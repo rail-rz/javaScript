@@ -1,0 +1,45 @@
+body {
+	margin: 0 auto;
+}
+
+.body-block {
+
+}
+
+.fir-tree {
+	position: absolute;
+	left: 50%;
+	bottom: 30%;
+}
+
+.fir-tree-head::after {
+	content: '';
+	position: relative;
+	bottom: 10%;
+	border: 50px solid transparent;
+	border-bottom: 40px solid green;
+}
+
+.fir-tree-body::after {
+	content: '';
+	position: relative;
+	bottom: -15px;
+	right: 25px;
+	border: 75px solid transparent;
+	border-bottom: 50px solid green;
+}
+
+.fir-tree-bottom::after {
+	content: '';
+	position: relative;
+	bottom: -40px;
+	right: 50px;
+	border: 100px solid transparent;
+	border-bottom: 50px solid green;
+}
+
+.fir-tree-footer {
+	content: '';
+	position: relative;
+	background: brown;
+}
