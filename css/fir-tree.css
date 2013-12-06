@@ -3,13 +3,13 @@ body {
 }
 
 .body-block {
-
+    background: #6495ED
 }
 
 .fir-tree {
 	position: absolute;
 	left: 50%;
-	bottom: 30%;
+	bottom: 11%;
 }
 
 .fir-tree-head::after {
@@ -18,6 +18,7 @@ body {
 	bottom: 10%;
 	border: 50px solid transparent;
 	border-bottom: 40px solid green;
+    z-index: 10;
 }
 
 .fir-tree-body::after {
@@ -27,6 +28,7 @@ body {
 	right: 25px;
 	border: 75px solid transparent;
 	border-bottom: 50px solid green;
+    z-index: 9;
 }
 
 .fir-tree-bottom::after {
@@ -36,10 +38,26 @@ body {
 	right: 50px;
 	border: 100px solid transparent;
 	border-bottom: 50px solid green;
+    z-index: 8;
 }
 
 .fir-tree-footer {
-	content: '';
 	position: relative;
 	background: brown;
+    bottom: -85px;
+    left: 45px;
+    height: 30px;
+    width: 10px;
+    z-index: 7;
+}
+
+.fir-tree-snow-center{
+	position: absolute;
+	bottom: 0;
+    background: white;
+    /*bottom: -80px;*/
+    height: 30px;
+    width: 100%;
+    border-radius: 100% 100% 0 0;
+    z-index: 6;
 }
