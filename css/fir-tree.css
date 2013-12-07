@@ -1,15 +1,16 @@
 body {
 	margin: 0 auto;
+    background: #6495ED;
 }
 
 .body-block {
-    background: #6495ED
 }
 
 .fir-tree {
 	position: absolute;
 	left: 50%;
-	bottom: 11%;
+    bottom: 0;
+    height: 205px; /** сделанно для кроссбраузерности мониторов разной велечины*/
 }
 
 .fir-tree-head::after {
@@ -52,12 +53,23 @@ body {
 }
 
 .fir-tree-snow-center{
-	position: absolute;
+	position: relative;
 	bottom: 0;
     background: white;
-    /*bottom: -80px;*/
+    bottom: -80px;
+    right: 45px;
     height: 30px;
     width: 100%;
     border-radius: 100% 100% 0 0;
     z-index: 6;
+}
+
+.footer-snow{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 25px;
+    background: white;
+    border-radius: 100% 100% 0 0;
+    z-index: -1;
 }
