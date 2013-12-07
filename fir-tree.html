@@ -6,43 +6,9 @@
     <meta name="Description" content="Новогодняя елка своими руками">
     <meta name="msapplication-TileImage" content="http://static.freepik.com/free-photo/christmas-tree----vector_34-49001.jpg">
 	<link rel="stylesheet" href="css/fir-tree.css" type="text/css">
+	<script src="js/initial.js"></script>
 	<script src="js/snow.js"></script>
-    <script>
-        var amountFooterSnow = 40; // кол-во сугробов
-        var maxFooterSnowSize = 200; // максимальная ширина сугроба
-        var minFooterSnowSize = 50; // минимальная ширина сугроба
-        var footerSnowColor = new Array('#FFFAFA', '#F8F8FF', '#FFFFF0', '#EEE9E9', '#FFFFF0'); // цвет сугроба
-        
-        var footerSnow = new Array();
-        
-        function Init() {
-            cloudOfSnow();
-//            ititFooterSnow();
-        }
-        
-        function getRandomVarFromArray(array){
-            var random = Math.floor( Math.random() * array.length );
-            return array[random];
-        }
-        
-        function ititFooterSnow() {
-            for(i=0; i<=amountFooterSnow; i++) {
-                footerSnow = document.getElementById('footer-snow-'+i);
-                footerSnow.size = getRandom(maxFooterSnowSize,minFooterSnowSize);
-                footerSnow.style.width = footerSnow.size+'px';
-                footerSnow.style.left = getRandom(window.innerWidth-footerSnow.size, 0)+'px';
-                footerSnow.style.background = getRandomVarFromArray(footerSnowColor);
-                footerSnow.style.borderColor = 'black';
-            }
-        }
-        
-        // создаем армию сугробов
-        for(i=0;i<=amountFooterSnow;++i) {
-            document.write("<div id='footer-snow-"+i+"'\n\
-style='position:absolute; bottom: 0;  height:28px; border-radius: 100% 100% 0 0; z-index:7'></div>");
-        }
-    </script>
-
+	<script src="js/footerSnow.js"></script>
 </head>
 <body onLoad = "Init()" >
 <div class="body-block">
@@ -50,6 +16,7 @@ style='position:absolute; bottom: 0;  height:28px; border-radius: 100% 100% 0 0;
     <div class="fir-tree">
         <div class="fir-tree-head"></div>
         <div class="fir-tree-body"></div>
+	    <div class="fir-tree-body-2"></div>
         <div class="fir-tree-bottom"></div>
         <div class="fir-tree-footer"></div>
         <div style='clear: left'></div>
@@ -59,10 +26,10 @@ style='position:absolute; bottom: 0;  height:28px; border-radius: 100% 100% 0 0;
     <div class="footer-snow"></div>
     <!--<div class="fir-tree-snow-center"></div>-->
 
-    <audio controls autoplay preload>
-        <source src="mp3/1.mp3" type="audio/mpeg">
-        Тег audio не поддерживается вашим браузером. 
-    </audio>
+    <!--<audio controls autoplay preload>-->
+        <!--<source src="mp3/1.mp3" type="audio/mpeg">-->
+        <!--Тег audio не поддерживается вашим браузером. -->
+    <!--</audio>-->
 </div>
 </body>
 </html>
