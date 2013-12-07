@@ -10,7 +10,7 @@ body {
 	position: absolute;
 	left: 50%;
     bottom: 0;
-    height: 205px; /** сделанно для кроссбраузерности мониторов разной велечины*/
+    height: 250px;
 }
 
 .fir-tree-head::after {
@@ -32,7 +32,7 @@ body {
     z-index: 9;
 }
 
-.fir-tree-bottom::after {
+.fir-tree-body-2::after {
 	content: '';
 	position: relative;
 	bottom: -40px;
@@ -42,10 +42,21 @@ body {
     z-index: 8;
 }
 
+.fir-tree-bottom::after {
+	content: '';
+	position: relative;
+	bottom: -60px;
+	right: 80px;
+	border: 130px solid transparent;
+	border-bottom: 65px solid green;
+	z-index: 8;
+}
+
+
 .fir-tree-footer {
 	position: relative;
 	background: brown;
-    bottom: -85px;
+    bottom: -115px;
     left: 45px;
     height: 30px;
     width: 10px;
@@ -56,8 +67,8 @@ body {
 	position: relative;
 	bottom: 0;
     background: white;
-    bottom: -80px;
-    right: 45px;
+    bottom: -105px;
+    right: 80px;
     height: 30px;
     width: 100%;
     border-radius: 100% 100% 0 0;
