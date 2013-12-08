@@ -8,11 +8,6 @@ var footerSnowColor = new Array('#FFFAFA', '#F8F8FF', '#FFFFF0', '#EEE9E9', '#FF
 
 var footerSnow = new Array();
 
-function getRandomVarFromArray(array){
-	var random = Math.floor( Math.random() * array.length );
-	return array[random];
-}
-
 function initFooterSnow() {
 	for(i=0; i<=amountFooterSnow; i++) {
 		footerSnow = document.getElementById('footer-snow-'+i);

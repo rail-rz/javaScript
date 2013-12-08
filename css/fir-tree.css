@@ -13,7 +13,7 @@ body {
     height: 250px;
 }
 
-.fir-tree-head::after {
+#fir-tree-head::after {
 	content: '';
 	position: relative;
 	bottom: 10%;
@@ -22,7 +22,7 @@ body {
     z-index: 10;
 }
 
-.fir-tree-body::after {
+#fir-tree-body::after {
 	content: '';
 	position: relative;
 	bottom: -15px;
@@ -32,7 +32,7 @@ body {
     z-index: 9;
 }
 
-.fir-tree-body-2::after {
+#fir-tree-body-2::after {
 	content: '';
 	position: relative;
 	bottom: -40px;
@@ -42,7 +42,7 @@ body {
     z-index: 8;
 }
 
-.fir-tree-bottom::after {
+#fir-tree-bottom::after {
 	content: '';
 	position: relative;
 	bottom: -60px;
@@ -53,7 +53,7 @@ body {
 }
 
 
-.fir-tree-footer {
+#fir-tree-footer {
 	position: relative;
 	background: brown;
     bottom: -115px;
@@ -63,7 +63,7 @@ body {
     z-index: 7;
 }
 
-.fir-tree-snow-center{
+#fir-tree-snow-center{
 	position: relative;
 	bottom: 0;
     background: white;
