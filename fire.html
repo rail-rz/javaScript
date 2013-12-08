@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Огонь</title>
+	<script src="js/initial.js"></script>
+	<script>
+		var amountFireCircle = 100; // из скольки кругов будет состоять огонь
+		var speedFire = 0.5; // скорость
+		var maxSizeCircle = 20; // макс. размер спрайта
+		var minSizeCircle = -20; // минимальный размер спрайта
+
+		var fire = new Array();
+
+		function fireElements() {
+			for(i=0;i<=amountFireCircle;++i) {
+				fire[i] = document.getElementById("fire-element-"+i);
+				fire[i].speedInX = getRandom(10,-10);
+				fire[i].speedInY = getRandom(10,-10);
+				fire[i].positionOnX=0;
+				fire[i].positionOnY=0;
+			}
+			actionFire();
+		}
+
+		function actionFire() {
+			for(i=0;i<=amountFireCircle;i++) {
+				fire[i].positionOnX+=fire[i].speedInX ;
+				fire[i].positionOnY+=fire[i].speedInY ;
+				fire[i].style.left=fire[i].positionOnX+'px';
+				fire[i].style.top=fire[i].positionOnY+'px';
+			}
+			setTimeout("actionFire()",50);
+		}
+
+
+
+		// создаем армию сугробов
+		document.write("<div style='position: absolute; left:50%; top:50%;'>");
+		for(i=0;i<=amountFireCircle;++i) {
+			document.write("<div id='fire-element-"+i+"' style='position:absolute; left: 50%; top:50%; background-color: black; width:10px; height:10px; border-radius: 100%;'></div>");
+		}
+		document.write("</div>");
+
+	</script>
+</head>
+<body onLoad="fireElements()">
+<div style='background-color: black; width: 10px; height: 10px; border-radius: 100%;'></div>
+
+
+</body>
+</html>
