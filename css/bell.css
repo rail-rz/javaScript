@@ -1,0 +1,86 @@
+.bell-toy {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+.infinity {
+    position: relative;
+    width: 212px;
+    height: 100px;
+}
+ 
+.infinity:before,
+.infinity:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 60px;    
+    border: 20px solid red;
+    -moz-border-radius: 50px 50px 0 50px;
+         border-radius: 50px 50px 0 50px;
+    -webkit-transform: rotate(-45deg);
+       -moz-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+         -o-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+}
+ 
+.infinity:after {
+    left: auto;
+    right: 0;
+    -moz-border-radius: 50px 50px 50px 0;
+         border-radius: 50px 50px 50px 0;
+    -webkit-transform:rotate(45deg);
+       -moz-transform:rotate(45deg);
+        -ms-transform:rotate(45deg);
+         -o-transform:rotate(45deg);
+            transform:rotate(45deg);
+}
+
+.bell {
+    background-color: gold;
+    width: 100px;
+    height: 80px;
+    border-radius: 100% 100% 0 0;
+    border: 2px solid goldenrod;
+}
+
+.trapezoid {
+    position: relative;
+    top: -5px;
+    right:  20px;
+    border-color: black;
+	border-bottom: 50px solid gold;
+	border-left: 20px solid transparent;
+	border-right: 20px solid transparent;
+    width: 100px;
+}
+
+.radius {
+    position: relative;
+    right:  20px;
+    height: 20px;
+    background-color: gold;
+    border-radius: 0 0 100% 100%;
+}
+
+.bell-left {
+    position: relative;
+    top: -20px;
+    right: 20px;
+    transform:rotate(50deg);
+    -moz-transform:rotate(50deg);
+    -webkit-transform:rotate(50deg);
+}
+
+.bell-right {
+    position: relative;
+    top: -240px;
+    left: 80px;
+    transform:rotate(50deg);
+    -moz-transform:rotate(-50deg);
+    -webkit-transform:rotate(-50deg);
+}
