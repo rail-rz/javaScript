@@ -48,7 +48,7 @@ body {
 	right: 160px;
 	border: 260px solid transparent;
 	border-bottom: 170px solid green;
-	z-index: 8;
+	z-index: 7;
 }
 
 
@@ -59,7 +59,7 @@ body {
     left: 90px;
     height: 60px;
     width: 20px;
-    z-index: 7;
+    z-index: 6;
 }
 
 #fir-tree-snow-center{
@@ -71,7 +71,7 @@ body {
     height: 30px;
     width: 100%;
     border-radius: 100% 100% 0 0;
-    z-index: 6;
+    z-index: 5;
 }
 
 .footer-snow{
