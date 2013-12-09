@@ -1,6 +1,6 @@
 body {
 	margin: 0 auto;
-    background: #6495ED;
+	background: #6495ED;
 }
 
 .body-block {
@@ -8,46 +8,47 @@ body {
 
 .fir-tree {
 	position: absolute;
-	left: 45%;
-    bottom: 0;
-    height: 475px;
+	left: 50%;
+	bottom: 0;
+	height: 250px;
 }
 
 #fir-tree-head::after {
 	content: '';
 	position: relative;
-	border: 100px solid transparent;
-	border-bottom: 120px solid green;
-    z-index: 10;
+	bottom: 10%;
+	border: 50px solid transparent;
+	border-bottom: 40px solid green;
+	z-index: 10;
 }
 
 #fir-tree-body::after {
 	content: '';
 	position: relative;
-	bottom: -40px;
-	right: 50px;
-	border: 150px solid transparent;
-	border-bottom: 140px solid green;
-    z-index: 9;
+	bottom: -15px;
+	right: 25px;
+	border: 75px solid transparent;
+	border-bottom: 50px solid green;
+	z-index: 9;
 }
 
 #fir-tree-body-2::after {
 	content: '';
 	position: relative;
-	bottom: -100px;
-	right: 100px;
-	border: 200px solid transparent;
-	border-bottom: 140px solid green;
-    z-index: 8;
+	bottom: -40px;
+	right: 50px;
+	border: 100px solid transparent;
+	border-bottom: 50px solid green;
+	z-index: 8;
 }
 
 #fir-tree-bottom::after {
 	content: '';
 	position: relative;
-	bottom: -150px;
-	right: 160px;
-	border: 260px solid transparent;
-	border-bottom: 170px solid green;
+	bottom: -60px;
+	right: 80px;
+	border: 130px solid transparent;
+	border-bottom: 65px solid green;
 	z-index: 7;
 }
 
@@ -55,31 +56,31 @@ body {
 #fir-tree-footer {
 	position: relative;
 	background: brown;
-    bottom: -310px;
-    left: 90px;
-    height: 60px;
-    width: 20px;
-    z-index: 6;
+	bottom: -115px;
+	left: 45px;
+	height: 30px;
+	width: 10px;
+	z-index: 6;
 }
 
 #fir-tree-snow-center{
 	position: relative;
 	bottom: 0;
-    background: white;
-    bottom: -300px;
-    right: 160px;
-    height: 30px;
-    width: 100%;
-    border-radius: 100% 100% 0 0;
-    z-index: 5;
+	background: white;
+	bottom: -105px;
+	right: 80px;
+	height: 30px;
+	width: 100%;
+	border-radius: 100% 100% 0 0;
+	z-index: 5;
 }
 
 .footer-snow{
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 25px;
-    background: white;
-    border-radius: 100% 100% 0 0;
-    z-index: -1;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 25px;
+	background: white;
+	border-radius: 100% 100% 0 0;
+	z-index: -1;
 }
