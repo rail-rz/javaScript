@@ -10,15 +10,14 @@ body {
 	position: absolute;
 	left: 45%;
     bottom: 0;
-    height: 430px;
+    height: 475px;
 }
 
 #fir-tree-head::after {
 	content: '';
 	position: relative;
-	bottom: 10%;
 	border: 100px solid transparent;
-	border-bottom: 80px solid green;
+	border-bottom: 120px solid green;
     z-index: 10;
 }
 
@@ -28,7 +27,7 @@ body {
 	bottom: -40px;
 	right: 50px;
 	border: 150px solid transparent;
-	border-bottom: 100px solid green;
+	border-bottom: 140px solid green;
     z-index: 9;
 }
 
@@ -38,7 +37,7 @@ body {
 	bottom: -100px;
 	right: 100px;
 	border: 200px solid transparent;
-	border-bottom: 100px solid green;
+	border-bottom: 140px solid green;
     z-index: 8;
 }
 
@@ -48,7 +47,7 @@ body {
 	bottom: -150px;
 	right: 160px;
 	border: 260px solid transparent;
-	border-bottom: 130px solid green;
+	border-bottom: 170px solid green;
 	z-index: 8;
 }
 
@@ -56,7 +55,7 @@ body {
 #fir-tree-footer {
 	position: relative;
 	background: brown;
-    bottom: -270px;
+    bottom: -310px;
     left: 90px;
     height: 60px;
     width: 20px;
@@ -67,7 +66,7 @@ body {
 	position: relative;
 	bottom: 0;
     background: white;
-    bottom: -260px;
+    bottom: -300px;
     right: 160px;
     height: 30px;
     width: 100%;
