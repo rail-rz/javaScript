@@ -7,7 +7,7 @@
  * и поставить <body onLoad = "cloudOfSnow()" >
  */
 
-var amountSnow = 30; // кол-во снежинок
+var amountSnow = 60; // кол-во снежинок
 var speedSnow = 0.5; // скорость
 var elementSnow = "*" // то, что мы будем назвыать снежинкой
 var maxSizeSnow = 30; // макс. вес снежинки
@@ -31,7 +31,7 @@ function cloudOfSnow() {
 		snow[i].speed=speedSnow*snow[i].size/5;
 		// начальная позиция снежинок
 		snow[i].positionOnX=getRandom(widthWindow-snow[i].size, 0);
-		snow[i].positionOnY=0;
+		snow[i].positionOnY=getRandom(heightWindow-snow[i].size, 0);
 	}
 	snowFall();
 }
