@@ -7,16 +7,38 @@
 		var amountFireCircle = 100; // из скольки кругов будет состоять огонь
 		var speedFire = 0.5; // скорость
 		var maxSizeCircle = 20; // макс. размер спрайта
-		var minSizeCircle = -20; // минимальный размер спрайта
+		var minSizeCircle = 1; // минимальный размер спрайта
+        var fireElementsColor = new Array(
+            '#FFFF00',
+            '#CD5C5C',
+            '#B22222',
+            '#FF3030',
+            '#EE2C2C',
+            '#CD2626',
+            '#8B1A1A', 
+            '#FF7F00', 
+            '#EE7600',
+            '#CD6600', 
+            '#FF0000',
+            '#EE0000',
+            '#CD0000',
+            '#8B0000', 
+            '#FF4500',
+            '#EE4000', 
+            '#CD3700', 
+            '#FF4500'
+        );
 
 		var fire = new Array();
 
 		function fireElements() {
 			for(i=0;i<=amountFireCircle;++i) {
 				fire[i] = document.getElementById("fire-element-"+i);
-				fire[i].speedInX = getRandom(10,-10);
-				fire[i].speedInY = getRandom(10,-10);
-				fire[i].positionOnX=0;
+                fire[i].size = getRandom(minSizeCircle,maxSizeCircle);
+                fire[i].style.background = getRandomVarFromArray(fireElementsColor);
+				fire[i].speedInY = (fire[i].size-maxSizeCircle)*getRandom(0.9,0.1);
+                fire[i].style.width = fire[i].style.height = fire[i].size+'px'; 
+				fire[i].positionOnX=(maxSizeCircle-fire[i].size)/2;
 				fire[i].positionOnY=0;
 			}
 			actionFire();
@@ -24,10 +46,17 @@
 
 		function actionFire() {
 			for(i=0;i<=amountFireCircle;i++) {
-				fire[i].positionOnX+=fire[i].speedInX ;
+
+//				fire[i].positionOnX+= (maxSizeCircle-fire[i].size)/maxSizeCircle;
 				fire[i].positionOnY+=fire[i].speedInY ;
 				fire[i].style.left=fire[i].positionOnX+'px';
 				fire[i].style.top=fire[i].positionOnY+'px';
+                // макс. расстояние на которое может пролететь элемент огня
+                // 2 раза больше макс. рассояния
+                if (fire[i].positionOnY <= -5*(maxSizeCircle-fire[i].size)/2) {
+                    fire[i].positionOnX=(maxSizeCircle-fire[i].size)/2;
+                    fire[i].positionOnY=0;
+                }
 			}
 			setTimeout("actionFire()",50);
 		}
@@ -36,16 +65,15 @@
 
 		// создаем армию сугробов
 		document.write("<div style='position: absolute; left:50%; top:50%;'>");
-		for(i=0;i<=amountFireCircle;++i) {
-			document.write("<div id='fire-element-"+i+"' style='position:absolute; left: 50%; top:50%; background-color: black; width:10px; height:10px; border-radius: 100%;'></div>");
-		}
+        for(i=0;i<=amountFireCircle;++i) {
+            document.write("<div id='fire-element-"+i+"' style='position:absolute; background-color: black; border-radius: 100%;opacity: 0.3;'></div>");
+        }
 		document.write("</div>");
+        
 
 	</script>
 </head>
 <body onLoad="fireElements()">
-<div style='background-color: black; width: 10px; height: 10px; border-radius: 100%;'></div>
-
 
 </body>
 </html>
