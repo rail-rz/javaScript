@@ -6,7 +6,7 @@
 	<script>
 		var amountFireCircle = 100; // из скольки кругов будет состоять огонь
 		var speedFire = 0.5; // скорость
-		var maxSizeCircle = 20; // макс. размер спрайта
+		var maxSizeCircle = 10; // макс. размер спрайта
 		var minSizeCircle = 1; // минимальный размер спрайта
         var fireElementsColor = new Array(
             '#FFFF00',
@@ -60,20 +60,20 @@
 			}
 			setTimeout("actionFire()",50);
 		}
-
-
-
-		// создаем армию сугробов
-		document.write("<div style='position: absolute; left:50%; top:50%;'>");
-        for(i=0;i<=amountFireCircle;++i) {
-            document.write("<div id='fire-element-"+i+"' style='position:absolute; background-color: black; border-radius: 100%;opacity: 0.3;'></div>");
-        }
-		document.write("</div>");
-        
-
 	</script>
 </head>
 <body onLoad="fireElements()">
-
+    <div class="candel" style='position: absolute; left:50%; top:50%;'>
+        <div class="fire">
+            <script>
+                for(i=0;i<=100;++i) {
+                    document.write("<div id='fire-element-"+i+"' style='position:absolute; background-color: black; border-radius: 100%;opacity: 0.3;'></div>");
+                }
+            </script>
+        </div>
+        <div class="candel-body" style="width: 10px; height: 25px; background-color: black; position: relative; top:10px  ">
+            
+        </div>
+    </div>
 </body>
 </html>

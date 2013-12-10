@@ -4,6 +4,7 @@
 
 function Init() {
 	cloudOfSnow();
+	fireElements();
 //    initFooterSnow();
 }
 
