@@ -6,11 +6,12 @@
     <meta name="Description" content="Новогодняя елка своими руками">
 	<link rel="stylesheet" href="css/fir-tree.css" type="text/css">
     <link rel="stylesheet" href="css/bell.css" type="text/css">
+    <link rel="stylesheet" href="css/candle.css" type="text/css">
 	<script src="js/initial.js"></script>
 	<script src="js/snow.js"></script>
 	<script src="js/footerSnow.js"></script>
 	<script>
-		var amountFireCircle = 400; // из скольки кругов будет состоять огонь
+		var amountFireCircle = 1000; // из скольки кругов будет состоять огонь
 		var speedFire = 0.5; // скорость
 		var maxSizeCircle = 8; // макс. размер спрайта
 		var minSizeCircle = 1; // минимальный размер спрайта
@@ -66,96 +67,114 @@
 			}
 			setTimeout("actionFire()",50);
 		}
+        
+        function getFireElement(max, min) {
+            for(i=min;i<=max;++i) {
+                document.write("<div id='fire-element-"+i+"' class='fire-element'></div>");
+            }
+        }
 	</script>
 </head>
 <body onLoad = "Init()" >
 <div class="body-block">
     <div class="fir-tree">    
 
-	    <!--<div class="bell-toy">-->
-            <!--<div class="bow">-->
-                <!--<div class="bow-left"></div>-->
-                <!--<div class="bow-right"></div>-->
-            <!--</div>-->
-            <!--<div class="bells">-->
-                <!--<div class="bell-left">-->
-                    <!--<div class="bell"></div>-->
-                    <!--<div class="trapezoid"></div>-->
-                    <!--<div class="radius"></div>-->
-                <!--</div>-->
-                <!--<div class="bell-right">-->
-                    <!--<div class="bell"></div>-->
-                    <!--<div class="trapezoid"></div>-->
-                    <!--<div class="radius"></div>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-	    <div class="candle" style='position: absolute; left:-50px; top:175px; z-index: 16'>
-		    <div class="fire">
-			    <script>
-				    for(i=300;i<=400;++i) {
-					    document.write("<div id='fire-element-"+i+"' style='position:absolute; background-color: black; border-radius: 100%;opacity: 0.3; z-index: 16'></div>");
-				    }
-			    </script>
-		    </div>
-		    <div class="candle-body" style="width: 8px; height: 20px; background-color: white; position: relative; top:10px  ">
+	    <div class="bell-toy">
+            <div class="bow">
+                <div class="bow-left"></div>
+                <div class="bow-right"></div>
+            </div>
+            <div class="bells">
+                <div class="bell-left">
+                    <div class="bell"></div>
+                    <div class="trapezoid"></div>
+                    <div class="radius"></div>
+                </div>
+                <div class="bell-right">
+                    <div class="bell"></div>
+                    <div class="trapezoid"></div>
+                    <div class="radius"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="candle-fir-tree-head">
+            <div class="candle" style=' left:140px;'>
+                <div class="fire">
+                    <script> getFireElement(100,0); </script>
+                </div>
+                <div class="candle-body"></div>
+            </div>
 
-		    </div>
-	    </div>
+            <div class="candle" style=' left:115px; top: 5px'>
+                <div class="fire">
+                    <script> getFireElement(200,100); </script>
+                </div>
+                <div class="candle-body"></div>
+            </div>
 
-	    <div class="candle" style='position: absolute; left:-50px; top:175px; z-index: 16'>
-		    <div class="fire">
-			    <script>
-				    for(i=300;i<=400;++i) {
-					    document.write("<div id='fire-element-"+i+"' style='position:absolute; background-color: black; border-radius: 100%;opacity: 0.3; z-index: 16'></div>");
-				    }
-			    </script>
-		    </div>
-		    <div class="candle-body" style="width: 8px; height: 20px; background-color: white; position: relative; top:10px  ">
+            <div class="candle" style=' left:85px; top:8px'>
+                <div class="fire">
+                    <script> getFireElement(300,200); </script>
+                </div>
+                <div class="candle-body"></div>
+            </div>
 
-		    </div>
-	    </div>
+            <div class="candle" style=' left:55px; top: 5px'>
+                <div class="fire">
+                    <script> getFireElement(400,300); </script>
+                </div>
+                <div class="candle-body"></div>
+            </div>
 
-	    <div class="candle" style='position: absolute; left:160px; top:130px; z-index: 16'>
-		    <div class="fire">
-			    <script>
-				    for(i=0;i<=100;++i) {
-					    document.write("<div id='fire-element-"+i+"' style='position:absolute; background-color: black; border-radius: 100%;opacity: 0.3; z-index: 16'></div>");
-				    }
-			    </script>
-		    </div>
-		    <div class="candle-body" style="width: 8px; height: 20px; background-color: white; position: relative; top:10px  ">
+            <div class="candle" style='left:30px;'>
+                <div class="fire">
+                    <script> getFireElement(500,400); </script>
+                </div>
+                <div class="candle-body"></div>
+            </div>
+        </div>
 
-		    </div>
-	    </div>
+        <div class="candle-fir-tree-body">
+            <div class="candle" style=' left:140px;'>
+                <div class="fire">
+                    <script> getFireElement(600,500); </script>
+                </div>
+                <div class="candle-body"></div>
+            </div>
 
-	    <div class="candle" style='position: absolute; left:0px; top:80px; z-index: 16'>
-		    <div class="fire">
-			    <script>
-				    for(i=100;i<=200;++i) {
-					    document.write("<div id='fire-element-"+i+"' style='position:absolute; background-color: black; border-radius: 100%;opacity: 0.3; z-index: 16'></div>");
-				    }
-			    </script>
-		    </div>
-		    <div class="candle-body" style="width: 8px; height: 20px; background-color: white; position: relative; top:10px  ">
+            <div class="candle" style=' left:115px; top: 5px'>
+                <div class="fire">
+                    <script> getFireElement(700,600); </script>
+                </div>
+                <div class="candle-body"></div>
+            </div>
 
-		    </div>
-	    </div>
+            <div class="candle" style=' left:85px; top:8px'>
+                <div class="fire">
+                    <script> getFireElement(800,700); </script>
+                </div>
+                <div class="candle-body"></div>
+            </div>
 
-	    <div class="candle" style='position: absolute; left:120px; top:40px; z-index: 16'>
-		    <div class="fire">
-			    <script>
-				    for(i=200;i<=300;++i) {
-					    document.write("<div id='fire-element-"+i+"' style='position:absolute; background-color: black; border-radius: 100%;opacity: 0.3; z-index: 16'></div>");
-				    }
-			    </script>
-		    </div>
-		    <div class="candle-body" style="width: 8px; height: 20px; background-color: white; position: relative; top:10px  ">
+            <div class="candle" style=' left:55px; top: 5px'>
+                <div class="fire">
+                    <script> getFireElement(900,800); </script>
+                </div>
+                <div class="candle-body"></div>
+            </div>
 
-		    </div>
-	    </div>
+            <div class="candle" style='left:30px;'>
+                <div class="fire">
+                    <script> getFireElement(1000,900); </script>
+                </div>
+                <div class="candle-body"></div>
+            </div>
+        </div>
 
-        <div id="fir-tree-head"></div>
+        <div id="fir-tree-head">
+          
+        </div>
         <div id="fir-tree-body"></div>
 	    <div id="fir-tree-body-2"></div>
         <div id="fir-tree-bottom"></div>
