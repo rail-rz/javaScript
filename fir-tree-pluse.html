@@ -1,7 +1,3 @@
-<!--
-To change this template, choose Tools | Templates
-and open the template in the editor.
--->
 <!DOCTYPE html>
 <html>
     <head>
@@ -24,10 +20,10 @@ and open the template in the editor.
             )
             
             function getObjects(leftPosition, topPosition, startRotate, finishRotate) {
-                for(i=startRotate;i<=finishRotate;i++) {
+                for(i=startRotate;i<=finishRotate;i+5) {
                     document.write("<div style='color: "+getRandomVarFromArray(firThreeColor)+";position: absolute; left:50%;top:50%; width: 0%; height: 0%; transform:rotate('"+i+"'deg);-moz-transform:rotate("+i+"deg);-webkit-transform:rotate("+i+"deg);'>");                    
                     document.write("<p style='margin: 0;'>/////////////////////////</p>");
-                    document.write("<p style='margin: -10px 0 0 0;'>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\</p>");
+                    document.write("<p style='margin: -10px 0 0 0;'>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ </p>");
                     document.write("</div>");
                 }
             }
