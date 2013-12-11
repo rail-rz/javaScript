@@ -10,45 +10,44 @@ body {
 	position: absolute;
 	left: 45%;
 	bottom: 0;
-	height: 270px;
+	height: 340px;
 }
 
 #fir-tree-head::after {
 	content: '';
 	position: relative;
-	bottom: 10%;
-	border: 70px solid transparent;
-	border-bottom: 60px solid green;
+	border: 90px solid transparent;
+	border-bottom: 90px solid green;
 	z-index: 10;
 }
 
 #fir-tree-body::after {
 	content: '';
 	position: relative;
-	bottom: -15px;
+	bottom: -30px;
 	right: 25px;
-	border: 95px solid transparent;
-	border-bottom: 70px solid green;
+	border: 115px solid transparent;
+	border-bottom: 100px solid green;
 	z-index: 9;
 }
 
 #fir-tree-body-2::after {
 	content: '';
 	position: relative;
-	bottom: -40px;
+	bottom: -65px;
 	right: 50px;
-	border: 120px solid transparent;
-	border-bottom: 70px solid green;
+	border: 140px solid transparent;
+	border-bottom: 100px solid green;
 	z-index: 8;
 }
 
 #fir-tree-bottom::after {
 	content: '';
 	position: relative;
-	bottom: -60px;
+	bottom: -95px;
 	right: 80px;
-	border: 150px solid transparent;
-	border-bottom: 75px solid green;
+	border: 170px solid transparent;
+	border-bottom: 105px solid green;
 	z-index: 7;
 }
 
@@ -56,10 +55,10 @@ body {
 #fir-tree-footer {
 	position: relative;
 	background: brown;
-	bottom: -115px;
-	left: 65px;
+	bottom: -175px;
+	left: 85px;
 	height: 50px;
-	width: 10px;
+	width: 15px;
 	z-index: 6;
 }
 
@@ -67,7 +66,7 @@ body {
 	position: relative;
 	bottom: 0;
 	background: white;
-	bottom: -105px;
+	bottom: -175px;
 	right: 80px;
 	height: 30px;
 	width: 100%;
