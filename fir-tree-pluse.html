@@ -21,23 +21,16 @@
             
             function getObjects( startRotate, finishRotate) {
                 for(i=startRotate;i<=finishRotate;i+=5) {
-                    document.write("<div style='color: "+getRandomVarFromArray(firThreeColor)+"; position:absolute; top:0;left:0; width: 0%; height: 0%;" +
-		                    " transform:rotate("+(-1)*i+"deg);-moz-transform:rotate("+i+"deg);-webkit-transform:rotate("+i+"deg);'>");
-                    document.write("<p style='margin: 0;'>////////////////////////</p>");
-                    document.write("<p style='margin: -10px 0;'>"+"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\" +"</p>");
+                    document.write("<div style='color: "+getRandomVarFromArray(firThreeColor)+";position: absolute; left:50%;top:50%; width: 0%; height: 0%; transform:rotate('"+i+"'deg);-moz-transform:rotate("+i+"deg);-webkit-transform:rotate("+i+"deg);'>");
+                    document.write("<p style='margin: 0;'>/////////////////////////</p>");
+                    document.write("<p style='margin: -10px 0 0 0;'>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ </p>");
                     document.write("</div>");
                 }
             }
         </script>
     </head>
     <body>
-    <div style="position: absolute; left:50%; top:25%;">
-        <script> getObjects( 50, 130) </script>
-        <script> getObjects( -125, -55) </script>
-        <!--<script> getObjects( 50, 60, -125, -55) </script>-->
-        <!--<script> getObjects( 50, 65, 55, 125) </script>-->
-        <!--<script> getObjects( 50, 70, 55, 125) </script>-->
-    </div>
-
+        <script> getObjects( 55, 125) </script>
+        
     </body>
 </html>
