@@ -3,6 +3,7 @@
     <head>
         <title>Прототип новой Ёлки</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	    <link rel="stylesheet" href="css/fir-tree.css" type="text/css">
         <script src="js/initial.js"></script>
         <script>
             var firThreeColor = new Array( 
@@ -18,47 +19,51 @@
                 '#458B00',
                 '#90EE90'
             )
-            
+
             function getObjects( startRotate, finishRotate) {
                 for(i=startRotate;i<=finishRotate;i+=3) {
                     document.write("<div style='color: "+getRandomVarFromArray(firThreeColor)+";position: absolute; width: 0%; height: 0%; transform:rotate("+i+"deg);-moz-transform:rotate("+i+"deg);-webkit-transform:rotate("+i+"deg); z-index:10'>");                    
-                    document.write("<p style='margin: 0;'>/////////////////////////</p>");
-                    document.write("<p style='margin: -10px 0 0 0;'>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ </p>");
+                    document.write("<p style='margin: 0;'>////////////////////</p>");
+                    document.write("<p style='margin: -10px 0 0 0;'>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\</p>");
                     document.write("</div>");
                 }
             }
+
             function getObjects1( startRotate, finishRotate) {
                 for(i=startRotate;i<=finishRotate;i+=2) {
                     document.write("<div style='color: "+getRandomVarFromArray(firThreeColor)+";position: absolute; top:30px; width: 0%; height: 0%; transform:rotate("+i+"deg);-moz-transform:rotate("+i+"deg);-webkit-transform:rotate("+i+"deg); z-index:9;'>");
-                    document.write("<p style='margin: 0;'>//////////////////////////////////////////////////</p>");
-                    document.write("<p style='margin: -10px 0 0 0;'>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\</p>");
+                    document.write("<p style='margin: 0;'>//////////////////////////////</p>");
+                    document.write("<p style='margin: -10px 0 0 0;'>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\</p>");
                     document.write("</div>");
                 }
             }
+
              function getObjects2( startRotate, finishRotate) {
                 for(i=startRotate;i<=finishRotate;i++) {
                     document.write("<div style='color: "+getRandomVarFromArray(firThreeColor)+";position: absolute; top:60px; width: 0%; height: 0%; transform:rotate("+i+"deg);-moz-transform:rotate("+i+"deg);-webkit-transform:rotate("+i+"deg); z-index:8;'>");
-                    document.write("<p style='margin: 0;'>///////////////////////////////////////////////////////////////////////////</p>");
-                    document.write("<p style='margin: -10px 0 0 0;'>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\</p>");
+                    document.write("<p style='margin: 0;'>/////////////////////////////////////////////</p>"); //45
+                    document.write("<p style='margin: -10px 0 0 0;'>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\</p>");
                     document.write("</div>");
                 }
             }
+
             function getObjects3( startRotate, finishRotate) {
                 for(i=startRotate;i<=finishRotate;i+=0.5) {
                     document.write("<div style='color: "+getRandomVarFromArray(firThreeColor)+";position: absolute; top:120px; width: 0%; height: 0%; transform:rotate("+i+"deg);-moz-transform:rotate("+i+"deg);-webkit-transform:rotate("+i+"deg); z-index:7;'>");
-                    document.write("<p style='margin: 0;'>////////////////////////////////////////////////////////////////////////////////////////////////////</p>");
-                    document.write("<p style='margin: -10px 0 0 0;'>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ </p>");
+                    document.write("<p style='margin: 0;'>///////////////////////////////////////////////////////</p>"); // 55
+                    document.write("<p style='margin: -10px 0 0 0;'>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\</p>");
                     document.write("</div>");
                 }
             }
         </script>
     </head>
     <body style="background: #6495ED;">
-        <div style="position:absolute; top:10%; left:50%;">
+        <div style="position:absolute; bottom:0; left:50%; height: 360px;">
             <script> getObjects( 55, 125) </script>
             <script> getObjects1( 55, 125) </script>
             <script> getObjects2( 55, 125) </script>
             <script> getObjects3( 55, 125) </script>
+	        <div style="position:relative; top:0; left:-25px; width:20px; height: 360px; background-color: brown;"></div>
        </div>
     </body>
 </html>
