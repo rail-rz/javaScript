@@ -21,7 +21,7 @@
             
             function getObjects( startRotate, finishRotate) {
                 for(i=startRotate;i<=finishRotate;i+=3) {
-                    document.write("<div style='color: "+getRandomVarFromArray(firThreeColor)+";position: absolute; left:50%;top:30%; width: 0%; height: 0%; transform:rotate("+i+"deg);-moz-transform:rotate("+i+"deg);-webkit-transform:rotate("+i+"deg); z-index:10'>");                    
+                    document.write("<div style='color: "+getRandomVarFromArray(firThreeColor)+";position: absolute; left:50%; width: 0%; height: 0%; transform:rotate("+i+"deg);-moz-transform:rotate("+i+"deg);-webkit-transform:rotate("+i+"deg); z-index:10'>");                    
                     document.write("<p style='margin: 0;'>/////////////////////////</p>");
                     document.write("<p style='margin: -10px 0 0 0;'>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ </p>");
                     document.write("</div>");
@@ -29,15 +29,23 @@
             }
             function getObjects1( startRotate, finishRotate) {
                 for(i=startRotate;i<=finishRotate;i+=2) {
-                    document.write("<div style='color: "+getRandomVarFromArray(firThreeColor)+";position: absolute; left:50%;top:35%; width: 0%; height: 0%; transform:rotate("+i+"deg);-moz-transform:rotate("+i+"deg);-webkit-transform:rotate("+i+"deg); z-index:9;'>");
+                    document.write("<div style='color: "+getRandomVarFromArray(firThreeColor)+";position: absolute; left:50%;top:30px; width: 0%; height: 0%; transform:rotate("+i+"deg);-moz-transform:rotate("+i+"deg);-webkit-transform:rotate("+i+"deg); z-index:9;'>");
                     document.write("<p style='margin: 0;'>//////////////////////////////////////////////////</p>");
                     document.write("<p style='margin: -10px 0 0 0;'>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\</p>");
                     document.write("</div>");
                 }
             }
-            function getObjects2( startRotate, finishRotate) {
+             function getObjects2( startRotate, finishRotate) {
+                for(i=startRotate;i<=finishRotate;i++) {
+                    document.write("<div style='color: "+getRandomVarFromArray(firThreeColor)+";position: absolute; left:50%;top:60px; width: 0%; height: 0%; transform:rotate("+i+"deg);-moz-transform:rotate("+i+"deg);-webkit-transform:rotate("+i+"deg); z-index:8;'>");
+                    document.write("<p style='margin: 0;'>///////////////////////////////////////////////////////////////////////////</p>");
+                    document.write("<p style='margin: -10px 0 0 0;'>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\</p>");
+                    document.write("</div>");
+                }
+            }
+            function getObjects3( startRotate, finishRotate) {
                 for(i=startRotate;i<=finishRotate;i+=0.5) {
-                    document.write("<div style='color: "+getRandomVarFromArray(firThreeColor)+";position: absolute; left:50%;top:40%; width: 0%; height: 0%; transform:rotate("+i+"deg);-moz-transform:rotate("+i+"deg);-webkit-transform:rotate("+i+"deg); z-index:8;'>");
+                    document.write("<div style='color: "+getRandomVarFromArray(firThreeColor)+";position: absolute; left:50%;top:120px; width: 0%; height: 0%; transform:rotate("+i+"deg);-moz-transform:rotate("+i+"deg);-webkit-transform:rotate("+i+"deg); z-index:7;'>");
                     document.write("<p style='margin: 0;'>////////////////////////////////////////////////////////////////////////////////////////////////////</p>");
                     document.write("<p style='margin: -10px 0 0 0;'>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ </p>");
                     document.write("</div>");
@@ -46,8 +54,11 @@
         </script>
     </head>
     <body style="background: #6495ED;">
-        <script> getObjects( 55, 125) </script>
-        <script> getObjects1( 55, 125) </script>
-        <script> getObjects2( 55, 125) </script>
+        <div style="position:absolute; top:10%; left:50%;">
+            <script> getObjects( 55, 125) </script>
+            <script> getObjects1( 55, 125) </script>
+            <script> getObjects2( 55, 125) </script>
+            <script> getObjects3( 55, 125) </script>
+       </div>
     </body>
 </html>
