@@ -2,7 +2,7 @@
  * @author rail_rz <zamaletdinov.rz@gmail.com>
  */
 
-var amountFireCircle = 900; // из скольки кругов будет состоять огонь
+var amountFireCircle = 1000; // из скольки кругов будет состоять огонь
 var speedFire = 0.5; // скорость
 var maxSizeCircle = 8; // макс. размер спрайта
 var minSizeCircle = 1; // минимальный размер спрайта
