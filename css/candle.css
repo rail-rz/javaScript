@@ -23,15 +23,20 @@
  
  .candle-fir-tree-head {
      position: absolute;
-     top: 60px;
+     top: 65px;
  }
  
  .candle-fir-tree-body {
      position: absolute;
-     top: 120px;
+     top: 135px;
  }
 
 .candle-fir-tree-body-2 {
 	position: absolute;
-	top: 185px;
+	top: 205px;
+}
+
+.candle-fir-tree-bottom {
+	position: absolute;
+	top: 270px;
 }
