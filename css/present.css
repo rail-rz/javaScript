@@ -1,0 +1,51 @@
+/**
+ * @author rail_rz <zamaletdinov.rz@gmail.com>
+ */
+ .present {
+     position:relative;
+     left:50%;
+     width: 0;
+ } 
+ 
+ .present-body {
+     width:100px;
+     height: 50px;
+     background-color: gold;
+     
+ }
+ 
+ .present-body:after {
+     content: "";
+     position:absolute;
+     left:45px;
+     width: 10px;
+     height: 50px;
+     background-color: red;
+ }
+ 
+ .present-bow {
+    position: relative;
+    left: 2px;
+    width: 40px; 
+    height: 20px;
+    border: 5px solid red;
+    border-radius: 100% 100% 0 100%;
+/*    transform:rotate(20deg);
+    -moz-transform:rotate(10deg);
+    -webkit-transform:rotate(10deg);*/
+
+ }
+ 
+ .present-bow:before {
+    content: "";
+    position: absolute;
+    left: 40px;
+    top:-5px;
+    width: 40px; 
+    height: 20px;
+    border: 5px solid red;
+    border-radius: 100% 100% 100% 0;
+/*    transform:rotate(40deg);
+    -moz-transform:rotate(-30deg);
+    -webkit-transform:rotate(-30deg);*/
+ }
