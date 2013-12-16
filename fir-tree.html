@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Елка</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="Description" content="Новогодняя елка своими руками">
+	<link rel="stylesheet" href="css/fir-tree.css" type="text/css">
+    <link rel="stylesheet" href="css/bell.css" type="text/css">
+    <link rel="stylesheet" href="css/candle.css" type="text/css">
+	<script src="js/initial.js"></script>
+	<script src="js/snow.js"></script>
+	<script src="js/footerSnow.js"></script>
+	<script src="js/candle.js"></script>
+</head>
+<body onLoad = "Init()" >
+<div class="body-block">
+    <div class="fir-tree">    
+
+	    <div class="bell-toy">
+            <div class="bow">
+                <div class="bow-left"></div>
+                <div class="bow-right"></div>
+            </div>
+            <div class="bells">
+                <div class="bell-left">
+                    <div class="bell"></div>
+                    <div class="trapezoid"></div>
+                    <div class="radius"></div>
+                </div>
+                <div class="bell-right">
+                    <div class="bell"></div>
+                    <div class="trapezoid"></div>
+                    <div class="radius"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="candle-fir-tree-head">
+            <div class="candle" style=' left:65px;'>
+                <div class="fire">
+                    <script> getFireElement(100,0); </script>
+                </div>
+                <div class="candle-body"></div>
+            </div>
+        </div>
+
+        <div class="candle-fir-tree-body">
+	        <div class="candle" style='left:30px;'>
+		        <div class="fire">
+			        <script> getFireElement(200,100); </script>
+		        </div>
+		        <div class="candle-body"></div>
+	        </div>
+	        <div class="candle" style=' left:100px;'>
+		        <div class="fire">
+			        <script> getFireElement(300,200); </script>
+		        </div>
+		        <div class="candle-body"></div>
+	        </div>
+        </div>
+
+	    <div class="candle-fir-tree-body-2">
+		    <div class="candle" style='left:5px; '>
+			    <div class="fire">
+				    <script> getFireElement(400,300); </script>
+			    </div>
+			    <div class="candle-body"></div>
+		    </div>
+		    <div class="candle" style=' left:70px; top:10px'>
+			    <div class="fire">
+				    <script> getFireElement(500,400); </script>
+			    </div>
+			    <div class="candle-body"></div>
+		    </div>
+		    <div class="candle" style=' left:135px;'>
+			    <div class="fire">
+				    <script> getFireElement(600,500); </script>
+			    </div>
+			    <div class="candle-body"></div>
+		    </div>
+		</div>
+
+	    <div class="candle-fir-tree-bottom">
+		    <div class="candle" style=' left: -30px'>
+			    <div class="fire">
+				    <script> getFireElement(700,600); </script>
+			    </div>
+			    <div class="candle-body"></div>
+		    </div>
+		    <div class="candle" style=' left: 30px; top:10px;'>
+			    <div class="fire">
+				    <script> getFireElement(800,700); </script>
+			    </div>
+			    <div class="candle-body"></div>
+		    </div>
+		    <div class="candle" style=' left: 100px; top:10px'>
+			    <div class="fire">
+				    <script> getFireElement(900,800); </script>
+			    </div>
+			    <div class="candle-body"></div>
+		    </div>
+		    <div class="candle" style=' left: 160px'>
+			    <div class="fire">
+				    <script> getFireElement(1000,900); </script>
+			    </div>
+			    <div class="candle-body"></div>
+		    </div>
+		</div>
+
+        <div id="fir-tree-head"></div>
+        <div id="fir-tree-body"></div>
+	    <div id="fir-tree-body-2"></div>
+        <div id="fir-tree-bottom"></div>
+        <div id="fir-tree-footer"></div>
+        <div id="fir-tree-snow-center"></div>
+	</div>
+    
+    <div class="footer-snow"></div>
+
+    <audio controls autoplay preload>
+        <source src="mp3/1.ogg" type="audio/mpeg">
+        Тег audio не поддерживается вашим браузером.
+    </audio>
+</div>
+</body>
+</html>

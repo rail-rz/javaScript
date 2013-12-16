@@ -1,0 +1,42 @@
+/**
+ * @author rail_rz <zamaletdinov.rz@gmail.com>
+ */
+ .candle {
+      position: absolute; 
+      z-index: 16;
+ }
+ 
+ .fire-element {
+     position:absolute;
+     border-radius: 100%;
+     opacity: 0.3;
+     z-index: 16;
+ }
+
+ .candle-body {
+     width: 8px;
+     height: 20px;
+     background-color: white;
+     position: relative;
+     top:10px;
+ }
+ 
+ .candle-fir-tree-head {
+     position: absolute;
+     top: 65px;
+ }
+ 
+ .candle-fir-tree-body {
+     position: absolute;
+     top: 135px;
+ }
+
+.candle-fir-tree-body-2 {
+	position: absolute;
+	top: 205px;
+}
+
+.candle-fir-tree-bottom {
+	position: absolute;
+	top: 285px;
+}

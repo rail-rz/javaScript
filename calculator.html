@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Калькулятор на JS</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script src="js/calculatorCoreJS.js"></script>
+</head>
+<body>
+
+<div>
+	<form name="formCal" action="" onclick="getValue(event.srcElement.value)">
+		<table>
+			<tr>
+				<td colspan="6"><input name="formForCount" type="text"></td>
+			</tr>
+
+			<tr>
+				<td><input name="one" type="button" value="1"></td>
+				<td><input name="two" type="button"  value="2"></td>
+				<td><input name="three" type="button"  value="3"></td>
+
+				<td><input name="C" type="button" value="C"></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><input name="four" type="button" value="4"></td>
+				<td><input name="five" type="button" value="5"></td>
+				<td><input name="six" type="button" value="6"></td>
+
+				<td><input name="plus" type="button" value="+"></td>
+				<td><input name="minus" type="button" value="-"></td>
+			</tr>
+			<tr>
+				<td><input name="seven" type="button" value="7"></td>
+				<td><input name="eight" type="button" value="8"></td>
+				<td><input name="nine" type="button" value="9"></td>
+
+				<td><input name="multiply" type="button" value="*"></td>
+				<td><input name="divide" type="button" value="/"></td>
+			</tr>
+			<tr>
+				<td><input name="point" type="button" value="."></td>
+				<td><input name="zero" type="button" value="0"></td>
+				<td><input name="count" type="button" value="="></td>
+			</tr>
+
+		</table>
+	</form>
+</div>
+</body>
+</html>
