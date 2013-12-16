@@ -1,82 +1,84 @@
 body {
-    margin: 0 auto;
+	margin: 0 auto;
 }
 
 .bell-toy {
-    position: absolute;
+	position: absolute;
 	top: -10px;
-    left: 40px;
-    height: 0px;
-    z-index: 15;
+	left: 40px;
+	height: 0px;
+	z-index: 15;
 }
 
-.bow { }
+.bow {
+}
 
 .bow-left, .bow-right {
-    position: relative;
-    width: 20px; 
-    height: 20px;
-    border: 5px solid red;
+	position: relative;
+	width: 20px;
+	height: 20px;
+	border: 5px solid red;
 }
 
 .bow-left {
-    border-radius: 100% 100% 0 100%;
+	border-radius: 100% 100% 0 100%;
 }
 
 .bow-right {
-    top: -30px;
-    left: 25px;
-    border-radius: 100% 100% 100% 0;
+	top: -30px;
+	left: 25px;
+	border-radius: 100% 100% 100% 0;
 }
+
 /*.bells {
     position: relative;
     bottom: 150px;
     left: 40px;
 }*/
 .bell {
-    background-color: gold;
-    width: 20px;
-    height: 15px;
-    border-radius: 100% 100% 0 0;
-    border: 1px solid goldenrod;
+	background-color: gold;
+	width: 20px;
+	height: 15px;
+	border-radius: 100% 100% 0 0;
+	border: 1px solid goldenrod;
 }
 
 .trapezoid {
-    position: relative;
-    top: -1px;
-    right:  2px;
-    border-color: black;
+	position: relative;
+	top: -1px;
+	right: 2px;
+	border-color: black;
 	border-bottom: 10px solid gold;
 	border-left: 2px solid transparent;
 	border-right: 2px solid transparent;
-    width: 22px;
+	width: 22px;
 }
 
 .radius {
-    position: relative;
-    top: -1px;
-    right: 2px;
-    width: 25px;
-    height: 2px;
-    background-color: gold;
-    border: 1px solid goldenrod;
-    border-radius: 0 0 100% 100%;
+	position: relative;
+	top: -1px;
+	right: 2px;
+	width: 25px;
+	height: 2px;
+	background-color: gold;
+	border: 1px solid goldenrod;
+	border-radius: 0 0 100% 100%;
 }
 
 .bell-left {
-    position: relative;
-    top: -35px;
-    left: 5px;
-    transform:rotate(50deg);
-    -moz-transform:rotate(50deg);
-    -webkit-transform:rotate(50deg);
+	position: relative;
+	top: -35px;
+	left: 5px;
+	transform: rotate(50deg);
+	-moz-transform: rotate(50deg);
+	-webkit-transform: rotate(50deg);
 }
 
 .bell-right {
-    position: relative;
-    top: -75px;
-    left: 25px;
-    transform:rotate(50deg);
-    -moz-transform:rotate(-50deg);
-    -webkit-transform:rotate(-50deg);
+	position: relative;
+	top: -75px;
+	left: 25px;
+	transform: rotate(50deg);
+	-moz-transform: rotate(-50deg);
+	-webkit-transform: rotate(-50deg);
 }

@@ -2,29 +2,29 @@
  * @author rail_rz <zamaletdinov.rz@gmail.com>
  */
 #ball-toy {
-    position: relative;
-    height: 30px;
-    width: 30px;
-    background-color: blue;
-    border-radius: 100%;
+	position: relative;
+	height: 30px;
+	width: 30px;
+	background-color: blue;
+	border-radius: 100%;
 }
 
 #ball-toy:before {
-    content: '';
-    position: absolute;
-    left: 13px;
-    top:-4px;
-    background-color: gold;
-    width: 4px;
-    height: 4px;
+	content: '';
+	position: absolute;
+	left: 13px;
+	top: -4px;
+	background-color: gold;
+	width: 4px;
+	height: 4px;
 }
 
 #ball-toy:after {
-    content: '2014';
-    position: relative;
-    left:4px;
-    top:5px;
-    color: yellow;
-    font: 10px Helvetica;
+	content: '2014';
+	position: relative;
+	left: 4px;
+	top: 5px;
+	color: yellow;
+	font: 10px Helvetica;
 }
 
