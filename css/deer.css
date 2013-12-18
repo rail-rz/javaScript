@@ -151,10 +151,10 @@
  #deer-left-footer-1:after,  #deer-left-footer-2:after {
      content: '';
      position: absolute;
-     width: 10px;
+     width: 9px;
      height: 5px;
      top: 40px;
-     left: 10px;
+     left: 9px;
      background-color: black;
      transform: rotate(25deg);
 	-moz-transform: rotate(25deg);
@@ -197,10 +197,10 @@
  #deer-right-footer-1:after,  #deer-right-footer-2:after {
      content: '';
      position: absolute;
-     width: 10px;
+     width: 9px;
      height: 5px;
      top: 40px;
-     left: 10px;
+     left: 9px;
      background-color: black;
      transform: rotate(25deg);
 	-moz-transform: rotate(25deg);
