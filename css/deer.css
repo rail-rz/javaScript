@@ -11,10 +11,11 @@
 
 #deer-right-horns {
 	position:relative;
-	width: 25px;
-	height: 120px;
-	left: 90px;
-	background-color: black;
+	bottom: 40px;
+    left: 55px;
+    width: 10px;
+	height: 60px;
+	background-color: #363636;
 	border-radius: 25% 25% 0 0 ;
 	transform: rotate(50deg);
 	-moz-transform: rotate(50deg);
@@ -24,25 +25,25 @@
 #deer-right-horns:before {
 	 content: '';
 	 position:absolute;
-	 width: 25px;
-	 height: 70px;
+	 width: 15px;
+	 height: 45px;
 	 top: 5px;
 	 left: 10px;
-	 background-color: black;
+	 background-color: #363636;
 	 border-radius: 25% 25% 0 0 ;
-	 transform: rotate(30deg);
-	 -moz-transform: rotate(30deg);
-	 -webkit-transform: rotate(30deg);
+	 transform: rotate(35deg);
+	 -moz-transform: rotate(35deg);
+	 -webkit-transform: rotate(35deg);
  }
 
 #deer-right-horns:after {
 	content: '';
 	position:absolute;
-	width: 25px;
-	height: 100px;
+	width: 15px;
+	height: 50px;
 	top: 20px;
 	left: -10px;
-	background-color: black;
+	background-color: #363636;
 	border-radius: 25% 25% 0 0 ;
 	transform: rotate(-25deg);
 	-moz-transform: rotate(-25deg);
@@ -51,10 +52,9 @@
 
 #deer-left-horns {
 	position:relative;
-	width: 80px;
-	height: 20px;
-	top: 80px;
-	background-color: black;
+	width: 40px;
+	height: 10px;
+	background-color: #363636;
 	border-radius: 25% 0 0 25%;
 	transform: rotate(5deg);
 	-moz-transform: rotate(5deg);
@@ -64,10 +64,10 @@
 #deer-left-horns:before {
 	content: '';
 	position:absolute;
-	width: 90px;
-	right: -5px;
-	height: 20px;
-	background-color: black;
+	width: 45px;
+	height: 10px;
+  	right: -5px;
+	background-color: #363636;
 	border-radius: 25% 0 0 25%;
 	transform: rotate(35deg);
 	-moz-transform: rotate(35deg);
@@ -77,10 +77,10 @@
 #deer-left-horns:after {
 	content: '';
 	position:absolute;
-	width: 90px;
-	right: -10px;
-	height: 25px;
-	background-color: black;
+	width: 45px;
+	height: 10px;
+   	right: -10px;
+	background-color: #363636;
 	border-radius: 25% 0 0 25%;
 	transform: rotate(65deg);
 	-moz-transform: rotate(65deg);
@@ -89,108 +89,123 @@
 
  #deer-head {
      position: relative;
-     background-color: black;
-     width: 100px;
-     height: 70px;
-	 top:-20px;
+     background-color: #363636;
+     width: 50px;
+     height: 30px;
+	 top:-55px;
      border-radius: 150% 50%  50% 100% / 150%;
  }
  
  #deer-body {
      position: relative;
-     left: 40px;
-     top: -30px;
-     background-color: black;
-     width: 200px;
-     height: 100px;
-     border-radius: 25% 30% 5% 5%;
+     left: 30px;
+     top: -65px;
+     background-color: #363636;
+     width: 90px;
+     height: 40px;
+     border-radius: 25% 30% 15% 15%;
  }
 
  #deer-body:after {
 	 content: '';
 	 position: absolute;
-	 top: 0;
-	 right: -10px;
-	 width: 30px;
-	 height: 30px;
-	 background-color: black;
+	 right: -5px;
+	 width: 15px;
+	 height: 15px;
+	 background-color: #363636;
 	 border-radius:70% 0 70% 0;
  }
  
  #deer-left-footer-1,  #deer-left-footer-2 {
      position: relative;
-	 bottom: 40px;
-     width: 20px;
-     height: 50px;
-     background-color: black;
+	 top: -70px;
+     width: 10px;
+     height: 30px;
+     background-color: #363636;
      border-radius: 30%;
+ }
+ 
+ #deer-left-footer-1 {
+     left: 35px;
+ }
+     
+ #deer-left-footer-2 {
+    top: -100px;
+    left: 40px;
  }
  
  #deer-left-footer-1:before,  #deer-left-footer-2:before {
      content: '';
      position: absolute;
-     top: 40px;
-     width: 20px;
-     height: 60px;
-     background-color: black;
+     top: 25px;
+     left: 5px;
+     width: 10px;
+     height: 20px;
+     background-color: #363636;
      border-radius: 30%;
+     transform: rotate(25deg);
+	-moz-transform: rotate(25deg);
+	-webkit-transform: rotate(-25deg);
  } 
  
  #deer-left-footer-1:after,  #deer-left-footer-2:after {
      content: '';
      position: absolute;
-     top: 90px;
-     width: 20px;
-     height: 10px;
-     background-color: black;
- }
- 
- #deer-left-footer-1 {
-     left: 40px;
- }
-     
-#deer-left-footer-2 {
-	bottom: 90px;
-    left: 50px;
+     width: 9px;
+     height: 5px;
+     top: 40px;
+     left: 9px;
+     background-color: #363636;
+     transform: rotate(25deg);
+	-moz-transform: rotate(25deg);
+	-webkit-transform: rotate(-25deg);
  }
  
  #deer-right-footer-1,  #deer-right-footer-2 {
      position: relative;
-	 bottom: 140px;
-     width: 40px;
-     height: 50px;
-     background-color: black;
-     border-radius: 20% 20% 50% 50%;
+     top: -130px;
+     width: 10px;
+     height: 30px;
+     background-color: #363636;
+     border-radius: 30%;
  }
  
+ #deer-right-footer-1 {
+     left: 100px;
+ }
+     
+#deer-right-footer-2 {
+     top: -160px;
+     left: 105px;
+ }
+ 
+
  #deer-right-footer-1:before,  #deer-right-footer-2:before {
      content: '';
      position: absolute;
-     top: 40px;
-     left: 10px;
-     width: 20px;
-     height: 60px;
-     background-color: black;
+     top: 25px;
+     left: 5px;
+     width: 10px;
+     height: 20px;
+     background-color: #363636;
      border-radius: 30%;
+     transform: rotate(25deg);
+	-moz-transform: rotate(25deg);
+	-webkit-transform: rotate(-25deg);
  } 
  
  #deer-right-footer-1:after,  #deer-right-footer-2:after {
      content: '';
      position: absolute;
-     top: 90px;
-     left: 10px;
-     width: 20px;
-     height: 10px;
-     background-color: black;
+     width: 9px;
+     height: 5px;
+     top: 40px;
+     left: 9px;
+     background-color: #363636;
+     transform: rotate(25deg);
+	-moz-transform: rotate(25deg);
+	-webkit-transform: rotate(-25deg);
  }
  
- #deer-right-footer-1 {
-     left: 190px;
- }
-     
-#deer-right-footer-2 {
-	top: -190px;
-     left: 200px;
- }
 
 
