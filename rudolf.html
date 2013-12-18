@@ -4,8 +4,48 @@
         <title>Rudolf</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/deer.css" type="text/css">
+        <script>
+            var footer = new Array();
+            
+            function initDeer() {
+                footer[0] = document.getElementById("deer-left-footer-1");
+                footer[1] = document.getElementById("deer-left-footer-2");
+                footer[2] = document.getElementById("deer-right-footer-1");
+                footer[3] = document.getElementById("deer-right-footer-2");
+                
+                footer[0].start =40;
+                footer[1].start =10;
+                footer[2].start =30;
+                footer[3].start =10;
+                
+                footControl(0,0);
+                footControl(1,0);
+                footControl(2,0);
+                footControl(3,0);
+            }
+            
+            function actionForwardDeer() {
+                    
+                   
+//                    footer[1].style.webkitTransform = "rotate("+footer[1].start+"deg)";
+//                    if(position == 0) {
+//                       (footer[1].start-- <= -25) ? setTimeout("actionForwardDeer(1)",50) : setTimeout("actionForwardDeer(0)",50);
+//                    } else {
+//                        (footer[1].start++ >= 30) ? setTimeout("actionForwardDeer(0)",50) : setTimeout("actionForwardDeer(1)",50);
+//                    }
+            }
+            
+            function footControl(i, position){
+                footer[i].style.webkitTransform = "rotate("+footer[i].start+"deg)";
+                if(position == 0) {
+                       (footer[i].start-- <= -25) ? setTimeout("footControl("+i+", 1)",50) : setTimeout("footControl("+i+", 0)",50);
+                    } else {
+                        (footer[i].start++ >= 40) ? setTimeout("footControl("+i+", 0)",50) : setTimeout("footControl("+i+", 1)",50);
+                    }
+            }
+        </script>
     </head>
-    <body>
+    <body onload="initDeer()">
         <div id="deer">
 	        <div id="deer-left-horns"></div>
 	        <div id="deer-right-horns"></div>
