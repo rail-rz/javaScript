@@ -7,37 +7,26 @@
         <script>
             var footer = new Array();
             var deer;
-            
+
             function initDeer() {
                 footer[0] = document.getElementById("deer-left-footer-1");
                 footer[1] = document.getElementById("deer-left-footer-2");
                 footer[2] = document.getElementById("deer-right-footer-1");
                 footer[3] = document.getElementById("deer-right-footer-2");
-                
+
                 footer[0].start =40;
                 footer[1].start =10;
                 footer[2].start =30;
                 footer[3].start =10;
-                
+
                 footControl(0,0);
                 footControl(1,0);
                 footControl(2,0);
                 footControl(3,0);
-                
+
                 deerPosition();
             }
-            
-            function actionForwardDeer() {
-                    
-                   
-//                    footer[1].style.webkitTransform = "rotate("+footer[1].start+"deg)";
-//                    if(position == 0) {
-//                       (footer[1].start-- <= -25) ? setTimeout("actionForwardDeer(1)",50) : setTimeout("actionForwardDeer(0)",50);
-//                    } else {
-//                        (footer[1].start++ >= 30) ? setTimeout("actionForwardDeer(0)",50) : setTimeout("actionForwardDeer(1)",50);
-//                    }
-            }
-            
+
             function footControl(i, position){
                 footer[i].style.webkitTransform = "rotate("+footer[i].start+"deg)";
                 footer[i].style.mozTransform = "rotate("+footer[i].start+"deg)";
@@ -48,20 +37,20 @@
                         (footer[i].start++ >= 40) ? setTimeout("footControl("+i+", 0)",50) : setTimeout("footControl("+i+", 1)",50);
                     }
             }
-            
+
             function deerPosition() {
                 deer = document.getElementById("deer");
                 deer.startPosition = 100;
                 moveDeer();
             }
-            
+
             function moveDeer() {
                 deer.style.left = deer.startPosition+"px";
                 deer.startPosition--;
                 setTimeout("moveDeer()",50);
             }
-            
-            
+
+
         </script>
     </head>
     <body onload="initDeer()">

@@ -5,6 +5,7 @@
 function Init() {
 	cloudOfSnow();
 	fireElements();
+	initDeer();
 //    initFooterSnow();
 }
 

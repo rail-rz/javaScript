@@ -15,7 +15,7 @@
     left: 55px;
     width: 10px;
 	height: 60px;
-	background-color: black;
+	background-color: #363636;
 	border-radius: 25% 25% 0 0 ;
 	transform: rotate(50deg);
 	-moz-transform: rotate(50deg);
@@ -29,7 +29,7 @@
 	 height: 45px;
 	 top: 5px;
 	 left: 10px;
-	 background-color: black;
+	 background-color: #363636;
 	 border-radius: 25% 25% 0 0 ;
 	 transform: rotate(35deg);
 	 -moz-transform: rotate(35deg);
@@ -43,7 +43,7 @@
 	height: 50px;
 	top: 20px;
 	left: -10px;
-	background-color: black;
+	background-color: #363636;
 	border-radius: 25% 25% 0 0 ;
 	transform: rotate(-25deg);
 	-moz-transform: rotate(-25deg);
@@ -54,7 +54,7 @@
 	position:relative;
 	width: 40px;
 	height: 10px;
-	background-color: black;
+	background-color: #363636;
 	border-radius: 25% 0 0 25%;
 	transform: rotate(5deg);
 	-moz-transform: rotate(5deg);
@@ -67,7 +67,7 @@
 	width: 45px;
 	height: 10px;
   	right: -5px;
-	background-color: black;
+	background-color: #363636;
 	border-radius: 25% 0 0 25%;
 	transform: rotate(35deg);
 	-moz-transform: rotate(35deg);
@@ -80,7 +80,7 @@
 	width: 45px;
 	height: 10px;
    	right: -10px;
-	background-color: black;
+	background-color: #363636;
 	border-radius: 25% 0 0 25%;
 	transform: rotate(65deg);
 	-moz-transform: rotate(65deg);
@@ -89,7 +89,7 @@
 
  #deer-head {
      position: relative;
-     background-color: black;
+     background-color: #363636;
      width: 50px;
      height: 30px;
 	 top:-55px;
@@ -100,10 +100,10 @@
      position: relative;
      left: 30px;
      top: -65px;
-     background-color: black;
+     background-color: #363636;
      width: 90px;
      height: 40px;
-     border-radius: 25% 30% 5% 5%;
+     border-radius: 25% 30% 15% 15%;
  }
 
  #deer-body:after {
@@ -112,7 +112,7 @@
 	 right: -5px;
 	 width: 15px;
 	 height: 15px;
-	 background-color: black;
+	 background-color: #363636;
 	 border-radius:70% 0 70% 0;
  }
  
@@ -121,7 +121,7 @@
 	 top: -70px;
      width: 10px;
      height: 30px;
-     background-color: black;
+     background-color: #363636;
      border-radius: 30%;
  }
  
@@ -141,7 +141,7 @@
      left: 5px;
      width: 10px;
      height: 20px;
-     background-color: black;
+     background-color: #363636;
      border-radius: 30%;
      transform: rotate(25deg);
 	-moz-transform: rotate(25deg);
@@ -155,7 +155,7 @@
      height: 5px;
      top: 40px;
      left: 9px;
-     background-color: black;
+     background-color: #363636;
      transform: rotate(25deg);
 	-moz-transform: rotate(25deg);
 	-webkit-transform: rotate(-25deg);
@@ -166,7 +166,7 @@
      top: -130px;
      width: 10px;
      height: 30px;
-     background-color: black;
+     background-color: #363636;
      border-radius: 30%;
  }
  
@@ -187,7 +187,7 @@
      left: 5px;
      width: 10px;
      height: 20px;
-     background-color: black;
+     background-color: #363636;
      border-radius: 30%;
      transform: rotate(25deg);
 	-moz-transform: rotate(25deg);
@@ -201,7 +201,7 @@
      height: 5px;
      top: 40px;
      left: 9px;
-     background-color: black;
+     background-color: #363636;
      transform: rotate(25deg);
 	-moz-transform: rotate(25deg);
 	-webkit-transform: rotate(-25deg);
