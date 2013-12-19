@@ -8,75 +8,35 @@
     <link rel="stylesheet" href="css/bell.css" type="text/css">
     <link rel="stylesheet" href="css/candle.css" type="text/css">
 	<link rel="stylesheet" href="css/toys.css" type="text/css">
-    <link rel="stylesheet" href="css/deer.css" type="text/css">
-	<script>
-		var footer = new Array();
-		var deer;
-
-		function initDeer() {
-			footer[0] = document.getElementById("deer-left-footer-1");
-			footer[1] = document.getElementById("deer-left-footer-2");
-			footer[2] = document.getElementById("deer-right-footer-1");
-			footer[3] = document.getElementById("deer-right-footer-2");
-
-			footer[0].start =40;
-			footer[1].start =10;
-			footer[2].start =40;
-			footer[3].start =10;
-
-			footControl(0,0);
-			footControl(1,0);
-			footControl(2,0);
-			footControl(3,0);
-
-			deerPosition();
-		}
-
-		function footControl(i, position){
-			footer[i].style.webkitTransform = "rotate("+footer[i].start+"deg)";
-			footer[i].style.MozTransform = "rotate("+footer[i].start+"deg)";
-			footer[i].style.tsransform = "rotate("+footer[i].start+"deg)";
-			if(position == 0) {
-				(footer[i].start-- <= -25) ? setTimeout("footControl("+i+", 1)",40) : setTimeout("footControl("+i+", 0)",40);
-			} else {
-				(footer[i].start++ >= 40) ? setTimeout("footControl("+i+", 0)",40) : setTimeout("footControl("+i+", 1)",40);
-			}
-		}
-
-		function deerPosition() {
-			deer = document.getElementById("deer");
-			deer.startPosition = widthWindow-150;
-			moveDeer();
-		}
-
-		function moveDeer() {
-			deer.style.left = deer.startPosition+"px";
-			deer.startPosition -=3;
-			if(deer.startPosition <= -150)
-				deer.startPosition = widthWindow-150;
-			setTimeout("moveDeer()",50);
-		}
-
-
-	</script>
+    <link rel="stylesheet" href="css/deer-sledge.css" type="text/css">
 	<script src="js/initial.js"></script>
 	<script src="js/snow.js"></script>
-	<script src="js/footerSnow.js"></script>
+	<script src="js/deer-sledge.js"></script>
 	<script src="js/candle.js"></script>
 </head>
 <body onLoad = "Init()" >
 <div class="body-block">
-    
-    <div id="deer">
-        <div id="deer-left-horns"></div>
-        <div id="deer-right-horns"></div>
-        <div id="deer-head"></div>
-        <div id="deer-body"></div>
-        <div id="deer-left-footer-1"></div>
-        <div id="deer-left-footer-2"></div>
-        <div id="deer-right-footer-1"></div>
-        <div id="deer-right-footer-2"></div>
-    </div>
+
+	<div id="deer-sledge">
+		<div id="deer">
+			<div id="deer-left-horns"></div>
+			<div id="deer-right-horns"></div>
+			<div id="deer-head"></div>
+			<div id="deer-body"></div>
+			<div id="deer-left-footer-1"></div>
+			<div id="deer-left-footer-2"></div>
+			<div id="deer-right-footer-1"></div>
+			<div id="deer-right-footer-2"></div>
+		</div>
+		<div id="sledge">
+			<div id="bridle"></div>
+			<div id="sledge-left"></div>
+			<div id="santa-head"></div>
+			<div id="santa"></div>
+			<div id="sledge-right"></div>
+			<div id="sledge-footer"></div>
+		</div>
+	</div>
     
     <div class="fir-tree">
 

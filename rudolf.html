@@ -3,7 +3,7 @@
     <head>
         <title>Rudolf</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="css/deer.css" type="text/css">
+        <link rel="stylesheet" href="css/deer-sledge.css" type="text/css">
         <script>
             var footer = new Array();
             var deer;
@@ -39,7 +39,7 @@
             }
 
             function deerPosition() {
-                deer = document.getElementById("deer");
+                deer = document.getElementById("deer-sledge");
                 deer.startPosition = 100;
                 moveDeer();
             }
@@ -53,7 +53,8 @@
 
         </script>
     </head>
-    <body>
+    <body onload="">
+    <div id="deer-sledge">
         <div id="deer">
 	        <div id="deer-left-horns"></div>
 	        <div id="deer-right-horns"></div>
@@ -65,11 +66,13 @@
             <div id="deer-right-footer-2"></div>
         </div>
         <div id="sledge">
+	        <div id="bridle"></div>
             <div id="sledge-left"></div>
             <div id="santa-head"></div>
             <div id="santa"></div>
             <div id="sledge-right"></div>
             <div id="sledge-footer"></div>
         </div>
+    </div>
     </body>
 </html>

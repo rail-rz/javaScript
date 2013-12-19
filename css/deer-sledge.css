@@ -1,12 +1,17 @@
 /**
  * @author rail_rz <zamaletdinov.rz@gmail.com>
  */
+#deer-sledge {
+	position: absolute;
+	top:5%;
+	left:75%;
+	width: 0;
+	height: 0;
+}
+
  #deer {
-     position: absolute;
-     top:10%;
-     left:40%;
-     width: 0;
-     height: 0;
+     position: relative;
+	 top:10px;
  }
 
 #deer-right-horns {
@@ -208,15 +213,17 @@
 }
 
 #sledge {
-    position: absolute;
-    top:17%;
-    left: 50%;
+    position: relative;
+	bottom:160px;
+	left:160px;
+	float: left;
+	width: 0;
 }
 
 #sledge-left {
     position: relative;
     width: 20px;
-    border-bottom: 30px solid red;
+    border-bottom: 30px solid #363636;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
 }
@@ -226,7 +233,7 @@
     position: absolute;
     bottom: -10px;
     left:6px;
-    background-color: red;
+    background-color: #363636;
     width: 20px;
     height: 60px;
     transform: rotate(15deg);
@@ -241,7 +248,7 @@
     left: -8px;
     width: 40px;
     height: 40px;
-    background-color: red;
+    background-color: #363636;
     border-radius: 100% 100% 0 100%
 }
 
@@ -251,7 +258,7 @@
     left:70px;
     width: 90px;
     height: 90px;
-    background-color: black;
+    background-color: #1C1C1C;
     border-radius: 100%;
 }
 
@@ -261,7 +268,7 @@
     right: 60px;
     width: 40px;
     height: 20px;
-    background-color: black;
+    background-color: #1C1C1C;
 }
  
 #santa:after {
@@ -271,7 +278,7 @@
    right: 90px;
    width: 20px;
    height: 25px;
-   background-color: black;
+   background-color: #1C1C1C;
    border-radius: 100% 0 0 100%;
 }
 
@@ -281,7 +288,7 @@
      left: 95px;
      width: 50px;
      height: 50px;
-     background-color: blue;
+     background-color: #1C1C1C;
      border-radius: 100%;
 }
 
@@ -291,8 +298,8 @@
     bottom: 40px;
     left: 5px;
     border: 10px solid transparent;
-    border-right: 30px solid blueviolet;
-    border-bottom: 15px solid blueviolet;
+    border-right: 30px solid #1C1C1C;
+    border-bottom: 15px solid #1C1C1C;
 }
 
 #santa-head:after {
@@ -302,7 +309,7 @@
     left: 40px;
     width:  15px;
     height: 15px;
-    background-color: silver;
+    background-color: #1C1C1C;
     border-radius: 100%;
     
 }
@@ -315,16 +322,38 @@
     left: 20px;
     position: absolute; 
     border: 40px solid transparent;
-    border-right: 100px solid red;
-    border-bottom: 60px solid red;
+    border-right: 100px solid #363636;
+    border-bottom: 60px solid #363636;
     border-radius: 0 30% 10% 10%;
 }
  
 #sledge-footer{
      position: absolute;
-     top: 40px;
+     top: 35px;
      left: -20px;
      width: 200px;
-     height: 10px;
-     background-color: gold;
+     height: 5px;
+     background-color: #1C1C1C;
+	border-radius: 0 0 0 50%;
  }
+
+#bridle {
+	position: relative;
+	bottom: 70px;
+	right: 110px;
+	width: 175px;
+	height: 2px;
+	background-color: #1C1C1C;
+	transform: rotate(-5deg);
+	-moz-transform: rotate(-5deg);
+	-webkit-transform: rotate(-5deg);
+}
+
+#bridle:before {
+	content: '';
+	position: absolute;
+	top: 5px;
+	width: 175px;
+	height: 2px;
+	background-color: #1C1C1C;
+}
