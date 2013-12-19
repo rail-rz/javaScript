@@ -34,7 +34,7 @@
 
 		function footControl(i, position){
 			footer[i].style.webkitTransform = "rotate("+footer[i].start+"deg)";
-			footer[i].style.mozTransform = "rotate("+footer[i].start+"deg)";
+			footer[i].style.MozTransform = "rotate("+footer[i].start+"deg)";
 			footer[i].style.tsransform = "rotate("+footer[i].start+"deg)";
 			if(position == 0) {
 				(footer[i].start-- <= -25) ? setTimeout("footControl("+i+", 1)",40) : setTimeout("footControl("+i+", 0)",40);
