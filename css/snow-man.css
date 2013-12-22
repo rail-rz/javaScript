@@ -45,6 +45,17 @@
 	border-radius: 50%;
 }
 
+#snow-face p {
+	position: relative;
+	left: -5px;
+	top: 5px;
+}
+
+#snow-face span {
+	position: relative;
+	top:5px;
+}
+
 #snow-face:before {
 	content: '';
 	position: absolute;
@@ -59,19 +70,56 @@
 #snow-hand {
 	position: absolute;
 	bottom: 160px;
-	left: 5px;
-	width: 25px;
-	height: 25px;
+	/*left: 5px;*/
+	width: 35px;
+	height: 35px;
 	background-color: snow;
 	border-radius: 50%;
+	z-index: 2;
 }
 
 #snow-hand:before {
 	content: '';
 	position: absolute;
 	left: 105px;
-	width: 25px;
-	height: 25px;
+	width: 35px;
+	height: 35px;
 	background-color: snow;
 	border-radius: 50%;
 }
+
+#billboard {
+	position: absolute;
+	width: 140px;
+	bottom: 280px;
+	background-color: red;
+	text-align: center;
+	font: 25px bold 'Comic Sans MS';
+	line-height:0.2;
+	color: gold;
+	border-radius: 15% 15% 0 0;
+}
+
+#billboard p {
+	text-shadow: 2px 2px 2px  white;
+}
+
+#billboard:before, #billboard:after {
+	content: '';
+	position: absolute;
+	bottom: -100px;
+	width: 5px;
+	height: 100px;
+	background-color: brown;
+	border-radius: 0;
+}
+
+#billboard:before {
+	left:0;
+}
+
+
+#billboard:after {
+	right:0;
+}
+
