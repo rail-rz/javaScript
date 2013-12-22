@@ -75,3 +75,28 @@
 	background-color: snow;
 	border-radius: 50%;
 }
+
+#billboard {
+	position: absolute;
+	width: 140px;
+	bottom: 280px;
+	background-color: red;
+	text-align: center;
+	font: 25px bold 'Comic Sans MS';
+	line-height:0.2;
+	color: gold;
+	border-radius: 15%;
+}
+
+#billboard p {
+	text-shadow: 2px 2px 2px    white;
+}
+
+#billboard:before {
+	content: '';
+	position: absolute;
+	width: 10px;
+	height: 50px;
+	background-color: brown;
+}
+
