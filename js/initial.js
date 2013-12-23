@@ -6,7 +6,6 @@ function Init() {
 	cloudOfSnow();
 	fireElements();
 	initDeer();
-//    initFooterSnow();
 }
 
 // метод для получения рандомного значения из массива
@@ -19,5 +18,3 @@ function getRandomVarFromArray(array) {
 function getRandom(max, min) {
 	return Math.random() * (max - min) + min;
 }
-
-//function initCloud() { };
