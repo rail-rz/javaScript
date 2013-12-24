@@ -6,10 +6,8 @@
  * и/или перенести методы getRandom и getRandomVarFromArray
  * и поставить <body onLoad = "cloudOfSnow()" >
  */
-
-var amountSnow = 60; // кол-во снежинок
+var amountSnow = 50; // кол-во снежинок
 var speedSnow = 0.5; // скорость
-var elementSnow = "*" // то, что мы будем назвыать снежинкой
 var maxSizeSnow = 30; // макс. вес снежинки
 var minSizeSnow = 5; // минимальный вес снижинки
 var snowColor = new Array('#FFFAFA', '#F8F8FF', '#FFFFF0', '#EEE9E9', '#FFFFF0', '#E6E6FA', '#8B8989', '#CDC9C9'); // цвет снежинок
@@ -19,9 +17,9 @@ var heightWindow = window.innerHeight; //максимальная высота �
 var widthWindow = window.innerWidth; // макс ширина браузера
 
 var snow = new Array(); // тут будет снег
+var elementSnow = new Array('*', '&#10052;', '&#10053;', '&#10054;');// то, что мы будем назвыать снежинкой
 
 function cloudOfSnow() {
-
 	for(i=0;i<=amountSnow;i++) {
 		snow[i] = document.getElementById("snow-"+i);
 		// определяем вес и скорость падения снежинки
@@ -55,5 +53,5 @@ function snowFall() {
 
 // создаем армию снежинок
 for(i=0;i<=amountSnow;++i) {
-	document.write("<span id='snow-"+i+"' style='position: absolute;color: white; z-index:100'>"+elementSnow+"</span>");
+	document.write("<span id='snow-"+i+"' style='position: absolute;color: white; z-index:100'>"+getRandomVarFromArray(elementSnow)+"</span>");
 }
