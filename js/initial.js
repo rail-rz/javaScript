@@ -6,6 +6,7 @@ function Init() {
 	cloudOfSnow();
 	fireElements();
 	initDeer();
+	watch();
 }
 
 // метод для получения рандомного значения из массива
