@@ -3,7 +3,7 @@
  */
 #ball-toy {
 	position: absolute;
-	top:140px;
+	top: 140px;
 	left: 55px;
 	height: 30px;
 	width: 30px;
@@ -29,4 +29,55 @@
 	top: 5px;
 	color: yellow;
 	font: 10px Helvetica;
+}
+
+#js-toy {
+	position: absolute;
+	bottom: 65px;
+	left: -10px;
+	background-color: yellow;
+	width: 25px;
+	height: 25px;
+	z-index: 15;
+}
+
+#js-toy:before {
+	content: 'js';
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
+
+#php-toy {
+	position: absolute;
+	bottom: 65px;
+	left: 50px;
+	width: 40px;
+	height: 31px;
+	text-align: center;
+	background-color: white;
+	border: 1px solid black;
+	border-radius: 50%;
+	z-index: 15;
+}
+
+#php-toy:before{
+	content: '';
+	position: absolute;
+	top:1px;
+	left:1px;
+	width: 35px;
+	height: 25px;
+	background-color: #191970;
+	border: 1px solid black;
+	color: white;
+	border-radius: 50%;
+}
+
+#php-toy:after{
+	content: 'PHP';
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	color: white;
 }
