@@ -37,8 +37,8 @@ function snowFall() {
 	controlSizeWindow();
 	for (i = 0; i <= amountSnow; i++) {
 		snow[i].positionOnY += snow[i].speed;
-		snow[i].positionOnX -=snow[i].speed;
-		counter += increase;
+//		snow[i].positionOnX +=Math.sin(0.5);
+//		counter += increase;
 		snow[i].style.left = snow[i].positionOnX + 'px';
 		snow[i].style.top = snow[i].positionOnY + 'px';
 		// определяет,не ушела ли за пределы экрана снежинка и создает новую если это так
@@ -55,5 +55,5 @@ function snowFall() {
 
 // создаем армию снежинок
 for (i = 0; i <= amountSnow; ++i) {
-	document.write("<span id='snow-" + i + "' style='position: absolute;color: white; z-index:100'>" + getRandomVarFromArray(elementSnow) + "</span>");
+	document.write("<span id='snow-" + i + "' class='snow-elements'>" + getRandomVarFromArray(elementSnow) + "</span>");
 }
