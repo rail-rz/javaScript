@@ -3,14 +3,14 @@
  */
 function watch() {
 	var date = new Date();
-	var y= date.getFullYear();
+	var y = date.getFullYear();
 	var d = date.getDate();
 	var h = date.getHours();
 	var m = date.getMinutes();
 	var s = date.getSeconds();
 
-	if(y==2013)
-		document.getElementById('last-day').innerHTML = 31-d;
+	if (y == 2013)
+		document.getElementById('last-day').innerHTML = 31 - d;
 	else {
 		document.getElementById('new-year').innerHTML = "С новым"
 		document.getElementById('last-day').innerHTML = "годом";
