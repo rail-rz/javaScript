@@ -1,0 +1,31 @@
+#watch {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    text-align: center;
+}
+
+#watch-header {
+    position: relative;
+}
+#watch-header:after {
+    content: ''; 
+    position: absolute; 
+    left: -20px;
+    bottom:0px;
+    border: 60px solid transparent;
+    border-bottom: 60px solid green;
+}
+
+#watch-clock {
+    width: 80px;
+    height: 80px;
+    background-color: blue;
+    color: red;
+    font-size: 20px;
+}
+
+#clock {
+    position: relative;
+    top:30px;
+}

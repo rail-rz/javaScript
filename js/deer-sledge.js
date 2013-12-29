@@ -41,6 +41,7 @@ function deerPosition() {
 }
 
 function moveDeer() {
+	controlSizeWindow();
 	deer.style.left = deer.startPosition+"px";
 	deer.startPosition -=3;
 	if(deer.startPosition <= -350)

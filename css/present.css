@@ -1,51 +1,46 @@
 /**
  * @author rail_rz <zamaletdinov.rz@gmail.com>
  */
-.present {
-	position: relative;
-	left: 50%;
+#present-yellow {
+	position: absolute;
+	bottom: 20px;
+	left: 100px;
 	width: 0;
+	z-index: 12;
 }
 
-.present-body {
-	width: 100px;
-	height: 50px;
+#present-yellow-body {
+	width: 50px;
+	height: 25px;
 	background-color: gold;
 
 }
 
-.present-body:after {
+#present-yellow-body:after {
 	content: "";
 	position: absolute;
-	left: 45px;
-	width: 10px;
-	height: 50px;
+	left: 23px;
+	width: 5px;
+	height: 25px;
 	background-color: red;
 }
 
-.present-bow {
+#present-yellow-bow {
 	position: relative;
-	left: 2px;
-	width: 40px;
-	height: 20px;
+	left: 0px;
+	width: 20px;
+	height: 10px;
 	border: 5px solid red;
 	border-radius: 100% 100% 0 100%;
-	/*    transform:rotate(20deg);
-		-moz-transform:rotate(10deg);
-		-webkit-transform:rotate(10deg);*/
-
 }
 
-.present-bow:before {
+#present-yellow-bow:before {
 	content: "";
 	position: absolute;
-	left: 40px;
-	top: -5px;
-	width: 40px;
-	height: 20px;
+	left: 20px;
+	top: -4px;
+	width: 20px;
+	height: 10px;
 	border: 5px solid red;
 	border-radius: 100% 100% 100% 0;
-	/*    transform:rotate(40deg);
-		-moz-transform:rotate(-30deg);
-		-webkit-transform:rotate(-30deg);*/
 }

@@ -45,17 +45,6 @@
 	border-radius: 50%;
 }
 
-#snow-face p {
-	position: relative;
-	left: -5px;
-	top: 5px;
-}
-
-#snow-face span {
-	position: relative;
-	top:5px;
-}
-
 #snow-face:before {
 	content: '';
 	position: absolute;
@@ -65,6 +54,17 @@
 	height: 10px;
 	background-color: black;
 	border-radius: 50%;
+}
+
+#snow-face:after {
+	content: '';
+	position: absolute;
+	top: 10px;
+	width: 40px;
+	height: 25px;
+	/*background-color: red;*/
+	border-bottom: 5px solid darkred;
+	border-radius: 0 0 50% 50%;
 }
 
 #snow-hand {
@@ -94,7 +94,7 @@
 	bottom: 280px;
 	background-color: red;
 	text-align: center;
-	font: 25px bold 'Comic Sans MS';
+	font: 15px bold 'Comic Sans MS';
 	line-height:0.2;
 	color: gold;
 	border-radius: 15% 15% 0 0;
