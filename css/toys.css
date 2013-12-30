@@ -81,3 +81,19 @@
 	left: 5px;
 	color: white;
 }
+
+#mysql-toy{
+	position: absolute;
+	height: 20px;
+	bottom: 70px;
+	left: 110px;
+	background-color: white;
+	color: orange;
+	font: 14px bold;
+	text-shadow: 1px 1px black;
+	z-index: 15;
+}
+
+#mysql-toy span {
+	color: #20B2AA;
+}
