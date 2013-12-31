@@ -81,3 +81,121 @@
 	left: 5px;
 	color: white;
 }
+
+#mysql-toy{
+	position: absolute;
+	height: 20px;
+	bottom: 70px;
+	left: 110px;
+	background-color: white;
+	color: orange;
+	font: 14px bold;
+	text-shadow: 1px 1px black;
+	z-index: 15;
+}
+
+#mysql-toy span {
+	color: #20B2AA;
+}
+
+#html-toy{
+	position: absolute;
+	bottom:150px;
+	left:20px;
+	width: 10px;
+	height: 20px;
+	border-bottom: 10px solid transparent;
+	border-right: 10px solid orange;
+	z-index: 16;
+	text-shadow: 1px 1px black;
+}
+
+#html-toy:before{
+	content: '';
+	position: absolute;
+	left:19px;
+	width: 10px;
+	height: 20px;
+	/*background-color: orange;*/
+	border-bottom: 10px solid transparent;
+	border-left: 10px solid orange;
+}
+
+#html-toy:after{
+	content: '';
+	position: absolute;
+	left: 19px;
+	top: 3px;
+	width: 2px;
+	height: 12px;
+	border-bottom: 9px solid transparent;
+	border-left: 7px solid white;
+	opacity: 0.4;
+}
+
+#html-toy p {
+	position: absolute;
+	top:-20px;
+	left: 15px;
+	font: 20px bold;
+	color: white;
+}
+
+#html-toy span {
+	position: absolute;
+	top:-10px;
+	left: 8px;
+	font: 8px bold;
+	color: white;
+}
+
+#css-toy{
+	position: absolute;
+	bottom:150px;
+	left:90px;
+	width: 10px;
+	height: 20px;
+	border-bottom: 10px solid transparent;
+	border-right: 10px solid darkblue;
+	z-index: 16;
+	text-shadow: 1px 1px black;
+}
+
+#css-toy:before{
+	content: '';
+	position: absolute;
+	left:19px;
+	width: 10px;
+	height: 20px;
+	/*background-color: orange;*/
+	border-bottom: 10px solid transparent;
+	border-left: 10px solid darkblue;
+}
+
+#css-toy:after{
+	content: '';
+	position: absolute;
+	left: 19px;
+	top: 3px;
+	width: 2px;
+	height: 12px;
+	border-bottom: 9px solid transparent;
+	border-left: 7px solid white;
+	opacity: 0.4;
+}
+
+#css-toy p {
+	position: absolute;
+	top:-20px;
+	left: 15px;
+	font: 20px bold;
+	color: white;
+}
+
+#css-toy span {
+	position: absolute;
+	top:-10px;
+	left: 10px;
+	font: 10px bold;
+	color: white;
+}
