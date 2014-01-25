@@ -26,3 +26,4 @@ img.src = 'image/pe_ship.png';
 img.onload = function() {    // Событие onLoad, ждём момента пока загрузится изображение
 	context.drawImage(img, 0, 0);  // Рисуем изображение от точки с координатами 0, 0
 }
+
