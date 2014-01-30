@@ -34,7 +34,7 @@ function Rect(color, x, y, width, height) {
 function Init() {
 	gameCanvas = new Rect('white', 0, 0, canvas.width, canvas.height)
 	computer = new Rect("black", 0, canvas.height / 2 - 40, 20, 80);
-	player = new Rect("black", canvas.width - 20, canvas.height / 2 - 40, 20, 80);
+	player = new Rect("black", canvas.width - 20, canvas.height / 2 - 40, 20, 80);//
 	ball = new Rect("black", canvas.width / 2 - 10, canvas.height / 2 - 10, 20, 20);
 
 	ball.vX = 2; // скорость по оси х
@@ -56,9 +56,12 @@ function Update() {
 		ball.vY = -ball.vY;
 	} else if ((ball.x + ball.width) > canvas.width || (ball.x + ball.width) < 0) {
 		RestartGame();
+	} else if ((PushControl(computer, ball) && ball.vX < 0) || (PushControl(player, ball) && ball.vX > 0)) {
+		ball.vX = -ball.vX;
 	}
 	ball.x += ball.vX;
 	ball.y += ball.vY;
+	ComputerMovie();
 }
 
 function PlayerMove(e) {
@@ -73,9 +76,30 @@ function PlayGame() {
 	Update();
 }
 
+function PushControl(objA, objB) {
+	if (objA.x + objA.width > objB.x &&
+		objA.x < objB.x + objB.width &&
+		objA.y + objA.height > objB.y &&
+		objA.y < objB.y + objB.height)
+		return true;
+	else
+		return false;
+}
+
 function RestartGame() {
 	ball.x = canvas.width / 2 - 10;
 	ball.y = canvas.height / 2 - 10;
+}
+
+function ComputerMovie() {
+	// вышитываем середину платформу, куда попадает шарик
+	computer.y = ball.y - 30;
+	// далее ставим ограничители,чтобы платформа не уходила за пределы
+	if(computer.y < 0)
+		computer.y = 0;
+	else if(computer.y + computer.height> canvas.height)
+		computer.y = canvas.height - computer.height;
+
 }
 
 
