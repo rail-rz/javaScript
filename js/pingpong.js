@@ -40,6 +40,8 @@ function Init() {
 	ball.vX = 2; // скорость по оси х
 	ball.vY = 2; // скорость по оси у
 
+	computer.vY = 0;
+
 	canvas.onmousemove = PlayerMove;
 	setInterval(PlayGame, 1000 / 50);
 }
@@ -52,16 +54,29 @@ function Drawing() {
 }
 
 function Update() {
+	ComputerMovie();
 	if (ball.y < 0 || (ball.y + ball.height) > canvas.height) {
 		ball.vY = -ball.vY;
 	} else if ((ball.x + ball.width) > canvas.width || (ball.x + ball.width) < 0) {
 		RestartGame();
 	} else if ((PushControl(computer, ball) && ball.vX < 0) || (PushControl(player, ball) && ball.vX > 0)) {
+		if (ball.vX < 9 && -9 < ball.vX) {
+			if (ball.vX < 0) {
+				ball.vX--;
+			} else {
+				ball.vX++;
+			}
+			if (ball.vY < 0) {
+				ball.vY--;
+			} else {
+				ball.vY++;
+			}
+		}
+		computer.vY += 2;// костыль
 		ball.vX = -ball.vX;
 	}
 	ball.x += ball.vX;
 	ball.y += ball.vY;
-	ComputerMovie();
 }
 
 function PlayerMove(e) {
@@ -87,13 +102,14 @@ function PushControl(objA, objB) {
 }
 
 function RestartGame() {
+//	ball.vX = ball.vY = 2;
 	ball.x = canvas.width / 2 - 10;
 	ball.y = canvas.height / 2 - 10;
 }
 
 function ComputerMovie() {
 	// вышитываем середину платформу, куда попадает шарик
-	computer.y = ball.y - 30;
+	computer.y = ball.y - 30 - computer.vY;
 	// далее ставим ограничители,чтобы платформа не уходила за пределы
 	if(computer.y < 0)
 		computer.y = 0;
