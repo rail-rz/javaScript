@@ -34,8 +34,12 @@ function Rect(color, x, y, width, height) {
 function Init() {
 	gameCanvas = new Rect('white', 0, 0, canvas.width, canvas.height)
 	computer = new Rect("black", 0, canvas.height / 2 - 40, 20, 80);
-	player = new Rect("black", canvas.width - 20, canvas.height / 2 - 40, 20, 80);//
+	player = new Rect("black", canvas.width - 20, canvas.height / 2 - 40, 20, 80);
 	ball = new Rect("black", canvas.width / 2 - 10, canvas.height / 2 - 10, 20, 20);
+
+
+	computer.score = 0;
+	player.score = 0;
 
 	ball.vX = 2; // скорость по оси х
 	ball.vY = 2; // скорость по оси у
@@ -51,13 +55,24 @@ function Drawing() {
 	computer.drawing();
 	player.drawing();
 	ball.drawing();
+
+	context.font = "italic 30pt Arial";
+	context.textAlign = 'center';
+	context.textBaseline = 'top';
+	context.fillStyle = 'black';
+	context.fillText(computer.score, 100, 0);
+	context.fillText(player.score, gameCanvas.width - 100, 0);
 }
 
 function Update() {
 	ComputerMovie();
 	if (ball.y < 0 || (ball.y + ball.height) > canvas.height) {
 		ball.vY = -ball.vY;
-	} else if ((ball.x + ball.width) > canvas.width || (ball.x + ball.width) < 0) {
+	} else if ((ball.x + ball.width) > canvas.width ) {
+		computer.score++;
+		RestartGame();
+	} else if ((ball.x + ball.width) < 0) {
+		player.score++;
 		RestartGame();
 	} else if ((PushControl(computer, ball) && ball.vX < 0) || (PushControl(player, ball) && ball.vX > 0)) {
 		if (ball.vX < 9 && -9 < ball.vX) {
@@ -72,7 +87,7 @@ function Update() {
 				ball.vY++;
 			}
 		}
-		computer.vY += 2;// костыль
+		computer.vY ++;// костыль
 		ball.vX = -ball.vX;
 	}
 	ball.x += ball.vX;
@@ -102,7 +117,8 @@ function PushControl(objA, objB) {
 }
 
 function RestartGame() {
-//	ball.vX = ball.vY = 2;
+	ball.vX = ball.vY = 2;
+	computer.vY = 0;
 	ball.x = canvas.width / 2 - 10;
 	ball.y = canvas.height / 2 - 10;
 }
@@ -115,7 +131,6 @@ function ComputerMovie() {
 		computer.y = 0;
 	else if(computer.y + computer.height> canvas.height)
 		computer.y = canvas.height - computer.height;
-
 }
 
 
