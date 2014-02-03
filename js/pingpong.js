@@ -2,19 +2,12 @@
  * @author rail_rz <zamaletdinov.rz@gmail.com>
  */
 
-// Создаем канвас
-var canvas = document.createElement("canvas");
-var context = canvas.getContext("2d");
-canvas.width = 600;
-canvas.height = 450;
-//canvas.style.backgroundColor = 'black';
-canvas.style.border = "1px solid black";
+
 // добавляет элемент последним в список детей
-document.body.appendChild(canvas);
+//document.body.appendChild(canvas);
 
-var gameCanvas, computer, player, ball;
+var canvas, context, gameCanvas, computer, player, ball;
 
-Init();
 
 // создаем класс Rect для отрисовки прямоугольников
 function Rect(color, x, y, width, height) {
@@ -32,6 +25,12 @@ function Rect(color, x, y, width, height) {
 }
 
 function Init() {
+	// Создаем канвас
+	canvas = document.getElementById("canvas");
+	context = canvas.getContext("2d");
+	canvas.width =  window.innerWidth;
+	canvas.height = window.innerHeight;
+
 	gameCanvas = new Rect('white', 0, 0, canvas.width, canvas.height)
 	computer = new Rect("black", 0, canvas.height / 2 - 40, 20, 80);
 	player = new Rect("black", canvas.width - 20, canvas.height / 2 - 40, 20, 80);
