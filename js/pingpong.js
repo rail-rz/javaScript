@@ -28,12 +28,12 @@ function Init() {
 	// Создаем канвас
 	canvas = document.getElementById("canvas");
 	context = canvas.getContext("2d");
-	canvas.width =  window.innerWidth;
+	canvas.width = window.innerWidth;
 	canvas.height = window.innerHeight;
 
 	gameCanvas = new Rect('white', 0, 0, canvas.width, canvas.height)
-	computer = new Rect("black", 0, canvas.height / 2 - 40, 20, 80);
-	player = new Rect("black", canvas.width - 20, canvas.height / 2 - 40, 20, 80);
+	computer = new Rect("black", 0, canvas.height / 2 - 40, (canvas.height * 3) / 100, (canvas.height * 15) / 100);
+	player = new Rect("black", canvas.width - 20, canvas.height / 2 - 40, (canvas.height * 3) / 100, (canvas.height * 15) / 100);
 	ball = new Rect("black", canvas.width / 2 - 10, canvas.height / 2 - 10, 20, 20);
 
 
@@ -67,14 +67,14 @@ function Update() {
 	ComputerMovie();
 	if (ball.y < 0 || (ball.y + ball.height) > canvas.height) {
 		ball.vY = -ball.vY;
-	} else if ((ball.x + ball.width) > canvas.width ) {
+	} else if ((ball.x + ball.width) > canvas.width) {
 		computer.score++;
 		RestartGame();
 	} else if ((ball.x + ball.width) < 0) {
 		player.score++;
 		RestartGame();
 	} else if ((PushControl(computer, ball) && ball.vX < 0) || (PushControl(player, ball) && ball.vX > 0)) {
-		if (ball.vX < 9 && -9 < ball.vX) {
+		if (ball.vX < 10 && -10 < ball.vX) {
 			if (ball.vX < 0) {
 				ball.vX--;
 			} else {
@@ -86,7 +86,6 @@ function Update() {
 				ball.vY++;
 			}
 		}
-		computer.vY ++;// костыль
 		ball.vX = -ball.vX;
 	}
 	ball.x += ball.vX;
@@ -123,12 +122,19 @@ function RestartGame() {
 }
 
 function ComputerMovie() {
-	// вышитываем середину платформу, куда попадает шарик
-	computer.y = ball.y - 30 - computer.vY;
+	// если скорость шарика ровна 10 уменьшаем скорость ИИ на три
+	computer.vY = ball.vY;
+	if (ball.vY == 10)
+		computer.vY += -3;
+	else if( ball.vY == -10)
+		computer.vY += 3;
+
+	computer.y += computer.vY;
+
 	// далее ставим ограничители,чтобы платформа не уходила за пределы
-	if(computer.y < 0)
+	if (computer.y < 0)
 		computer.y = 0;
-	else if(computer.y + computer.height> canvas.height)
+	else if (computer.y + computer.height > canvas.height)
 		computer.y = canvas.height - computer.height;
 }
 
