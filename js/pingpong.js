@@ -34,19 +34,30 @@ function Init() {
 	gameCanvas = new Rect('white', 0, 0, canvas.width, canvas.height)
 	computer = new Rect("black", 0, canvas.height / 2 - 40, (canvas.height * 3) / 100, (canvas.height * 15) / 100);
 	player = new Rect("black", canvas.width - 20, canvas.height / 2 - 40, (canvas.height * 3) / 100, (canvas.height * 15) / 100);
+//	player = new Rect("black", canvas.width - 20, 0, (canvas.height * 3) / 100, canvas.height);
 	ball = new Rect("black", canvas.width / 2 - 10, canvas.height / 2 - 10, 20, 20);
 
 
 	computer.score = 0;
 	player.score = 0;
 
-	ball.vX = 2; // скорость по оси х
-	ball.vY = 2; // скорость по оси у
+	ball.vX = GetRandomFloor(5, 2); // скорость по оси х
+	ball.vY = GetRandomFloor(5, 2); // скорость по оси у
 
 	computer.vY = 0;
 
 	canvas.onmousemove = PlayerMove;
 	setInterval(PlayGame, 1000 / 50);
+}
+
+// метод для получения рандомного значения
+function GetRandom(max, min) {
+	return Math.random() * (max - min) + min;
+}
+
+// получение целочисленного рандомного значения
+function GetRandomFloor(max, min) {
+	return Math.floor(GetRandom(max, min));
 }
 
 function Drawing() {
@@ -74,7 +85,7 @@ function Update() {
 		player.score++;
 		RestartGame();
 	} else if ((PushControl(computer, ball) && ball.vX < 0) || (PushControl(player, ball) && ball.vX > 0)) {
-		if (ball.vX < 10 && -10 < ball.vX) {
+		if (ball.vY < 10 && -10 < ball.vY) {
 			if (ball.vX < 0) {
 				ball.vX--;
 			} else {
@@ -115,7 +126,8 @@ function PushControl(objA, objB) {
 }
 
 function RestartGame() {
-	ball.vX = ball.vY = 2;
+	ball.vX = GetRandomFloor(5, 2);
+	ball.vY = GetRandomFloor(5, 2);
 	computer.vY = 0;
 	ball.x = canvas.width / 2 - 10;
 	ball.y = canvas.height / 2 - 10;
@@ -124,11 +136,11 @@ function RestartGame() {
 function ComputerMovie() {
 	// если скорость шарика ровна 10 уменьшаем скорость ИИ на три
 	computer.vY = ball.vY;
-	if (ball.vY == 10)
-		computer.vY += -3;
-	else if( ball.vY == -10)
+	if (ball.vY == 10) {
+		computer.vY -= 3;
+	} else if (ball.vY == -10) {
 		computer.vY += 3;
-
+	}
 	computer.y += computer.vY;
 
 	// далее ставим ограничители,чтобы платформа не уходила за пределы
