@@ -2,19 +2,12 @@
  * @author rail_rz <zamaletdinov.rz@gmail.com>
  */
 
-// Создаем канвас
-var canvas = document.createElement("canvas");
-var context = canvas.getContext("2d");
-canvas.width = 600;
-canvas.height = 450;
-//canvas.style.backgroundColor = 'black';
-canvas.style.border = "1px solid black";
+
 // добавляет элемент последним в список детей
-document.body.appendChild(canvas);
+//document.body.appendChild(canvas);
 
-var gameCanvas, computer, player, ball;
+var canvas, context, gameCanvas, computer, player, ball;
 
-Init();
 
 // создаем класс Rect для отрисовки прямоугольников
 function Rect(color, x, y, width, height) {
@@ -32,22 +25,39 @@ function Rect(color, x, y, width, height) {
 }
 
 function Init() {
+	// Создаем канвас
+	canvas = document.getElementById("canvas");
+	context = canvas.getContext("2d");
+	canvas.width = window.innerWidth;
+	canvas.height = window.innerHeight;
+
 	gameCanvas = new Rect('white', 0, 0, canvas.width, canvas.height)
-	computer = new Rect("black", 0, canvas.height / 2 - 40, 20, 80);
-	player = new Rect("black", canvas.width - 20, canvas.height / 2 - 40, 20, 80);
+	computer = new Rect("black", 0, canvas.height / 2 - 40, (canvas.height * 3) / 100, (canvas.height * 15) / 100);
+	player = new Rect("black", canvas.width - 20, canvas.height / 2 - 40, (canvas.height * 3) / 100, (canvas.height * 15) / 100);
+//	player = new Rect("black", canvas.width - 20, 0, (canvas.height * 3) / 100, canvas.height);
 	ball = new Rect("black", canvas.width / 2 - 10, canvas.height / 2 - 10, 20, 20);
 
 
 	computer.score = 0;
 	player.score = 0;
 
-	ball.vX = 2; // скорость по оси х
-	ball.vY = 2; // скорость по оси у
+	ball.vX = GetRandomCeil(5, 2); // скорость по оси х
+	ball.vY = GetRandomCeil(5, 2); // скорость по оси у
 
 	computer.vY = 0;
 
 	canvas.onmousemove = PlayerMove;
 	setInterval(PlayGame, 1000 / 50);
+}
+
+// метод для получения рандомного значения
+function GetRandom(max, min) {
+	return Math.random() * (max - min) + min;
+}
+
+// получение целочисленного рандомного значения
+function GetRandomCeil(max, min) {
+	return Math.ceil(GetRandom(max, min));
 }
 
 function Drawing() {
@@ -68,14 +78,14 @@ function Update() {
 	ComputerMovie();
 	if (ball.y < 0 || (ball.y + ball.height) > canvas.height) {
 		ball.vY = -ball.vY;
-	} else if ((ball.x + ball.width) > canvas.width ) {
+	} else if ((ball.x + ball.width) > canvas.width) {
 		computer.score++;
 		RestartGame();
 	} else if ((ball.x + ball.width) < 0) {
 		player.score++;
 		RestartGame();
 	} else if ((PushControl(computer, ball) && ball.vX < 0) || (PushControl(player, ball) && ball.vX > 0)) {
-		if (ball.vX < 9 && -9 < ball.vX) {
+		if (ball.vY < 10 && -10 < ball.vY) {
 			if (ball.vX < 0) {
 				ball.vX--;
 			} else {
@@ -87,7 +97,6 @@ function Update() {
 				ball.vY++;
 			}
 		}
-		computer.vY ++;// костыль
 		ball.vX = -ball.vX;
 	}
 	ball.x += ball.vX;
@@ -117,19 +126,27 @@ function PushControl(objA, objB) {
 }
 
 function RestartGame() {
-	ball.vX = ball.vY = 2;
+	ball.vX = GetRandomCeil(5, 2);
+	ball.vY = GetRandomCeil(5, 2);
 	computer.vY = 0;
 	ball.x = canvas.width / 2 - 10;
 	ball.y = canvas.height / 2 - 10;
 }
 
 function ComputerMovie() {
-	// вышитываем середину платформу, куда попадает шарик
-	computer.y = ball.y - 30 - computer.vY;
+	// если скорость шарика ровна 10 уменьшаем скорость ИИ на три
+	computer.vY = ball.vY;
+	if (ball.vY == 10) {
+		computer.vY -= 3;
+	} else if (ball.vY == -10) {
+		computer.vY += 3;
+	}
+	computer.y += computer.vY;
+
 	// далее ставим ограничители,чтобы платформа не уходила за пределы
-	if(computer.y < 0)
+	if (computer.y < 0)
 		computer.y = 0;
-	else if(computer.y + computer.height> canvas.height)
+	else if (computer.y + computer.height > canvas.height)
 		computer.y = canvas.height - computer.height;
 }
 
