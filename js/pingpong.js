@@ -41,8 +41,8 @@ function Init() {
 	computer.score = 0;
 	player.score = 0;
 
-	ball.vX = GetRandomFloor(5, 2); // скорость по оси х
-	ball.vY = GetRandomFloor(5, 2); // скорость по оси у
+	ball.vX = GetRandomCeil(5, 2); // скорость по оси х
+	ball.vY = GetRandomCeil(5, 2); // скорость по оси у
 
 	computer.vY = 0;
 
@@ -56,8 +56,8 @@ function GetRandom(max, min) {
 }
 
 // получение целочисленного рандомного значения
-function GetRandomFloor(max, min) {
-	return Math.floor(GetRandom(max, min));
+function GetRandomCeil(max, min) {
+	return Math.ceil(GetRandom(max, min));
 }
 
 function Drawing() {
@@ -126,8 +126,8 @@ function PushControl(objA, objB) {
 }
 
 function RestartGame() {
-	ball.vX = GetRandomFloor(5, 2);
-	ball.vY = GetRandomFloor(5, 2);
+	ball.vX = GetRandomCeil(5, 2);
+	ball.vY = GetRandomCeil(5, 2);
 	computer.vY = 0;
 	ball.x = canvas.width / 2 - 10;
 	ball.y = canvas.height / 2 - 10;
