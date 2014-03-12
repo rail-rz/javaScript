@@ -1,0 +1,45 @@
+<!DOCTYPE html> 
+    <head> 
+        <meta charset="UTF-8" /> 
+        <title>Тест анимации спрайтами</title>
+    </head> 
+    <body> 
+        <canvas id="myCanvas" width="400" height="300"> 
+           Упс=)
+        </canvas> 
+        <script> 
+
+    var width = 300, 
+        height = 300, 
+        framesX = 3,
+		framesY = 2, 
+        currentFrameX = 0, 
+		currentFrameY = 0,
+          
+        canvas = document.getElementById("myCanvas"); 
+        ctx = canvas.getContext("2d"); 
+        image = new Image() 
+        image.src = 'image/nlo.png';
+
+      
+    var draw = function(){ 
+        ctx.clearRect(0, 0, width, height); 
+	
+        ctx.drawImage(image, width * currentFrameX, height*currentFrameY , width, height, 0, 0, width, height); 
+      
+		if (currentFrameX == framesX) { 
+			currentFrameX = 0; 
+			if(currentFrameY == framesY) {
+				currentFrameY =0;
+			} else {
+				currentFrameY ++;
+			}
+        } else { 
+			currentFrameX ++; 
+        } 
+    } 
+      
+    setInterval(draw, 500);
+</script> 
+    </body> 
+</html>
