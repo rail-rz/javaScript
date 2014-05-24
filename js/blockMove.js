@@ -5,15 +5,10 @@
 // глобальная переменная - костыль 
 var counter = 0;
 
-function Init() {
+//function Init() {
     //отлов самого движения, без этой строчки ничего работать не будет
     document.onmousemove = mouseMove
-
-    // получаем элемент
-    var element = document.getElementById('moving-element');
-    onmouseOver=element.style.background='red';
-    onmouseOut=element.style.background='blues';
-}
+//}
 
 // добавление блока 
 function NewBlock(name) {
