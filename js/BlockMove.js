@@ -2,26 +2,39 @@
  * @author rail_rz <zamaletdinov.rz@gmail.com>
  */
 
-var dragObject = null;
+//var dragObject;
+//
 //отлов самого движения, без этой строчки ничего работать не будет
 document.onmousemove = mouseMove
 
-// нажатие кнопки мыши
+// отслеживания движения мыши 
+// тестовое отслеживание 
+function mouseMove(event){
+    event = fixEvent(event)
+    document.getElementById('param-x').innerHTML = event.pageX
+    document.getElementById('param-y').innerHTML = event.pageY
+}
+
+// эл-нт который нужно отловить
+element = document.getElementById('moving-element');
+
+// отлов определенного элемента
 element.onmousedown = function(e){
     // запомнить переносимый объект
     // в переменной dragObject
     dragObject  = this
- 
+    document.getElementById('moving-element').style.backgroundColor = 'Red';
+    
     // остановить обработку события
     return false
 }
 
-// отпускание кнопки мыши
 document.onmouseup = function() {
     // опустить переносимый объект
+    document.getElementById('moving-element').style.backgroundColor = 'green';
     dragObject = null
-    alert(1);
 }
+
 
 
 
@@ -47,12 +60,4 @@ function fixEvent(e) {
 
     return e;
 }
-
-// отслеживания движения мыши 
-function mouseMove(event){
-    event = fixEvent(event)
-    document.getElementById('mouseX').value = event.pageX
-    document.getElementById('mouseY').value = event.pageY
-}
-
 

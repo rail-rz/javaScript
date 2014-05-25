@@ -1,13 +1,21 @@
 /**
 *@author rail_rz <zamaletdinov.rz@gmail.com>
 */
-
+   
 #new-element {
-	width: 50px;
-	height: 50px;
-	background-color: blue;
-	position: absolute;
-	left:50%;
-
+    width: 50px;
+    height: 50px;
+    background-color: blue;
+    position: absolute;
+    left:50%;
+    
 }
 
+#moving-element {
+    width: 100px;
+    height: 100px;
+    background-color: green;
+    position: absolute;
+    left:75%;
+    
+}
