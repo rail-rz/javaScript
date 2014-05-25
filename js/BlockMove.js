@@ -1,42 +1,8 @@
 /**
  * @author rail_rz <zamaletdinov.rz@gmail.com>
+ * 
+ * за основу взято http://javascript.ru/ui/draganddrop
  */
-
-// эл-нт который нужно отловить
-element = document.getElementById('moving-element');
-
-
-var mouseOffset
- 
-element.onmousedown = function(e) {
-    e = fixEvent(e)
-    var pos = getPosition(element)
-     
-    mouseOffset= {
-        x: e.pageX - pos.x,
-        y: e.pageY - pos.y
-    }
-}
-
-document.onmousemove = function(e) {
-    e = fixEvent(e)
-    element.style.left = e.pageX - mouseOffset.x + 'px'
-    element.style.top = e.pageY - mouseOffset.y  + 'px'
-}
-
-document.onmouseup = function() {
-    // опустить переносимый объект
-    // 
-    dragObject = null
-    
-    // очистить обработчики, т.к перенос закончен
-    document.onmousemove = null
-    document.onmouseup = null
-    document.ondragstart = null
-    document.body.onselectstart = null
-}
-
-
 
 // Кроссбраузерное решение на отлов движения
 function fixEvent(e) {
@@ -61,65 +27,65 @@ function fixEvent(e) {
     return e;
 }
 
-//var dragMaster = (function() {
-// 
-//    var dragObject
-//    var mouseOffset
-// 
-//    // получить сдвиг target относительно курсора мыши
-//    function getMouseOffset(target, e) {
-//        var docPos  = getPosition(target)
-//        return {x:e.pageX - docPos.x, y:e.pageY - docPos.y}
-//    }
-// 
-//    function mouseUp(){
-//        dragObject = null
-// 
-//        // очистить обработчики, т.к перенос закончен
-//        document.onmousemove = null
-//        document.onmouseup = null
-//        document.ondragstart = null
-//        document.body.onselectstart = null
-//    }
-// 
-//    function mouseMove(e){
-//        e = fixEvent(e)
-// 
-//        with(dragObject.style) {
-//            position = 'absolute'
-//            top = e.pageY - mouseOffset.y + 'px'
-//            left = e.pageX - mouseOffset.x + 'px'
-//        }
-//        return false
-//    }
-// 
-//    function mouseDown(e) {
-//        e = fixEvent(e)
-//        if (e.which!=1) return
-// 
-//        dragObject  = this
-// 
-//        // получить сдвиг элемента относительно курсора мыши
-//        mouseOffset = getMouseOffset(this, e)
-// 
-//        // эти обработчики отслеживают процесс и окончание переноса
-//        document.onmousemove = mouseMove
-//        document.onmouseup = mouseUp
-// 
-//        // отменить перенос и выделение текста при клике на тексте
-//        document.ondragstart = function() { return false }
-//        document.body.onselectstart = function() { return false }
-// 
-//        return false
-//    }
-// 
-//    return {
-//        makeDraggable: function(element){
-//            element.onmousedown = mouseDown
-//        }
-//    }
-// 
-//}())
+var dragMaster = (function() {
+ 
+    var dragObject
+    var mouseOffset
+ 
+    // получить сдвиг target относительно курсора мыши
+    function getMouseOffset(target, e) {
+        var docPos  = getPosition(target)
+        return {x:e.pageX - docPos.x, y:e.pageY - docPos.y}
+    }
+ 
+    function mouseUp(){
+        dragObject = null
+ 
+        // очистить обработчики, т.к перенос закончен
+        document.onmousemove = null
+        document.onmouseup = null
+        document.ondragstart = null
+        document.body.onselectstart = null
+    }
+ 
+    function mouseMove(e){
+        e = fixEvent(e)
+ 
+        with(dragObject.style) {
+            position = 'absolute'
+            top = e.pageY - mouseOffset.y + 'px'
+            left = e.pageX - mouseOffset.x + 'px'
+        }
+        return false
+    }
+ 
+    function mouseDown(e) {
+        e = fixEvent(e)
+        if (e.which!=1) return
+ 
+        dragObject  = this
+ 
+        // получить сдвиг элемента относительно курсора мыши
+        mouseOffset = getMouseOffset(this, e)
+ 
+        // эти обработчики отслеживают процесс и окончание переноса
+        document.onmousemove = mouseMove
+        document.onmouseup = mouseUp
+ 
+        // отменить перенос и выделение текста при клике на тексте
+        document.ondragstart = function() { return false }
+        document.body.onselectstart = function() { return false }
+ 
+        return false
+    }
+ 
+    return {
+        makeDraggable: function(element){
+            element.onmousedown = mouseDown
+        }
+    }
+ 
+}())
  
 function getPosition(e){
     var left = 0
@@ -135,4 +101,8 @@ function getPosition(e){
     top  += e.offsetTop
  
     return {x:left, y:top}
+}
+
+function DragObject(element) {
+	dragMaster.makeDraggable(element);
 }

@@ -6,6 +6,7 @@
         <meta name="Description" content="Block move">
         <link rel="stylesheet" href="css/blockMove.css" type="text/css">
         <script src="js/CreateBlock.js"></script>
+        <script src="js/BlockMove.js"></script>
     </head>
     <body>
         <div id="param-x" style="position: absolute; left: 30%"></div>
@@ -13,7 +14,6 @@
         
         <div id="moving-element">123</div>
 
-                        <script src="js/BlockMove.js"></script>
 
         
 <!--        <div style="width:200px; height:30px; background:red;" onmouseover="this.style.background='#CCCCCC'"
@@ -26,5 +26,14 @@
         <div id="all-elements"></div>
         
         <!--<div style="width:200px; height:30px; background:red;" onmouseover="this.style.background='green';" onmouseout="this.style.background='red';">&nbsp;</div>-->
+        
+        <script>
+            onload = function() {
+            var dragObject = document.getElementById('1');
+            new DragObject(dragObject);
+//            var dragObject = document.getElementById('name-2');
+//            new DragObject(dragObject);
+            }
+        </script>
     </body>
 </html>
