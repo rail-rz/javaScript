@@ -9,8 +9,11 @@ function Init() {
     
     // сразу задаем полную нужным блокамы
     document.getElementById('content-right').style.height = heightWindow+'px';
-    document.getElementById('content-left-workzone').style.height = sizeControl(heightWindow, 75) + "px";
-    document.getElementById('content-left-helperzone').style.height = sizeControl(heightWindow, 25) + "px";
+    document.getElementById('content-left-workzone').style.height = sizeControl(heightWindow, 75) -2 + "px";
+    document.getElementById('content-left-workzone').style.width = sizeControl(widthWindow, 75) + "px";
+    document.getElementById('content-left-helperzone').style.height = sizeControl(heightWindow, 25) - 2 + "px";
+    document.getElementById('content-left-helperzone').style.width = sizeControl(widthWindow, 75) + "px";
+    document.getElementById('content-right').style.width = sizeControl(widthWindow, 20) + "px";
 }
 
 //контроль за размером hundredPercentSize - 100% размер в px, percentage - процент уменьшения
