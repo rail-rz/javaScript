@@ -12,7 +12,13 @@ function NewBlock(name) {
     newDiv.id = name+'-'+counter;
     newDiv.style.backgroundColor = 'red';
     newDiv.style.width = '100px';
-    newDiv.style.height = '20px';
+    newDiv.style.height = '50px';
     newDiv.style.position = 'absolute';
     document.getElementById('all-elements').appendChild(newDiv);
+	var dragObjects = document.getElementById('all-elements').getElementsByTagName('div')
+                for(var i=0; i<dragObjects.length; i++) {
+                    new DragObject(dragObjects[i])
+                }
+//            var dragObject = document.getElementById('name-1');
+//            new DragObject(dragObject);
 }
