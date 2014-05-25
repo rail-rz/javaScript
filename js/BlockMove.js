@@ -41,6 +41,7 @@ var dragMaster = (function() {
     function mouseUp(){
         dragObject = null
  
+  
         // очистить обработчики, т.к перенос закончен
         document.onmousemove = null
         document.onmouseup = null
@@ -53,8 +54,13 @@ var dragMaster = (function() {
  
         with(dragObject.style) {
             position = 'absolute'
-            top = e.pageY - mouseOffset.y + 'px'
-            left = e.pageX - mouseOffset.x + 'px'
+
+            if((e.pageY - mouseOffset.y)>0 && (e.pageY)< sizeControl(window.innerHeight, 75)) {
+                top = e.pageY - mouseOffset.y + 'px'
+            }
+            if((e.pageX - mouseOffset.x)>0 && (e.pageX)< sizeControl(window.innerWidth, 75)) {
+                left = e.pageX - mouseOffset.x + 'px'
+            }
         }
         return false
     }
@@ -75,6 +81,8 @@ var dragMaster = (function() {
         // отменить перенос и выделение текста при клике на тексте
         document.ondragstart = function() { return false }
         document.body.onselectstart = function() { return false }
+        
+//        this.style.backgroundColor = 'Black';
  
         return false
     }
@@ -96,10 +104,10 @@ function getPosition(e){
         top  += e.offsetTop
         e    = e.offsetParent
     }
- 
+
     left += e.offsetLeft
     top  += e.offsetTop
- 
+
     return {x:left, y:top}
 }
 

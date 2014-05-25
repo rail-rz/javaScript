@@ -4,18 +4,34 @@
         <title>Prototype</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/prototype.css" type="text/css">
+        <link rel="stylesheet" href="css/blockMove.css" type="text/css">
         <script src="js/prototypeInit.js"></script>
+        <script src="js/CreateBlock.js"></script>
+        <script src="js/BlockMove.js"></script>
     </head>
     <body onload="Init()">
         
         <div id="content">
             
             <div id="content-left">
-                <div id="content-left-workzone"></div>
-                <div id="content-left-helperzone"></div>
+
+                <div id="content-left-workzone">
+                    <div id="all-elements">
+                        <div><h1>Рабочая область</h1></div>
+
+                        <div id="moving-element">123</div>
+                    </div>
+                </div>
+
+                <div id="content-left-helperzone">Вспомогательная зона, позволяет видеть доп. свединиия об элементе</div>
+
             </div>
 
-            <div id="content-right"></div>
+            <div id="content-right">
+                <h1>Место обитания всех эл-тов, которые можно будет добавлять в рабочую зону</h1>
+                <div id="new-element" onClick="NewBlock('name')">Push Me</div>
+
+            </div>
         
         </div>
         

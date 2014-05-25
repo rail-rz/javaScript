@@ -14,7 +14,6 @@ fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td{
     outline: 0;
     font-weight: inherit;
     font-style: inherit;
-    /*font-size: 100%;*/
     font-family: inherit;
     vertical-align: baseline;
 }
@@ -24,24 +23,23 @@ fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td{
 #content-left {
     float: left;
     width: 75%;
-    background-color: red;
 }
 
 #content-left-workzone{
     width: 100%;
     height: 500px;
-    background-color: green;
+    border: 1px solid black;
 }
 
 #content-left-helperzone {
     width: 100%;
     height: 100px;
-    background-color: yellowgreen;
+    border: 1px solid black;
 }
 
 #content-right {
     float: left;
     width: 25%;
-    background-color: blue;
+    /*border-left: 1px solid black;*/
 }
 
