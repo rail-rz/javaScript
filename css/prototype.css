@@ -27,6 +27,14 @@ fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td{
 #content-left-workzone{
     height: 500px;
     border: 1px solid black;
+/*    здесь хиден, чтобы поверх дива не отображалось*/
+    overflow: hidden;
+}
+
+#all-elements {
+    /*overflow: hidden;*/
+/*    здесь абсолют, чтобы позволить передвигать все дивы;)*/
+    position: relative;
 }
 
 #content-left-helperzone {

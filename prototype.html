@@ -8,6 +8,7 @@
         <script src="js/prototypeInit.js"></script>
         <script src="js/CreateBlock.js"></script>
         <script src="js/BlockMove.js"></script>
+        <script src="js/InfoBlock.js"></script>
     </head>
     <body onload="Init()">
         
@@ -23,13 +24,16 @@
                     </div>
                 </div>
 
-                <div id="content-left-helperzone">Вспомогательная зона, позволяет видеть доп. свединиия об элементе</div>
+                <div id="content-left-helperzone">
+                    Вспомогательная зона, позволяет видеть доп. свединиия об элементе
+                    <p>Высота: <span id="content-left-helperzone-heght"></span></p>
+                </div>
 
             </div>
 
             <div id="content-right">
                 <h1>Место обитания всех эл-тов, которые можно будет добавлять в рабочую зону</h1>
-                <div id="new-element" onClick="NewBlock('name')">Push Me</div>
+                <div id="new-element">Push Me</div>
 
             </div>
         

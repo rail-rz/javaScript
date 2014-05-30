@@ -14,6 +14,11 @@ function Init() {
     document.getElementById('content-left-helperzone').style.height = sizeControl(heightWindow, 25) - 2 + "px";
     document.getElementById('content-left-helperzone').style.width = sizeControl(widthWindow, 75) + "px";
     document.getElementById('content-right').style.width = sizeControl(widthWindow, 20) + "px";
+    // опеределение какие эл-ты можно двигать а какие нет
+    var dragObjects = document.getElementById('all-elements').getElementsByTagName('div');
+    for(var i=0; i<dragObjects.length; i++) {
+        new DragObject(dragObjects[i]);
+    }
 }
 
 //контроль за размером hundredPercentSize - 100% размер в px, percentage - процент уменьшения

@@ -54,12 +54,27 @@ var dragMaster = (function() {
         
         with(dragObject.style) {
             position = 'absolute'
-            if((e.pageY - mouseOffset.y)>=0 && (e.pageY - mouseOffset.y + dragObject.offsetHeight)<= sizeControl(window.innerHeight, 75)) {
-                top = e.pageY - mouseOffset.y + 'px'
+            
+            //TODO: не уверен в решение создания двух лишних переменных
+            var elementTop = e.pageY - mouseOffset.y
+            var elementLeft = e.pageX - mouseOffset.x
+            
+            //TODO: эта часть кода обязательна для переписки!
+            if(elementTop>=0 && (elementTop + dragObject.offsetHeight)<= sizeControl(window.innerHeight, 75)) {
+                top = elementTop + 'px'
             }
-            if((e.pageX - mouseOffset.x)>=0 && (e.pageX - mouseOffset.x + dragObject.offsetWidth)<= sizeControl(window.innerWidth, 75)) {
-                left = e.pageX - mouseOffset.x + 'px'
+            if((elementLeft)>=0 && (elementLeft + dragObject.offsetWidth)<= sizeControl(window.innerWidth, 75)) {
+                left = elementLeft + 'px'
             }
+            
+//                        TODO: второй вариант, чтобы пол элемента можно было спрятать за экран
+//            if(elementTop + dragObject.offsetHeight/2>=0 && (elementTop + dragObject.offsetHeight/2)<= sizeControl(window.innerHeight, 75)) {
+//                top = elementTop + 'px'
+//            }
+//            if((elementLeft + dragObject.offsetWidth/2)>=0 && (elementLeft + dragObject.offsetWidth/2)<= sizeControl(window.innerWidth, 75)) {
+//                left = elementLeft + 'px'
+//            }
+
         }
         return false
     }
@@ -81,7 +96,8 @@ var dragMaster = (function() {
         document.ondragstart = function() { return false }
         document.body.onselectstart = function() { return false }
         
-//        this.style.backgroundColor = 'Black';
+        // вот отсюда начинается доступ к новому классу на обработку и вывод инфы
+        infoBlock.getInfo(dragObject);
  
         return false
     }
@@ -111,5 +127,10 @@ function getPosition(e){
 }
 
 function DragObject(element) {
-	dragMaster.makeDraggable(element);
+    console.log(element)
+    if(element.id == 'new-element') {
+        new NewBlock('name');
+    } else {
+        dragMaster.makeDraggable(element);
+    }
 }
