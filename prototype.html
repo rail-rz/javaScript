@@ -18,10 +18,9 @@
 
                 <div id="content-left-workzone">
                     
-                    <div id='top-left-button' class='size-button' style="left:50px;"></div>
-                    <div id='top-right-button' class='size-button' style="left:100px;"></div>
-                    <div id='bottom-left-button' class='size-button' style="left:50px;top:50px"></div>
-                    <div id='bottom-right-button' class='size-button' style="left:100px; top:50px"></div>
+                    <div style="position:relative">
+                        <div id='bottom-right-button' class='size-button' style="left:100px; top:50px"></div>
+                    </div>
                     
                     <div id="all-elements">
                        
@@ -33,7 +32,14 @@
 
                 <div id="content-left-helperzone">
                     Вспомогательная зона, позволяет видеть доп. свединиия об элементе
-                    <p>Высота: <span id="content-left-helperzone-heght"></span></p>
+                    <p>Высота: <input id="element-size-height" type="number"></p>
+                    <p>Ширина: <input id="element-size-width" type="number"></p>
+<!--                    <div>
+                        <input id="element-color-red" type="button" style="background-color: red; border: none;" onclick="alert(this)">
+                        <input id="element-color-blue" type="button" style="background-color: blue; border: none;">
+                        <input id="element-color-green" type="button" style="background-color: green; border: none;">
+                        <input id="element-color-yelow" type="button" style="background-color: yellow; border: none;">
+                    </div>-->
                 </div>
 
             </div>

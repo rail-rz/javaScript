@@ -30,7 +30,9 @@ function fixEvent(e) {
 var dragMaster = (function() {
  
     var dragObject
+    var dragObjectId
     var mouseOffset
+    var sizeButton
  
     // получить сдвиг target относительно курсора мыши
     function getMouseOffset(target, e) {
@@ -40,7 +42,6 @@ var dragMaster = (function() {
  
     function mouseUp(){
         dragObject = null
- 
   
         // очистить обработчики, т.к перенос закончен
         document.onmousemove = null
@@ -55,19 +56,18 @@ var dragMaster = (function() {
         with(dragObject.style) {
             position = 'absolute'
             
-            //TODO: не уверен в решение создания двух лишних переменных
-            var elementTop = e.pageY - mouseOffset.y
-            var elementLeft = e.pageX - mouseOffset.x
-            
             //TODO: эта часть кода обязательна для переписки!
-            if(elementTop>=0 && (elementTop + dragObject.offsetHeight)<= sizeControl(window.innerHeight, 75)) {
-                top = elementTop + 'px'
-            }
-            if((elementLeft)>=0 && (elementLeft + dragObject.offsetWidth)<= sizeControl(window.innerWidth, 75)) {
-                left = elementLeft + 'px'
+            if( (e.pageY - mouseOffset.y) >= 0 && (e.pageY - mouseOffset.y + dragObject.offsetHeight)<= sizeControl(window.innerHeight, 75)) {
+                top = e.pageY - mouseOffset.y + 'px'
             }
             
-//                        TODO: второй вариант, чтобы пол элемента можно было спрятать за экран
+            if( (e.pageX - mouseOffset.x) >= 0 && (e.pageX - mouseOffset.x + dragObject.offsetWidth)<= sizeControl(window.innerWidth, 75)) {
+                left = e.pageX - mouseOffset.x + 'px'
+            }
+            
+            buttonPosition(e)
+            
+//            TODO: второй вариант, чтобы пол элемента можно было спрятать за экран
 //            if(elementTop + dragObject.offsetHeight/2>=0 && (elementTop + dragObject.offsetHeight/2)<= sizeControl(window.innerHeight, 75)) {
 //                top = elementTop + 'px'
 //            }
@@ -78,12 +78,17 @@ var dragMaster = (function() {
         }
         return false
     }
+    
+    
  
     function mouseDown(e) {
         e = fixEvent(e)
         if (e.which!=1) return
  
-        dragObject  = this
+        dragObject = this
+        dragObjectId = dragObject.id
+//        console.log(dragObject.id)
+        sizeButton = document.getElementById('bottom-right-button')
  
         // получить сдвиг элемента относительно курсора мыши
         mouseOffset = getMouseOffset(this, e)
@@ -96,14 +101,62 @@ var dragMaster = (function() {
         document.ondragstart = function() { return false }
         document.body.onselectstart = function() { return false }
         
+        // устанавливаем нопку ресайза блока вниз эл-та
+        buttonPosition(e)
+        
         // вот отсюда начинается доступ к новому классу на обработку и вывод инфы
         infoBlock.getInfo(dragObject);
-         document.getElementById('top-left-button').style.top = element.offsetTop + 'px';
-            document.getElementById('top-left-button').style.left = element.offsetLeft + 'px';
+        resizeBlock()
+         
+        return false
+    }
+    
+    function resizeBlock() {
+        sizeButton.onmousedown = buttonDown
+    }
+    
+    function buttonDown(e) {
+        // получить сдвиг элемента относительно курсора мыши
+        mouseOffset = getMouseOffset(sizeButton, e)
+ 
+        // эти обработчики отслеживают процесс и окончание переноса
+        document.onmousemove = buttonMove
+        document.onmouseup = mouseUp
  
         return false
     }
- 
+    
+    function buttonMove(e){
+        dragObject = document.getElementById(dragObjectId)
+        with(sizeButton.style) {
+            position = 'absolute'
+            
+            top = e.pageY - mouseOffset.y + 'px';
+//            dragObject.style.height = e.pageY - mouseOffset.y + 'px';
+            console.log(e.pageY)
+            dragObject.style.height = dragObject.offsetTop - e.pageY + 'px';
+            
+            left = e.pageX - mouseOffset.x + 'px'
+//            document.getElementById(dragObjectId).style.width = e.pageX + 'px';
+            
+//            TODO: второй вариант, чтобы пол элемента можно было спрятать за экран
+//            if(elementTop + dragObject.offsetHeight/2>=0 && (elementTop + dragObject.offsetHeight/2)<= sizeControl(window.innerHeight, 75)) {
+//                top = elementTop + 'px'
+//            }
+//            if((elementLeft + dragObject.offsetWidth/2)>=0 && (elementLeft + dragObject.offsetWidth/2)<= sizeControl(window.innerWidth, 75)) {
+//                left = elementLeft + 'px'
+//            }
+
+        }
+        return false
+    }
+    
+    
+    function buttonPosition(e) {
+        sizeButton.style.top = e.pageY - mouseOffset.y + dragObject.offsetHeight + 'px';
+        sizeButton.style.left = e.pageX - mouseOffset.x + dragObject.offsetWidth + 'px';
+    }
+    
     return {
         makeDraggable: function(element){
             element.onmousedown = mouseDown

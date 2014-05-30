@@ -19,6 +19,7 @@ function Init() {
     for(var i=0; i<dragObjects.length; i++) {
         new DragObject(dragObjects[i]);
     }
+//    new DragObject(document.getElementById('bottom-right-button'));
 }
 
 //контроль за размером hundredPercentSize - 100% размер в px, percentage - процент уменьшения
