@@ -17,3 +17,12 @@
     position: absolute;
     left:25%;
 }
+
+.size-button {
+    width:10px;
+    height: 10px;
+    position: absolute;
+    background-color: red;
+    /*display:none;*/
+    /*left:20%;*/
+}

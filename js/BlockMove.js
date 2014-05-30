@@ -98,6 +98,8 @@ var dragMaster = (function() {
         
         // вот отсюда начинается доступ к новому классу на обработку и вывод инфы
         infoBlock.getInfo(dragObject);
+         document.getElementById('top-left-button').style.top = element.offsetTop + 'px';
+            document.getElementById('top-left-button').style.left = element.offsetLeft + 'px';
  
         return false
     }
@@ -127,10 +129,5 @@ function getPosition(e){
 }
 
 function DragObject(element) {
-    console.log(element)
-    if(element.id == 'new-element') {
-        new NewBlock('name');
-    } else {
-        dragMaster.makeDraggable(element);
-    }
+    dragMaster.makeDraggable(element);
 }
