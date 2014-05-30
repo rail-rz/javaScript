@@ -19,6 +19,8 @@ function Init() {
     for(var i=0; i<dragObjects.length; i++) {
         new DragObject(dragObjects[i]);
     }
+    
+  
 //    new DragObject(document.getElementById('bottom-right-button'));
 }
 

@@ -4,33 +4,9 @@
  * за основу взято http://javascript.ru/ui/draganddrop
  */
 
-// Кроссбраузерное решение на отлов движения
-function fixEvent(e) {
-    // получить объект событие для IE
-    e = e || window.event;
-
-    // добавить pageX/pageY для IE
-    if ( e.pageX == null && e.clientX != null ) {
-        var html = document.documentElement;
-        var body = document.body;
-        e.pageX = e.clientX + (html && html.scrollLeft || body && body.scrollLeft || 0) - (html.clientLeft || 0);
-        e.pageY = e.clientY + (html && html.scrollTop || body && body.scrollTop || 0) - (html.clientTop || 0);
-    }
-
-    // добавить which для IE
-    // which - кнопка мыши - 1: левая, 2: средняя, 3: правая
-    // pageX/pageY - координаты курсора относительно верхнего-левого угла документа (с учетом прокрутки)
-    if (!e.which && e.button) {
-        e.which = e.button & 1 ? 1 : ( e.button & 2 ? 3 : ( e.button & 4 ? 2 : 0 ) );
-    }
-
-    return e;
-}
-
 var dragMaster = (function() {
  
     var dragObject
-    var dragObjectId
     var mouseOffset
     var sizeButton
  
@@ -86,8 +62,6 @@ var dragMaster = (function() {
         if (e.which!=1) return
  
         dragObject = this
-        dragObjectId = dragObject.id
-//        console.log(dragObject.id)
         sizeButton = document.getElementById('bottom-right-button')
  
         // получить сдвиг элемента относительно курсора мыши
@@ -101,56 +75,16 @@ var dragMaster = (function() {
         document.ondragstart = function() { return false }
         document.body.onselectstart = function() { return false }
         
-        // устанавливаем нопку ресайза блока вниз эл-та
+        // устанавливаем кнопку ресайза блока вниз эл-та
         buttonPosition(e)
         
         // вот отсюда начинается доступ к новому классу на обработку и вывод инфы
         infoBlock.getInfo(dragObject);
-        resizeBlock()
+        resizeBlock.resize(dragObject);
+//        resizeBlock()
          
         return false
     }
-    
-    function resizeBlock() {
-        sizeButton.onmousedown = buttonDown
-    }
-    
-    function buttonDown(e) {
-        // получить сдвиг элемента относительно курсора мыши
-        mouseOffset = getMouseOffset(sizeButton, e)
- 
-        // эти обработчики отслеживают процесс и окончание переноса
-        document.onmousemove = buttonMove
-        document.onmouseup = mouseUp
- 
-        return false
-    }
-    
-    function buttonMove(e){
-        dragObject = document.getElementById(dragObjectId)
-        with(sizeButton.style) {
-            position = 'absolute'
-            
-            top = e.pageY - mouseOffset.y + 'px';
-//            dragObject.style.height = e.pageY - mouseOffset.y + 'px';
-            console.log(e.pageY)
-            dragObject.style.height = dragObject.offsetTop - e.pageY + 'px';
-            
-            left = e.pageX - mouseOffset.x + 'px'
-//            document.getElementById(dragObjectId).style.width = e.pageX + 'px';
-            
-//            TODO: второй вариант, чтобы пол элемента можно было спрятать за экран
-//            if(elementTop + dragObject.offsetHeight/2>=0 && (elementTop + dragObject.offsetHeight/2)<= sizeControl(window.innerHeight, 75)) {
-//                top = elementTop + 'px'
-//            }
-//            if((elementLeft + dragObject.offsetWidth/2)>=0 && (elementLeft + dragObject.offsetWidth/2)<= sizeControl(window.innerWidth, 75)) {
-//                left = elementLeft + 'px'
-//            }
-
-        }
-        return false
-    }
-    
     
     function buttonPosition(e) {
         sizeButton.style.top = e.pageY - mouseOffset.y + dragObject.offsetHeight + 'px';
@@ -164,22 +98,6 @@ var dragMaster = (function() {
     }
  
 }())
- 
-function getPosition(e){
-    var left = 0
-    var top  = 0
- 
-    while (e.offsetParent){
-        left += e.offsetLeft
-        top  += e.offsetTop
-        e    = e.offsetParent
-    }
-    
-    left += e.offsetLeft
-    top  += e.offsetTop
-
-    return {x:left, y:top}
-}
 
 function DragObject(element) {
     dragMaster.makeDraggable(element);
