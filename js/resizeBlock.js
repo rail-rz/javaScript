@@ -8,13 +8,11 @@
 var resizeBlock = (function() {
 
     var block; // Основной блок
-    var block_r; // Блок для изменения размеров
-    var delta_w = 0; // Изменение по ширине
-    var delta_h = 0; // Изменение по высоте
+    var resizeBlock; // Блок для изменения размеров
 
     // получить сдвиг target относительно курсора мыши
     function getMouseOffset(target, e) {
-        var docPos  = getPosition(target)
+        var docPos  = getPosition(target);
         return {x:e.pageX - docPos.x, y:e.pageY - docPos.y}
     }
     
@@ -24,18 +22,20 @@ var resizeBlock = (function() {
     }
     
     function mouseMove(e){
-        e = fixEvent(e)
+        e = fixEvent(e);
         
-        with(block_r.style) {
-            position = 'absolute'
+        with(resizeBlock.style) {
+            position = 'absolute';
             
             //TODO: эта часть кода обязательна для переписки!
-            if( (e.pageY - mouseOffset.y) >= 0 && (e.pageY - mouseOffset.y + block_r.offsetHeight)<= sizeControl(window.innerHeight, 75)) {
-                top = e.pageY - mouseOffset.y + 'px'
+            if( (e.pageY - mouseOffset.y) >= 0 && (e.pageY - mouseOffset.y)<= sizeControl(window.innerHeight, 75)) {
+                top = e.pageY - mouseOffset.y + 'px';
+	            block.style.height = e.pageY - mouseOffset.y - block.offsetTop > 4 ? e.pageY - mouseOffset.y - block.offsetTop + 'px' : 5 + 'px';
             }
-            
-            if( (e.pageX - mouseOffset.x) >= 0 && (e.pageX - mouseOffset.x + block_r.offsetWidth)<= sizeControl(window.innerWidth, 75)) {
-                left = e.pageX - mouseOffset.x + 'px'
+
+            if( (e.pageX - mouseOffset.x) >= 0 && (e.pageX - mouseOffset.x)<= sizeControl(window.innerWidth, 75)) {
+                left = e.pageX - mouseOffset.x + 'px';
+	            block.style.width =  e.pageX - mouseOffset.x - block.offsetLeft >4 ? e.pageX - mouseOffset.x - block.offsetLeft + 'px' : '5px';
             }
             
             
@@ -50,26 +50,27 @@ var resizeBlock = (function() {
         }
         return false
     }
-    
 
     function mouseDown(e) {
-         e = fixEvent(e)
-        if (e.which!=1) return
-        
-        // получить сдвиг элемента относительно курсора мыши
-        mouseOffset = getMouseOffset(this, e)
+         e = fixEvent(e);
+        if (e.which!=1) return;
+
+        // Получаем блок для изменения размеров
+	    resizeBlock = this;
+
+	    // получить сдвиг элемента относительно курсора мыши
+        mouseOffset = getMouseOffset(this, e);
+
+
         
         // эти обработчики отслеживают процесс и окончание переноса
-        document.onmousemove = mouseMove
-        document.onmouseup = mouseUp
+        document.onmousemove = mouseMove;
+        document.onmouseup = mouseUp;
  
         // отменить перенос и выделение текста при клике на тексте
-        document.ondragstart = function() { return false }
-        document.body.onselectstart = function() { return false }
+        document.ondragstart = function() { return false };
+        document.body.onselectstart = function() { return false };
  
-        // Получаем блок для изменения размеров
-        block_r = this; 
-        
         return false;
     }
 
@@ -78,7 +79,7 @@ var resizeBlock = (function() {
         resize: function(element){
             // изменяемый блок
             block = element;
-            document.getElementById("bottom-right-button").onmousedown = mouseDown
+            document.getElementById("bottom-right-button").onmousedown = mouseDown;
                 
         }
     }
