@@ -10,6 +10,7 @@
         <script src="js/CreateBlock.js"></script>
         <script src="js/BlockMove.js"></script>
         <script src="js/resizeBlock.js"></script>
+        <script src="js/rotateBlock.js"></script>
         <script src="js/InfoBlock.js"></script>
     </head>
     <body onload="Init()">
@@ -22,13 +23,18 @@
                     
                     <div style="position:relative">
                         <div id='bottom-right-button' class='size-button' style="left:100px; top:50px; z-index: 100"></div>
+                        <div id="rotate-button"></div>
                     </div>
                     
                     <div id="all-elements">
                        
-                        <div><h1>Рабочая область</h1></div>
+                        <h1>Рабочая область</h1>
 
                         <div id="moving-element">123</div>
+                        
+                         <!--<div class="tringle"></div>-->
+                         <canvas id="triangle" height="100" width="100">Triangle</canvas>
+
                     </div>
                 </div>
 
@@ -48,7 +54,8 @@
 
             <div id="content-right">
                 <h1>Место обитания всех эл-тов, которые можно будет добавлять в рабочую зону</h1>
-                <div id="new-element" onclick="NewBlock('name')">Push Me</div>
+                <div id="new-element" onclick="NewBlock(1)">Push Me</div>
+                <div id="circule" onclick="NewBlock(2)">Push Me</div>
 
             </div>
         

@@ -15,12 +15,26 @@ function Init() {
     document.getElementById('content-left-helperzone').style.width = sizeControl(widthWindow, 75) + "px";
     document.getElementById('content-right').style.width = sizeControl(widthWindow, 20) + "px";
     // опеределение какие эл-ты можно двигать а какие нет
-    var dragObjects = document.getElementById('all-elements').getElementsByTagName('div');
+    var dragObjects = document.getElementById('all-elements').childNodes;
     for(var i=0; i<dragObjects.length; i++) {
         new DragObject(dragObjects[i]);
     }
     
-  
+  //TODO: создание канвасом треогальника, подумать как
+        var canvas = document.getElementById('triangle');
+        var context = canvas.getContext('2d');
+
+        context.beginPath();
+        context.moveTo(0, 0);
+        context.lineTo(100, 0);
+        context.lineTo(50, 100);
+
+        context.closePath();
+
+        context.fillStyle = "rgb(78, 193, 243)";
+        context.opacity = 0.2;
+        context.fill();
+//
 //    new DragObject(document.getElementById('bottom-right-button'));
 }
 

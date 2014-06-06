@@ -9,6 +9,7 @@ var dragMaster = (function () {
 	var dragObject;
 	var mouseOffset;
 	var sizeButton;
+    var rotateButton;
 
 	// получить сдвиг target относительно курсора мыши
 	function getMouseOffset(target, e) {
@@ -42,6 +43,7 @@ var dragMaster = (function () {
 			}
 
 			buttonPosition();
+            rotateButtonPosition();
 
 //            TODO: второй вариант, чтобы пол элемента можно было спрятать за экран
 //            if(elementTop + dragObject.offsetHeight/2>=0 && (elementTop + dragObject.offsetHeight/2)<= sizeControl(window.innerHeight, 75)) {
@@ -61,7 +63,8 @@ var dragMaster = (function () {
 		if (e.which != 1) return;
 
 		dragObject = this;
-		sizeButton = document.getElementById('bottom-right-button')
+		sizeButton = document.getElementById('bottom-right-button');
+        rotateButton = document.getElementById('rotate-button');
 
 		// получить сдвиг элемента относительно курсора мыши
 		mouseOffset = getMouseOffset(this, e);
@@ -75,11 +78,13 @@ var dragMaster = (function () {
 		document.body.onselectstart = function () {return false};
 
 		// устанавливаем кнопку ресайза блока вниз эл-та
-		buttonPosition(e);
+		buttonPosition();
+        rotateButtonPosition();
 
 		// вот отсюда начинается доступ к новому классу на обработку и вывод инфы
 		infoBlock.getInfo(dragObject);
 		resizeBlock.resize(dragObject);
+        rotateBlock.goRotate(dragObject);
 
 		return false
 	}
@@ -88,6 +93,11 @@ var dragMaster = (function () {
 		sizeButton.style.top = dragObject.offsetTop + dragObject.offsetHeight + 'px';
 		sizeButton.style.left = dragObject.offsetLeft + dragObject.offsetWidth + 'px';
 	}
+    
+    function rotateButtonPosition() {
+        rotateButton.style.top = dragObject.offsetTop + 'px';
+        rotateButton.style.left = dragObject.offsetLeft + dragObject.offsetWidth + 'px';
+    }
 
 	return {
 		makeDraggable: function (element) {
