@@ -27,6 +27,7 @@
     height: 10px;
     position: absolute;
     background-color: red;
+    cursor: pointer;
     /*display:none;*/
     /*left:20%;*/
 }
