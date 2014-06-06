@@ -7,20 +7,43 @@ var counter = 0;
 
 // добавление блока 
 function NewBlock(elementId) {
-    var newDiv = document.createElement('div');
+    var element;
     ++counter;
-    newDiv.id = 'name-'+counter;
-    newDiv.style.width = '100px';
-    newDiv.style.height = '50px';
-    newDiv.style.position = 'absolute';
+    
     if(elementId == 2) {
-        newDiv.className = 'circule-element';
-    } else {
-        newDiv.style.backgroundColor = 'red';
+        element = document.createElement('div');
+        element.id = 'name-'+counter;
+        element.style.width = '100px';
+        element.style.height = '50px';
+        element.style.position = 'absolute';
+        element.className = 'circule-element';
+
+    } else if(elementId == 1) {
+        element = document.createElement('div');
+        element.id = 'name-'+counter;
+        element.style.width = '100px';
+        element.style.height = '50px';
+        element.style.position = 'absolute';
+        element.style.backgroundColor = 'red';
+    } else if( elementId == 3) {
+        element = document.createElement('img');
+        element.id = 'name-'+counter;
+        element.style.position = 'absolute';
+        element.src = 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQL82tckOtHxX4LwHGEFCJ1OxL2JcHWCrJ_FMF8La0FLFlqw-h2cgn2KyZj';
+    } else if(elementId == 4) {
+        element = document.createElement('p');
+        element.id = 'name-'+counter;
+        element.style.position = 'absolute';
     }
-    document.getElementById('all-elements').appendChild(newDiv);
+//    https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQL82tckOtHxX4LwHGEFCJ1OxL2JcHWCrJ_FMF8La0FLFlqw-h2cgn2KyZj
+    document.getElementById('all-elements').appendChild(element);
+    
+    if(elementId == 4) {
+        element.innerHTML = 'text';
+    }
+    
 
     // опеределение какие эл-ты можно двигать а какие нет
-    var dragObject = document.getElementById(newDiv.id);
+    var dragObject = document.getElementById(element.id);
     new DragObject(dragObject);
 }
