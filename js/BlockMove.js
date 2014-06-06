@@ -28,11 +28,11 @@ var dragMaster = (function () {
 			position = 'absolute';
 
 			//TODO: эта часть кода обязательна для переписки!
-			if ((e.pageY - mouseOffset.y) > 0 && (e.pageY - mouseOffset.y + dragObject.offsetHeight) < sizeControl(window.innerHeight, 75)) {
+			if ((e.pageY - mouseOffset.y+ dragObject.offsetHeight/2) > 0 && (e.pageY - mouseOffset.y + dragObject.offsetHeight/2) < sizeControl(window.innerHeight, 75)) {
 				top = e.pageY - mouseOffset.y + 'px'
 			}
 
-			if ((e.pageX - mouseOffset.x) >= 0 && (e.pageX - mouseOffset.x + dragObject.offsetWidth) <= sizeControl(window.innerWidth, 75)) {
+			if ((e.pageX - mouseOffset.x + dragObject.offsetWidth/2) >= 0 && (e.pageX - mouseOffset.x + dragObject.offsetWidth/2) <= sizeControl(window.innerWidth, 75)) {
 				left = e.pageX - mouseOffset.x + 'px'
 			}
             

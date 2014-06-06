@@ -23,12 +23,12 @@ var resizeBlock = (function() {
             position = 'absolute';
             
             //TODO: эта часть кода обязательна для переписки!
-            if( (e.pageY - mouseOffset.y) >= 0 && (e.pageY - mouseOffset.y)<= sizeControl(window.innerHeight, 75)) {
+            if( (e.pageY - mouseOffset.y) >= block.offsetTop + 5 && (e.pageY - mouseOffset.y)<= sizeControl(window.innerHeight, 75)) {
                 top = e.pageY - mouseOffset.y + 'px';
 	            block.style.height = e.pageY - mouseOffset.y - block.offsetTop > 4 ? e.pageY - mouseOffset.y - block.offsetTop + 'px' : 5 + 'px';
             }
 
-            if( (e.pageX - mouseOffset.x) >= 0 && (e.pageX - mouseOffset.x)<= sizeControl(window.innerWidth, 75)) {
+            if( (e.pageX - mouseOffset.x) >= block.offsetLeft + 5 && (e.pageX - mouseOffset.x)<= sizeControl(window.innerWidth, 75)) {
                 left = e.pageX - mouseOffset.x + 'px';
 	            block.style.width =  e.pageX - mouseOffset.x - block.offsetLeft >4 ? e.pageX - mouseOffset.x - block.offsetLeft + 'px' : '5px';
             }

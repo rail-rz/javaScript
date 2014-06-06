@@ -6,6 +6,7 @@
 var infoBlock = (function() {
     
     var block;
+    var sizeButton;
     var height;
     var width;
     var zIndex;
@@ -21,11 +22,13 @@ var infoBlock = (function() {
 
         height.oninput = function() {
             block.style.height = height.value + 'px';
+            sizeButton.style.top = block.offsetTop + block.offsetHeight + 'px';
         }
         
 
         width.oninput = function() {
             block.style.width = width.value + 'px';
+            sizeButton.style.left = block.offsetLeft + block.offsetWidth + 'px';
         }
         
         background.oninput = function() {
@@ -48,6 +51,7 @@ var infoBlock = (function() {
     
     function setting(element) {
         block = element;
+        sizeButton = document.getElementById("bottom-right-button");
         
         height = document.getElementById('element-size-height');
         width = document.getElementById('element-size-width');
