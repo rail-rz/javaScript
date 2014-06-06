@@ -11,12 +11,6 @@ var dragMaster = (function () {
 	var sizeButton;
     var rotateButton;
 
-	// получить сдвиг target относительно курсора мыши
-	function getMouseOffset(target, e) {
-		var docPos = getPosition(target);
-		return {x: e.pageX - docPos.x, y: e.pageY - docPos.y}
-	}
-
 	function mouseUp() {
 		dragObject = null;
 
@@ -41,7 +35,7 @@ var dragMaster = (function () {
 			if ((e.pageX - mouseOffset.x) >= 0 && (e.pageX - mouseOffset.x + dragObject.offsetWidth) <= sizeControl(window.innerWidth, 75)) {
 				left = e.pageX - mouseOffset.x + 'px'
 			}
-
+            
 			buttonPosition();
             rotateButtonPosition();
 

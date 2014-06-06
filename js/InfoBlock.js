@@ -5,20 +5,60 @@
 
 var infoBlock = (function() {
     
-    function resizeBlock(element) {
-        var height = document.getElementById('element-size-height');
+    var block;
+    var height;
+    var width;
+    var zIndex;
+    var background;
+    var opacity;
+    
+    function updateBlock() {
+//        height = document.getElementById('element-size-height');
+//        width = document.getElementById('element-size-width');
+//        background = document.getElementById('element-background');
+
 
         height.oninput = function() {
-          element.style.height = height.value + 'px';
-          document.getElementById('bottom-right-button').style.top = height.value + 'px';
+          block.style.height = height.value + 'px';
         }
         
-        var width = document.getElementById('element-size-width');
 
         width.oninput = function() {
-          element.style.width = width.value + 'px';
-          document.getElementById('bottom-right-button').style.left = e.pageX - mouseOffset.x +width.value + 'px';
+          block.style.width = width.value + 'px';
         }
+        
+        background.oninput = function() {
+          block.style.background = background.value;
+        }
+        
+        zIndex.oninput = function() {
+          block.style.zIndex = zIndex.value;
+        }
+        
+        opacity.oninput = function() {
+          block.style.opacity = opacity.value;
+        }
+        
+        
+    }
+    
+    function setting(element) {
+        block = element;
+        
+        height = document.getElementById('element-size-height');
+        width = document.getElementById('element-size-width');
+        background = document.getElementById('element-background');
+        zIndex = document.getElementById('element-zindex');
+        opacity = document.getElementById('element-opacity');
+
+        height.value = block.offsetHeight;
+        width.value = block.offsetWidth;
+        background.value = block.style.backgroundColor;
+        zIndex.value = block.style.zIndex;
+        opacity.value = block.style.opacity;
+        
+        
+        updateBlock();
     }
     
 
@@ -26,20 +66,8 @@ var infoBlock = (function() {
     
     return {
         getInfo: function(element){
-            // костыль на отображение 
-            // обнуляет значения
-//            var dragObjects = document.getElementById('all-elements').getElementsByTagName('div');
-//            for(var i=0; i<dragObjects.length; i++) {
-//                dragObjects[i].style.border = 'none';
-//            }
-            
-            resizeBlock(element)
-
-//            document.getElementById('top-left-button').style.top = element.offsetTop + 'px';
-//            document.getElementById('top-left-button').style.left = element.offsetLeft + 'px';
-            document.getElementById('element-size-height').value = element.offsetHeight;
-            document.getElementById('element-size-width').value = element.offsetWidth;
-                
+            setting(element);
+//            resizeBlock(element);
         }
     }
  

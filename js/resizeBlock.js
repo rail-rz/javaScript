@@ -10,12 +10,7 @@ var resizeBlock = (function() {
     var block; // Основной блок
     var resizeBlock; // Блок для изменения размеров
 
-    // получить сдвиг target относительно курсора мыши
-    function getMouseOffset(target, e) {
-        var docPos  = getPosition(target);
-        return {x:e.pageX - docPos.x, y:e.pageY - docPos.y}
-    }
-    
+
     /* При отпускании кнопки мыши отключаем обработку движения курсора мыши */
     function mouseUp() {
         document.onmousemove = null;
@@ -39,6 +34,8 @@ var resizeBlock = (function() {
             }
             
             
+            infoBlock.getInfo(block);
+
 //            TODO: второй вариант, чтобы пол элемента можно было спрятать за экран
 //            if(elementTop + dragObject.offsetHeight/2>=0 && (elementTop + dragObject.offsetHeight/2)<= sizeControl(window.innerHeight, 75)) {
 //                top = elementTop + 'px'

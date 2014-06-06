@@ -27,6 +27,12 @@ function fixEvent(e) {
     return e;
 }
 
+// получить сдвиг target относительно курсора мыши
+function getMouseOffset(target, e) {
+    var docPos = getPosition(target);
+    return {x: e.pageX - docPos.x, y: e.pageY - docPos.y}
+}
+
 function getPosition(e){
     var left = 0
     var top  = 0
