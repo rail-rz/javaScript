@@ -16,28 +16,33 @@
         function Init() {
             var canvas = document.getElementById('namga-game');
             var context = canvas.getContext("2d");
-            var canvasParam = { w:640, h:480}
-            canvas.style.width = canvasParam.w + 'px';
-            canvas.style.height = canvasParam.h + 'px';
+            var canvasParam = { color:'grey', x:0, y:0, realWidth:640, realHeight:480 }
+            // задаем размеры и разрешение canvas
+            canvas.style.width = canvasParam.realWidth + 'px';
+            canvas.style.height = canvasParam.realHeight + 'px';
+            canvas.width = canvasParam.realWidth;
+            canvas.height = canvasParam.realHeight;
 
             // TODO: GLOBAL? It`s not Global
-            gameCanvas = new Rect( context, 'red', 0, 0, canvasParam.w, canvasParam.h);
-            var playerParams = { path:'image/nlo.png', x:0, y:0, imageWidth:300, imageHeight:300, realWidth:30, realHeight:30, frameX:3, frameY:2, currentFrameX:0, currentFrameY:0}
+            gameCanvas = new Rect( context, canvasParam);
+            var playerParams = { path:'image/nlo.png', x:0, y:0, imageWidth:300, imageHeight:300, realWidth:100, realHeight:100, frameX:3, frameY:2, currentFrameX:0, currentFrameY:0}
             player = new AnimatePerson( context, playerParams);
+            var element1Params = {color:'red', x:200, y:200, realWidth:100, realHeight:100}
+            element1 = new Rect(context, element1Params);
 
-//            canvas.onmousemove = PlayerMove;
+//            canvas.onmousemove = mouseMove;
             window.addEventListener( "keydown", doKeyDown, false);
 
             setInterval(PlayGame, 1000 / 50);
         }
 
         // создаем класс Rect для отрисовки прямоугольников
-        function Rect( context, color, x, y, width, height) {
-            this.color = color;	// цвет прямоугольника
-            this.x = x; // координата х
-            this.y = y; // координата у
-            this.width = width; // ширина
-            this.height = height; // высота
+        function Rect( context, params) {
+            this.color = params.color;	// цвет прямоугольника
+            this.x = params.x; // координата х
+            this.y = params.y; // координата у
+            this.width = params.realWidth; // ширина
+            this.height = params.realHeight; // высота
             // Метод рисующий прямоугольник
             this.drawing = function () {
                 context.fillStyle = this.color;
@@ -45,6 +50,7 @@
             }
         }
 
+        // создание анимированных спрайтов
         function AnimatePerson(context, params) {
             this.x = params.x; // координата х
             this.y = params.y; // координата у
@@ -71,24 +77,35 @@
         }
 
         // управление мышью
-        function PlayerMove(e) {
+        function mouseMove(e) {
             player.y = e.pageY;
             player.x = e.pageX;
         }
 
+        // управление клавиатурой
         function doKeyDown(e) {
             if(e.keyCode == 68) {
-                player.x = ++player.x;
+                player.x = player.x + 5;
             } else if(e.keyCode == 65) {
-                player.x = --player.x;
+                player.x = player.x - 5;
             }
             if(e.keyCode == 87) {
-                player.y = --player.y;
+                player.y = player.y - 5;
             } else if(e.keyCode == 83) {
-                player.y = ++player.y;
+                player.y = player.y + 5;
             }
-//            console.log(e.keyCode);
-//            console.log(player.x);
+
+            // запрет на выход за пределы экрана
+            if(player.x < 0) {
+                player.x = 0;
+            } else if(player.x + player.width > gameCanvas.width) {
+                player.x = gameCanvas.width - player.width;
+            }
+            if(player.y <0 ) {
+                player.y = 0;
+            } else if(player.y + player.height > gameCanvas.height) {
+                player.y = gameCanvas.height - player.height;
+            }
         }
 
         function PlayGame() {
@@ -98,13 +115,14 @@
         function Drawing() {
             gameCanvas.drawing();
             player.drawing();
+            element1.drawing();
         }
     </script>
 </head>
 
 <body style="height: 100%" onload="Init()">
     <div style="height: 100%">
-        <canvas id="namga-game" style="width:25%; height: 25%; background-color: red"></canvas>
+        <canvas id="namga-game"></canvas>
     </div>
 </body>
 
