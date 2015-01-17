@@ -16,21 +16,23 @@
         function Init() {
             var canvas = document.getElementById('namga-game');
             var context = canvas.getContext("2d");
+            var canvasParam = { w:640, h:480}
+            canvas.style.width = canvasParam.w + 'px';
+            canvas.style.height = canvasParam.h + 'px';
 
-            gameCanvas = new Rect('red', 0, 0, canvas.offsetWidth, canvas.offsetHeight, context);
-            newElement = new Rect('black', 10, 10, 20, 20, context);
+            // TODO: GLOBAL? It`s not Global
+            gameCanvas = new Rect( context, 'red', 0, 0, canvasParam.w, canvasParam.h);
+            var playerParams = { path:'image/nlo.png', x:0, y:0, imageWidth:300, imageHeight:300, realWidth:30, realHeight:30, frameX:3, frameY:2, currentFrameX:0, currentFrameY:0}
+            player = new AnimatePerson( context, playerParams);
 
-//            gameCanvas.drawing();
-//            newElement.drawing();
-
-            canvas.onmousemove = PlayerMove;
+//            canvas.onmousemove = PlayerMove;
+            window.addEventListener( "keydown", doKeyDown, false);
 
             setInterval(PlayGame, 1000 / 50);
         }
 
         // создаем класс Rect для отрисовки прямоугольников
-        function Rect(color, x, y, width, height, context) {
-
+        function Rect( context, color, x, y, width, height) {
             this.color = color;	// цвет прямоугольника
             this.x = x; // координата х
             this.y = y; // координата у
@@ -43,15 +45,50 @@
             }
         }
 
+        function AnimatePerson(context, params) {
+            this.x = params.x; // координата х
+            this.y = params.y; // координата у
+            this.width = params.realWidth; // ширина
+            this.height = params.realHeight; // высота
+
+            image = new Image();
+            image.src = params.path;
+
+            this.drawing = function(){
+                context.drawImage(image, params.imageWidth * params.currentFrameX, params.imageHeight*params.currentFrameY , params.imageWidth, params.imageHeight, this.x, this.y, params.realWidth, params.realHeight);
+
+                if (params.currentFrameX == params.frameX) {
+                    params.currentFrameX = 0;
+                    if(params.currentFrameY == params.frameY) {
+                        params.currentFrameY =0;
+                    } else {
+                        params.currentFrameY ++;
+                    }
+                } else {
+                    params.currentFrameX ++;
+                }
+            }
+        }
+
+        // управление мышью
         function PlayerMove(e) {
-            var y = e.pageY;
-//                if (newElement.height < y && y < canvas.height - newElement.height) {
-            newElement.y = y;
-//                }
-            var x = e.pageX;
-//                if (newElement.width < x && x < canvas.width - newElement.width) {
-            newElement.x = x;
-//                }
+            player.y = e.pageY;
+            player.x = e.pageX;
+        }
+
+        function doKeyDown(e) {
+            if(e.keyCode == 68) {
+                player.x = ++player.x;
+            } else if(e.keyCode == 65) {
+                player.x = --player.x;
+            }
+            if(e.keyCode == 87) {
+                player.y = --player.y;
+            } else if(e.keyCode == 83) {
+                player.y = ++player.y;
+            }
+//            console.log(e.keyCode);
+//            console.log(player.x);
         }
 
         function PlayGame() {
@@ -60,7 +97,7 @@
 
         function Drawing() {
             gameCanvas.drawing();
-            newElement.drawing();
+            player.drawing();
         }
     </script>
 </head>
