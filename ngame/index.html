@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Персональная страница Замалетдинова Раиля</title>
+    <title>NGame</title>
     <style>
         html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre,
         a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp,
@@ -25,7 +25,7 @@
 
             // TODO: GLOBAL? It`s not Global
             gameCanvas = new Rect( context, canvasParam);
-            var playerParams = { path:'image/nlo.png', x:0, y:0, imageWidth:300, imageHeight:300, realWidth:100, realHeight:100, frameX:3, frameY:2, currentFrameX:0, currentFrameY:0}
+            var playerParams = { path:'image/nlo.png', x:0, y:0, imageWidth:300, imageHeight:300, realWidth:100, realHeight:100, frameX:3, frameY:2, currentFrameX:0, currentFrameY:0, speedX:5, speedY:5 }
             player = new AnimatePerson( context, playerParams);
             var element1Params = {color:'red', x:200, y:200, realWidth:100, realHeight:100}
             element1 = new Rect(context, element1Params);
@@ -43,6 +43,8 @@
             this.y = params.y; // координата у
             this.width = params.realWidth; // ширина
             this.height = params.realHeight; // высота
+            this.speedX = params.speedX;
+            this.speedY = params.speedY;
             // Метод рисующий прямоугольник
             this.drawing = function () {
                 context.fillStyle = this.color;
@@ -56,7 +58,8 @@
             this.y = params.y; // координата у
             this.width = params.realWidth; // ширина
             this.height = params.realHeight; // высота
-
+            this.speedX = params.speedX;
+            this.speedY = params.speedY;
             image = new Image();
             image.src = params.path;
 
@@ -85,14 +88,14 @@
         // управление клавиатурой
         function doKeyDown(e) {
             if(e.keyCode == 68) {
-                player.x = player.x + 5;
+                player.x = player.x + player.speedX;
             } else if(e.keyCode == 65) {
-                player.x = player.x - 5;
+                player.x = player.x - player.speedX;
             }
             if(e.keyCode == 87) {
-                player.y = player.y - 5;
+                player.y = player.y - player.speedY;
             } else if(e.keyCode == 83) {
-                player.y = player.y + 5;
+                player.y = player.y + player.speedY;
             }
 
             // запрет на выход за пределы экрана
@@ -106,6 +109,30 @@
             } else if(player.y + player.height > gameCanvas.height) {
                 player.y = gameCanvas.height - player.height;
             }
+
+            // тестовая модель столкновения
+            if ((player.x + player.width >= element1.x) && (player.x <= element1.x + element1.width) && (player.y + player.height >= element1.y) && (player.y <= element1.y + element1.height)) {
+//                player.speedX = 0;
+//                player.speedY = 0;
+                if((player.x + player.width >= element1.x)) {
+                    player.x = player.x - player.speedX;
+                } else if((player.x <= element1.x + element1.width)) {
+                    player.x = player.x - player.speedX;
+                }
+//                player.y = player.y - player.speedY;
+            }
+
+
+//            if ((player.y + player.height >= element1.y) && (player.y <= element1.y + element1.height)) {
+//                player.speedY = 0;
+//            }
+
+            console.log(            player.speedX , player.speedY        )
+//            if(player.x + player.width == element1.x && player.y + player.height == element1.height) {
+//            }
+//            if( ) {
+//                player.y = 0;
+//            }
         }
 
         function PlayGame() {
