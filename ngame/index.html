@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Персональная страница Замалетдинова Раиля</title>
+    <style>
+        html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp,
+        small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td
+        { margin:0; padding:0; border:0; outline:0;
+            font-weight:inherit; font-style:inherit; font-size:100%; font-family:inherit;
+            vertical-align:baseline; }
+    </style>
+    <script>
+        function Init() {
+            var canvas = document.getElementById('namga-game');
+            var context = canvas.getContext("2d");
+
+            gameCanvas = new Rect('red', 0, 0, canvas.offsetWidth, canvas.offsetHeight, context);
+            newElement = new Rect('black', 10, 10, 20, 20, context);
+
+//            gameCanvas.drawing();
+//            newElement.drawing();
+
+            canvas.onmousemove = PlayerMove;
+
+            setInterval(PlayGame, 1000 / 50);
+        }
+
+        // создаем класс Rect для отрисовки прямоугольников
+        function Rect(color, x, y, width, height, context) {
+
+            this.color = color;	// цвет прямоугольника
+            this.x = x; // координата х
+            this.y = y; // координата у
+            this.width = width; // ширина
+            this.height = height; // высота
+            // Метод рисующий прямоугольник
+            this.drawing = function () {
+                context.fillStyle = this.color;
+                context.fillRect(this.x, this.y, this.width, this.height);
+            }
+        }
+
+        function PlayerMove(e) {
+            var y = e.pageY;
+//                if (newElement.height < y && y < canvas.height - newElement.height) {
+            newElement.y = y;
+//                }
+            var x = e.pageX;
+//                if (newElement.width < x && x < canvas.width - newElement.width) {
+            newElement.x = x;
+//                }
+        }
+
+        function PlayGame() {
+            Drawing();
+        }
+
+        function Drawing() {
+            gameCanvas.drawing();
+            newElement.drawing();
+        }
+    </script>
+</head>
+
+<body style="height: 100%" onload="Init()">
+    <div style="height: 100%">
+        <canvas id="namga-game" style="width:25%; height: 25%; background-color: red"></canvas>
+    </div>
+</body>
+
+</html>
