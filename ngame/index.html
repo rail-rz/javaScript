@@ -110,18 +110,41 @@
             }
 
             // тестовая модель столкновения
-            if ((player.x + player.width >= element1.x) && (player.x <= element1.x + element1.width) && (player.y + player.height >= element1.y) && (player.y <= element1.y + element1.height)) {
-                if((player.x + player.width > element1.x) && (player.x < element1.x + element1.width) ) {
-
-                }
-                if((player.y + player.height > element1.y) && (player.y < element1.y + element1.height)) {
-
-                }
-            }
+            var crash = CrashController(player, element1);
+            console.log(crash);
         }
 
         function PlayGame() {
             Drawing();
+        }
+
+        function CrashController(objA, objB) {
+            if (objA.x + objA.width > objB.x && objA.x < objB.x + objB.width && objA.y + objA.height > objB.y && objA.y < objB.y + objB.height) {
+                if(objA.y + objA.height > objB.y || objA.y < objB.y + objB.height) {
+                    if(objA.y< objB.y) {
+                        objA.y = objB.y - objA.height;
+                        return 1;
+                    }
+                    if(objA.y > objB.y) {
+                        objA.y = objB.y + objB.height;
+                        return 2;
+                    }
+                }
+                if(objA.x + objA.width > objB.x || objA.x < objB.x + objB.width) {
+                    if(objA.x < objB.x) {
+                        objA.x = objB.x - objA.width;
+                        return 3;
+                    }
+                    if(objA.x > objB.x) {
+                        objA.x = objB.x + objB.width;
+                        return 4;
+                    }
+
+                }
+                return true;
+            } else {
+                return false;
+            }
         }
 
         function Drawing() {
