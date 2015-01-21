@@ -27,7 +27,7 @@
             gameCanvas = new Rect( context, canvasParam);
             var playerParams = { path:'image/nlo.png', x:0, y:0, imageWidth:300, imageHeight:300, realWidth:100, realHeight:100, frameX:3, frameY:2, currentFrameX:0, currentFrameY:0, speedX:10, speedY:10 }
             player = new AnimatePerson( context, playerParams);
-            var element1Params = {color:'red', x:200, y:200, realWidth:100, realHeight:50}
+            var element1Params = {color:'red', x:250, y:460, realWidth:10, realHeight:20, speedX:2}
             element1 = new Rect(context, element1Params);
 
 //            canvas.onmousemove = mouseMove;
@@ -43,11 +43,13 @@
             this.y = params.y; // координата у
             this.width = params.realWidth; // ширина
             this.height = params.realHeight; // высота
-            this.speedX = params.speedX;
-            this.speedY = params.speedY;
+            this.speedX = params.speedX || 0;
+            this.speedY = params.speedY || 0;
             // Метод рисующий прямоугольник
             this.drawing = function () {
                 context.fillStyle = this.color;
+                this.x += this.speedX;
+                this.y += this.speedY;
                 context.fillRect(this.x, this.y, this.width, this.height);
             }
         }
@@ -97,21 +99,19 @@
                 player.y = player.y + player.speedY;
             }
 
-            // запрет на выход за пределы экрана
-            if(player.x < 0) {
-                player.x = 0;
-            } else if(player.x + player.width > gameCanvas.width) {
-                player.x = gameCanvas.width - player.width;
-            }
-            if(player.y <0 ) {
-                player.y = 0;
-            } else if(player.y + player.height > gameCanvas.height) {
-                player.y = gameCanvas.height - player.height;
+            if(WallController(player)) {
+                if(player.x < 0) {
+                    player.x = 0;
+                } else if(player.x + player.width > gameCanvas.width) {
+                    player.x = gameCanvas.width - player.width;
+                }
+                if(player.y <0 ) {
+                    player.y = 0;
+                } else if(player.y + player.height > gameCanvas.height) {
+                    player.y = gameCanvas.height - player.height;
+                }
             }
 
-            // тестовая модель столкновения
-            var crash = CrashController(player, element1);
-            console.log(crash);
         }
 
         function PlayGame() {
@@ -120,37 +120,30 @@
 
         function CrashController(objA, objB) {
             if (objA.x + objA.width > objB.x && objA.x < objB.x + objB.width && objA.y + objA.height > objB.y && objA.y < objB.y + objB.height) {
-                if(objA.y + objA.height > objB.y || objA.y < objB.y + objB.height) {
-                    if(objA.y< objB.y) {
-                        objA.y = objB.y - objA.height;
-                        return 1;
-                    }
-                    if(objA.y > objB.y) {
-                        objA.y = objB.y + objB.height;
-                        return 2;
-                    }
-                }
-                if(objA.x + objA.width > objB.x || objA.x < objB.x + objB.width) {
-                    if(objA.x < objB.x) {
-                        objA.x = objB.x - objA.width;
-                        return 3;
-                    }
-                    if(objA.x > objB.x) {
-                        objA.x = objB.x + objB.width;
-                        return 4;
-                    }
-
-                }
                 return true;
             } else {
                 return false;
             }
         }
 
+        function WallController(obj) {
+            // запрет на выход за пределы экрана
+            if(obj.x < 0 || obj.x + obj.width > gameCanvas.width || obj.y <0 || obj.y + obj.height > gameCanvas.height) {
+                return true;
+            }
+            return false;
+        }
+
         function Drawing() {
             gameCanvas.drawing();
             player.drawing();
             element1.drawing();
+
+            // тестовая модель столкновения
+            var crash = CrashController(player, element1);
+            if(WallController(element1)) {
+                element1.speedX = -element1.speedX;
+            }
         }
     </script>
 </head>
