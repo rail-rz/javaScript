@@ -12,107 +12,13 @@
             font-weight:inherit; font-style:inherit; font-size:100%; font-family:inherit;
             vertical-align:baseline; }
     </style>
+    <script src="js/init.js"></script>
+    <script src="js/listeners.js"></script>
+    <script src="js/elements.js"></script>
     <script>
-        function Init() {
-            var canvas = document.getElementById('namga-game');
-            var context = canvas.getContext("2d");
-            var canvasParam = { color:'grey', x:0, y:0, realWidth:640, realHeight:480 }
-            // задаем размеры и разрешение canvas
-            canvas.style.width = canvasParam.realWidth + 'px';
-            canvas.style.height = canvasParam.realHeight + 'px';
-            canvas.width = canvasParam.realWidth;
-            canvas.height = canvasParam.realHeight;
 
-            // TODO: GLOBAL? It`s not Global
-            gameCanvas = new Rect( context, canvasParam);
-            var playerParams = { path:'image/nlo.png', x:0, y:0, imageWidth:300, imageHeight:300, realWidth:100, realHeight:100, frameX:3, frameY:2, currentFrameX:0, currentFrameY:0, speedX:10, speedY:10 }
-            player = new AnimatePerson( context, playerParams);
-            var element1Params = {color:'red', x:250, y:460, realWidth:10, realHeight:20, speedX:2}
-            element1 = new Rect(context, element1Params);
 
-//            canvas.onmousemove = mouseMove;
-            window.addEventListener( "keydown", doKeyDown, false);
 
-            setInterval(PlayGame, 1000 / 50);
-        }
-
-        // создаем класс Rect для отрисовки прямоугольников
-        function Rect( context, params) {
-            this.color = params.color;	// цвет прямоугольника
-            this.x = params.x; // координата х
-            this.y = params.y; // координата у
-            this.width = params.realWidth; // ширина
-            this.height = params.realHeight; // высота
-            this.speedX = params.speedX || 0;
-            this.speedY = params.speedY || 0;
-            // Метод рисующий прямоугольник
-            this.drawing = function () {
-                context.fillStyle = this.color;
-                this.x += this.speedX;
-                this.y += this.speedY;
-                context.fillRect(this.x, this.y, this.width, this.height);
-            }
-        }
-
-        // создание анимированных спрайтов
-        function AnimatePerson(context, params) {
-            this.x = params.x; // координата х
-            this.y = params.y; // координата у
-            this.width = params.realWidth; // ширина
-            this.height = params.realHeight; // высота
-            this.speedX = params.speedX;
-            this.speedY = params.speedY;
-            image = new Image();
-            image.src = params.path;
-
-            this.drawing = function(){
-                context.drawImage(image, params.imageWidth * params.currentFrameX, params.imageHeight*params.currentFrameY , params.imageWidth, params.imageHeight, this.x, this.y, params.realWidth, params.realHeight);
-
-                if (params.currentFrameX == params.frameX) {
-                    params.currentFrameX = 0;
-                    if(params.currentFrameY == params.frameY) {
-                        params.currentFrameY =0;
-                    } else {
-                        params.currentFrameY ++;
-                    }
-                } else {
-                    params.currentFrameX ++;
-                }
-            }
-        }
-
-        // управление мышью
-        function mouseMove(e) {
-            player.y = e.pageY;
-            player.x = e.pageX;
-        }
-
-        // управление клавиатурой
-        function doKeyDown(e) {
-            if(e.keyCode == 68) {
-                player.x = player.x + player.speedX;
-            } else if(e.keyCode == 65) {
-                player.x = player.x - player.speedX;
-            } else if(e.keyCode == 87) {
-                player.y = player.y - player.speedY;
-            } else if(e.keyCode == 83) {
-                player.y = player.y + player.speedY;
-            }
-
-            if(WallController(player)) {
-                if(player.x < 0) {
-                    player.x = 0;
-                } else if(player.x + player.width > gameCanvas.width) {
-                    player.x = gameCanvas.width - player.width;
-                }
-                if(player.y <0 ) {
-                    player.y = 0;
-                } else if(player.y + player.height > gameCanvas.height) {
-                    player.y = gameCanvas.height - player.height;
-                }
-            }
-
-        }
 
         function PlayGame() {
             Drawing();
@@ -138,6 +44,9 @@
             gameCanvas.drawing();
             player.drawing();
             element1.drawing();
+            gun.drawing();
+
+            element1.x += element1.speedX;
 
             // тестовая модель столкновения
             var crash = CrashController(player, element1);
