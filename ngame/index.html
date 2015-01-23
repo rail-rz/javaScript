@@ -15,46 +15,8 @@
     <script src="js/init.js"></script>
     <script src="js/listeners.js"></script>
     <script src="js/elements.js"></script>
-    <script>
-
-
-
-
-        function PlayGame() {
-            Drawing();
-        }
-
-        function CrashController(objA, objB) {
-            if (objA.x + objA.width > objB.x && objA.x < objB.x + objB.width && objA.y + objA.height > objB.y && objA.y < objB.y + objB.height) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-
-        function WallController(obj) {
-            // запрет на выход за пределы экрана
-            if(obj.x < 0 || obj.x + obj.width > gameCanvas.width || obj.y <0 || obj.y + obj.height > gameCanvas.height) {
-                return true;
-            }
-            return false;
-        }
-
-        function Drawing() {
-            gameCanvas.drawing();
-            player.drawing();
-            element1.drawing();
-            gun.drawing();
-
-            element1.x += element1.speedX;
-
-            // тестовая модель столкновения
-            var crash = CrashController(player, element1);
-            if(WallController(element1)) {
-                element1.speedX = -element1.speedX;
-            }
-        }
-    </script>
+    <script src="js/gameLogic.js"></script>
+    <script src="js/crashMethods.js"></script>
 </head>
 
 <body style="height: 100%" onload="Init()">

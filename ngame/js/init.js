@@ -18,7 +18,7 @@ function Init() {
 
     // TODO: GLOBAL? It`s not Global
     gameCanvas = new Rect( context, canvasParam);
-    var playerParams = { path:'image/nlo.png', x:0, y:0, imageWidth:300, imageHeight:300, realWidth:100, realHeight:100, frameX:3, frameY:2, currentFrameX:0, currentFrameY:0, speedX:10, speedY:10 }
+    var playerParams = { path:'image/nlo.png', x:0, y:0, imageWidth:300, imageHeight:300, realWidth:100, realHeight:100, frameX:3, frameY:2, currentFrameX:0, currentFrameY:0, speedX:5, speedY:5 }
     player = new AnimatePerson( context, playerParams);
     var gunParams = {color:'yellow', speedY:2, opacity:0.3}
     gun = new Rect(context, gunParams);
@@ -28,6 +28,7 @@ function Init() {
     // функции слушатили
 //  canvas.onmousemove = mouseMove;
     window.addEventListener( "keydown", doKeyDown, false);
+    window.addEventListener( "keyup", doKeyUp, false);
 
     setInterval(PlayGame, 1000 / 50);
 }
