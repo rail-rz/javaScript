@@ -3,8 +3,20 @@
  * @author rail_rz <zamaletdinov.rz@gmail.com>
  */
 
+function ElementsFactory(context, params) {
+//    console.log(params.length);
+    var allElements = [];
+    for(var i = 0; i < params.length; i++) {
+         var Name =  params[i]['methodName'];
+        console.log(params[i]['methodName']);
+//        allElements[i] = new Name(context, params[i]);
+    }
+    return allElements;
+}
+
 // создаем класс Rect для отрисовки прямоугольников
 function Rect( context, params) {
+    console.log(params);
     this.color = params.color;	// цвет прямоугольника
     this.x = params.x || 0; // координата х
     this.y = params.y || 0; // координата у

@@ -3,7 +3,7 @@
  * @author rail_rz <zamaletdinov.rz@gmail.com>
  */
 
-var keysMap = {}
+var keysMap = {};
 
 // управление мышью
 function mouseMove(e) {
