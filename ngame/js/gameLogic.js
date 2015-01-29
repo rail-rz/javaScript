@@ -19,9 +19,9 @@ function PlayGame(canvas) {
     var playerParams = { path:'image/nlo.png', x:0, y:0, imageWidth:300, imageHeight:300, realWidth:100, realHeight:100, frameX:3, frameY:2, currentFrameX:0, currentFrameY:0, speedX:5, speedY:5 };
     var gunParams = {color:'yellow', speedY:2, opacity:0.3, realWidth:30};
 	var otherElements = [
-		{ color:'red', x:250, y:460, realWidth:10, realHeight:20, speedX:2},
+		{ color:'red', x:250, y:460, realWidth:10, realHeight:20, speedX:2 },
 		{ color:'green', x:250, y:460, realWidth:10, realHeight:20, speedX:-2},
-		{ color:'black', x:250, y:460, realWidth:10, realHeight:20, speedX:-3},
+		{ color:'black', x:250, y:460, realWidth:10, realHeight:20, speedX:-3}
 	];
 
 	elementCreator = new NElementFactory(context, canvasParam);
@@ -93,11 +93,23 @@ function PlayGame(canvas) {
 
 			if(WallController(this.elements[i])) {
 				this.elements[i].speedX = -this.elements[i].speedX;
+//				if(this.elements[i].y + this.elements[i].height < this.gameCanvas) {
+//					this.elements[i].y = this.gameCanvas - this.elements[i].height;
+//				}
 			}
 
-			// тестовая модель столкновения
-			if(CrashController(this.player, this.elements[i])) {
-	            this.elements.splice(i, 1);
+
+			if(keysMap[32]) {
+				// тестовая модель столкновения
+				if(CrashController(this.player, this.elements[i])) {
+					this.elements.splice(i, 1);
+					if(this.elements.length <= 10) {
+						elementCreator = new NElementFactory(context, { color:'blue', x:0, y:460, realWidth:10, realHeight:20, speedX:-3});
+						this.elements.push(elementCreator.makeRect());
+						elementCreator = new NElementFactory(context, { color:'green', x:630, y:460, realWidth:10, realHeight:20, speedX:2});
+						this.elements.push(elementCreator.makeRect());
+					}
+				}
 			}
 		}
 
