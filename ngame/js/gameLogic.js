@@ -5,6 +5,7 @@
 
 function PlayGame(canvas) {
 
+	this.setIntervalId = null;
 	// временная переменная, для создания элементов
 	var elementCreator;
 
@@ -19,17 +20,20 @@ function PlayGame(canvas) {
     var playerParams = { path:'image/nlo.png', x:0, y:0, imageWidth:300, imageHeight:300, realWidth:100, realHeight:100, frameX:3, frameY:2, currentFrameX:0, currentFrameY:0, speedX:5, speedY:5 };
     var gunParams = {color:'yellow', speedY:2, opacity:0.3, realWidth:30};
 	var otherElements = [
-		{ color:'red', x:250, y:460, realWidth:10, realHeight:20, speedX:2 },
-		{ color:'green', x:250, y:460, realWidth:10, realHeight:20, speedX:-2},
-		{ color:'black', x:250, y:460, realWidth:10, realHeight:20, speedX:-3}
+		{ color:'red', x:250, y:440, realWidth:10, realHeight:20, speedX:2, speedY:9.8 },
+		{ color:'green', x:250, y:440, realWidth:10, realHeight:20, speedX:-2, speedY:9.8},
+		{ color:'black', x:250, y:440, realWidth:10, realHeight:20, speedX:-3, speedY:9.8}
 	];
+	var groundParams = {color:'dimgray', x:0, y:460, realHeight:20, realWidth:640};
 
 	elementCreator = new NElementFactory(context, canvasParam);
     this.gameCanvas = elementCreator.makeRect();
 	elementCreator = new NElementFactory(context, playerParams);
-	this.player = elementCreator.makeAnimatePerson();
+	this.player = elementCreator.makeSprite();
 	elementCreator = new NElementFactory(context, gunParams);
     this.gun = elementCreator.makeRect();
+	elementCreator = new NElementFactory(context, groundParams);
+	this.ground = elementCreator.makeRect();
 
 	this.elements = [];
 	for(var i = 0; i < otherElements.length; i++) {
@@ -42,11 +46,18 @@ function PlayGame(canvas) {
         this.gameCanvas.drawing();
         this.player.drawing();
         this.gun.drawing();
+		this.ground.drawing();
 
+		if(keysMap[27]) {
+			clearInterval(this.setIntervalId);
+		}
         //player move
         if(keysMap[32]) {
-            if(this.gun.height <= this.player.height) {
+            if(this.gun.height <= 2 * this.player.height) {
                 this.gun.height += this.gun.speedY;
+				if(WallController(this.gun)) {
+					this.gun.height -= this.gun.speedY;
+				}
             }
             this.gun.x = this.player.x + this.player.width/2 - this.gun.width/2;
             this.gun.y = this.player.y + this.player.height ;
@@ -80,15 +91,32 @@ function PlayGame(canvas) {
 			}
 		}
 
+		// столкновение с землей
+		if(CrashController(this.ground, this.player)) {
+			if(this.player.y + this.player.height > this.ground.y) {
+				this.player.y = this.ground.y - this.player.height;
+			}
+		}
+
 		// обработка игровых элементов
 		for(var i = 0; i < this.elements.length; i++) {
 			this.elements[i].drawing();
 			this.elements[i].x += this.elements[i].speedX;
 			this.elements[i].y += this.elements[i].speedY;
 
-			if(CrashController(this.gun, this.elements[i])) {
-				this.elements[i].speedX = 0;
-				this.elements[i].y -= this.gun.speedY;
+			if(CrashController(this.gun, this.elements[i]) && keysMap[32]) {
+				this.elements[i].x -= this.elements[i].speedX;
+				this.elements[i].y -= this.gun.speedY + this.elements[i].speedY;
+
+				if(CrashController(this.player, this.elements[i])) {
+					this.elements.splice(i, 1);
+					if(this.elements.length <= 10) {
+						elementCreator = new NElementFactory(context, { color:'blue', x:0, y:440, realWidth:10, realHeight:20, speedX:-3, speedY:9.8});
+						this.elements.push(elementCreator.makeRect());
+						elementCreator = new NElementFactory(context, { color:'green', x:630, y:440, realWidth:10, realHeight:20, speedX:2, speedY:9.8});
+						this.elements.push(elementCreator.makeRect());
+					}
+				}
 			}
 
 			if(WallController(this.elements[i])) {
@@ -98,17 +126,9 @@ function PlayGame(canvas) {
 //				}
 			}
 
-
-			if(keysMap[32]) {
-				// тестовая модель столкновения
-				if(CrashController(this.player, this.elements[i])) {
-					this.elements.splice(i, 1);
-					if(this.elements.length <= 10) {
-						elementCreator = new NElementFactory(context, { color:'blue', x:0, y:460, realWidth:10, realHeight:20, speedX:-3});
-						this.elements.push(elementCreator.makeRect());
-						elementCreator = new NElementFactory(context, { color:'green', x:630, y:460, realWidth:10, realHeight:20, speedX:2});
-						this.elements.push(elementCreator.makeRect());
-					}
+			if(CrashController(this.ground, this.elements[i])) {
+				if(this.elements[i].y + this.elements[i].height > this.ground.y) {
+					this.elements[i].y = this.ground.y - this.elements[i].height;
 				}
 			}
 		}
@@ -117,5 +137,5 @@ function PlayGame(canvas) {
 
 	}
 
-    setInterval(this.drawingGame, 1000 / 50);
+	this.setIntervalId = setInterval(this.drawingGame, 1000 / 50);
 }
