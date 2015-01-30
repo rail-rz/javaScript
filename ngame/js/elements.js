@@ -33,7 +33,7 @@ var NElement = {
 		this.height = params.realHeight; // высота
 		this.speedX = params.speedX;
 		this.speedY = params.speedY;
-		image = new Image();
+		var image = new Image();
 		image.src = params.path;
 
 		this.drawing = function(){
@@ -52,21 +52,21 @@ var NElement = {
 		}
     },
 
-//	image:function(context, params) {
-//		this.x = params.x || 0; // координата х
-//		this.y = params.y || 0; // координата у
-////		this.width = params.realWidth || 0; // ширина
-////		this.height = params.realHeight || 0; // высота
-////		this.speedX = params.speedX || 0;
-////		this.speedY = params.speedY || 0;
-//
-//		image = new Image();
-//		image.src = params.path;
-//		console.log(params);
-//		this.drawing = function(){
-//			context.drawImage(image,this.x, this.y);
-//		}
-//	}
+	image:function(context, params) {
+		this.x = params.x || 0; // координата х
+		this.y = params.y || 0; // координата у
+		this.width = params.realWidth || 0; // ширина
+		this.height = params.realHeight || 0; // высота
+		this.speedX = params.speedX || 0;
+		this.speedY = params.speedY || 0;
+
+		var image = new Image();
+		image.src = params.path;
+		console.log(params);
+		this.drawing = function(){
+			context.drawImage(image,this.x, this.y);
+		}
+	}
 };
 
 function NElementFactory(context, params) {
@@ -78,5 +78,5 @@ NElementFactory.prototype = {
     constructor:NElementFactory,
     makeRect:function() {return new NElement.rect(this.context, this.params)},
     makeSprite:function() {return new NElement.sprite(this.context, this.params)},
-	makeImage:function() {return new NElement.sprite(this.context, this.params)}
+	makeImage:function() {return new NElement.image(this.context, this.params)}
 };

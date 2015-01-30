@@ -9,7 +9,7 @@ function PlayGame(canvas) {
 	// временная переменная, для создания элементов
 	var elementCreator;
 
-    var canvasParam = { color:'grey', realWidth:640, realHeight:480 };
+    var canvasParam = { path:'image/background.jpg', realWidth:640, realHeight:480, imageWidth:800, imageHeight:600 };
     canvas.style.width = canvasParam.realWidth + 'px';
     canvas.style.height = canvasParam.realHeight + 'px';
     // задаем размеры и разрешение canvas
@@ -24,10 +24,10 @@ function PlayGame(canvas) {
 		{ color:'green', x:250, y:440, realWidth:10, realHeight:20, speedX:-2, speedY:9.8},
 		{ color:'black', x:250, y:440, realWidth:10, realHeight:20, speedX:-3, speedY:9.8}
 	];
-	var groundParams = {color:'dimgray', x:0, y:460, realHeight:20, realWidth:640};
+	var groundParams = {color:'black', x:0, y:460, realHeight:20, realWidth:640};
 
 	elementCreator = new NElementFactory(context, canvasParam);
-    this.gameCanvas = elementCreator.makeRect();
+    this.gameCanvas = elementCreator.makeImage();
 	elementCreator = new NElementFactory(context, playerParams);
 	this.player = elementCreator.makeSprite();
 	elementCreator = new NElementFactory(context, gunParams);
