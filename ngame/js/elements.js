@@ -62,9 +62,8 @@ var NElement = {
 
 		var image = new Image();
 		image.src = params.path;
-		console.log(params);
-		this.drawing = function(){
-			context.drawImage(image,this.x, this.y);
+		this.drawing = function() {
+			context.drawImage(image,this.x, this.y, params.imageWidth, params.imageHeight);
 		}
 	}
 };

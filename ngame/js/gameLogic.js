@@ -9,7 +9,8 @@ function PlayGame(canvas) {
 	// временная переменная, для создания элементов
 	var elementCreator;
 
-    var canvasParam = { path:'image/background.jpg', realWidth:640, realHeight:480, imageWidth:800, imageHeight:600 };
+    var canvasParam = { path:'image/background.png', realWidth:640, realHeight:480, imageWidth:800, imageHeight:600 };
+//	var canvasParam = {color:'grey', realWidth:640, realHeight:480, imageWidth:800, imageHeight:600 };
     canvas.style.width = canvasParam.realWidth + 'px';
     canvas.style.height = canvasParam.realHeight + 'px';
     // задаем размеры и разрешение canvas
@@ -49,7 +50,7 @@ function PlayGame(canvas) {
 		this.ground.drawing();
 
 		if(keysMap[27]) {
-			clearInterval(this.setIntervalId);
+			this.stop();
 		}
         //player move
         if(keysMap[32]) {
@@ -135,7 +136,16 @@ function PlayGame(canvas) {
 
 
 
-	}
+	};
 
-	this.setIntervalId = setInterval(this.drawingGame, 1000 / 50);
+	this.start = function() {
+		this.setIntervalId = setInterval(this.drawingGame, 1000 / 50);
+	};
+
+	this.stop = function() {
+
+	};
+
+
+	this.start();
 }
