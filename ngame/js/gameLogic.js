@@ -10,7 +10,7 @@ function PlayGame(canvas) {
 	var elementCreator;
 
     var canvasParam = { path:'image/background.png', realWidth:640, realHeight:480, imageWidth:800, imageHeight:600 };
-//	var canvasParam = {color:'grey', realWidth:640, realHeight:480, imageWidth:800, imageHeight:600 };
+	//var canvasParam = {color:'grey', realWidth:640, realHeight:480, imageWidth:800, imageHeight:600 };
     canvas.style.width = canvasParam.realWidth + 'px';
     canvas.style.height = canvasParam.realHeight + 'px';
     // задаем размеры и разрешение canvas
