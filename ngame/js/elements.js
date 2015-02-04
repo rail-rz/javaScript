@@ -6,7 +6,7 @@
 var NElement = {
 
 	// элемент прямоугольников
-    rect: function(context, params) {
+    rect: function(params) {
 		this.color = params.color;	// цвет прямоугольника
 		this.x = params.x || 0; // координата х
 		this.y = params.y || 0; // координата у
@@ -17,16 +17,14 @@ var NElement = {
 		this.opacity = params.opacity || 1;
 		// Метод рисующий прямоугольник
 		this.drawing = function () {
-			context.fillStyle = this.color;
-			context.globalAlpha = this.opacity;
-//                this.x += this.speedX;
-//                this.y += this.speedY;
-			context.fillRect(this.x, this.y, this.width, this.height);
+			NElement.context.fillStyle = this.color;
+			NElement.context.globalAlpha = this.opacity;
+			NElement.context.fillRect(this.x, this.y, this.width, this.height);
 		}
     },
 
 	// анимированный спрайт
-	sprite: function(context, params) {
+	sprite: function(params) {
 		this.x = params.x; // координата х
 		this.y = params.y; // координата у
 		this.width = params.realWidth; // ширина
@@ -37,7 +35,7 @@ var NElement = {
 		image.src = params.path;
 
 		this.drawing = function(){
-			context.drawImage(image, params.imageWidth * params.currentFrameX, params.imageHeight*params.currentFrameY , params.imageWidth, params.imageHeight, this.x, this.y, params.realWidth, params.realHeight);
+			NElement.context.drawImage(image, params.imageWidth * params.currentFrameX, params.imageHeight*params.currentFrameY , params.imageWidth, params.imageHeight, this.x, this.y, params.realWidth, params.realHeight);
 
 			if (params.currentFrameX == params.frameX) {
 				params.currentFrameX = 0;
@@ -52,7 +50,7 @@ var NElement = {
 		}
     },
 
-	image:function(context, params) {
+	image:function(params) {
 		this.x = params.x || 0; // координата х
 		this.y = params.y || 0; // координата у
 		this.width = params.realWidth || 0; // ширина
@@ -63,19 +61,30 @@ var NElement = {
 		var image = new Image();
 		image.src = params.path;
 		this.drawing = function() {
-			context.drawImage(image,this.x, this.y, params.imageWidth, params.imageHeight);
+			NElement.context.drawImage(image,this.x, this.y, params.imageWidth, params.imageHeight);
 		}
 	}
 };
 
-function NElementFactory(context, params) {
-    this.context = context;
+// TODO: избавиться от постоянного вызова фабрики
+function NElementFactory(params) {
     this.params = params;
 }
 
 NElementFactory.prototype = {
     constructor:NElementFactory,
-    makeRect:function() {return new NElement.rect(this.context, this.params)},
-    makeSprite:function() {return new NElement.sprite(this.context, this.params)},
-	makeImage:function() {return new NElement.image(this.context, this.params)}
+    makeRect:function() {return new NElement.rect( this.params)},
+    makeSprite:function() {return new NElement.sprite( this.params)},
+	makeImage:function() {return new NElement.image( this.params)}
 };
+
+function NCreateElements(params) {
+	// TODO: временно через if/else
+	if(params.method == 'makeRect') {
+		return new NElementFactory(params).makeRect();
+	} else if(params.method == 'makeSprite') {
+		return new NElementFactory(params).makeSprite();
+	} else if(params.method == 'makeImage') {
+		return new NElementFactory(params).makeImage();
+	}
+}
