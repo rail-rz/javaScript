@@ -9,7 +9,7 @@ function PlayGame(canvas) {
 	// TODO:временная переменная, для создания элементов
 	var elementCreator;
 
-    var canvasParam = { method:'makeSprite', path:'image/background.png', realWidth:640, realHeight:480, imageWidth:800, imageHeight:600 };
+    var canvasParam = { method:'makeImage', path:'image/background.png', realWidth:640, realHeight:480, imageWidth:800, imageHeight:600 };
 	//var canvasParam = {color:'grey', realWidth:640, realHeight:480, imageWidth:800, imageHeight:600, method:'makeRect' };
     canvas.style.width = canvasParam.realWidth + 'px';
     canvas.style.height = canvasParam.realHeight + 'px';
