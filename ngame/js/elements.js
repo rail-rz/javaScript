@@ -66,24 +66,11 @@ var NElement = {
 	}
 };
 
-function NElementFactory(params) {
-    this.params = params;
-}
+function NElementFactory() {}
 
 NElementFactory.prototype = {
     constructor:NElementFactory,
-    makeRect:function() {return new NElement.rect( this.params)},
-    makeSprite:function() {return new NElement.sprite( this.params)},
-	makeImage:function() {return new NElement.image( this.params)}
-};
-
-function NCreateElements(params) {
-	// TODO: временно через if/else
-	if(params.method == 'makeRect') {
-		return new NElementFactory(params).makeRect();
-	} else if(params.method == 'makeSprite') {
-		return new NElementFactory(params).makeSprite();
-	} else if(params.method == 'makeImage') {
-		return new NElementFactory(params).makeImage();
+	createElement:function(params) {
+		return new NElement[params.method](params);
 	}
-}
+};

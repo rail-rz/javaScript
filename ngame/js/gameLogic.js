@@ -4,33 +4,34 @@
  */
 
 function PlayGame(canvas) {
+	var factory = new NElementFactory();
 
 //    var canvasParam = { path:'image/background.png', realWidth:640, realHeight:480, imageWidth:800, imageHeight:600 };
-	var canvasParam = {color:'grey', realWidth:640, realHeight:480, imageWidth:800, imageHeight:600, method:'makeRect' };
+	var canvasParam = {color:'grey', realWidth:640, realHeight:480, imageWidth:800, imageHeight:600, method:'rect' };
     canvas.style.width = canvasParam.realWidth + 'px';
     canvas.style.height = canvasParam.realHeight + 'px';
     // задаем размеры и разрешение canvas
     canvas.width = canvasParam.realWidth;
     canvas.height = canvasParam.realHeight;
 
-
-    var playerParams = { path:'image/nlo.png', x:0, y:0, imageWidth:300, imageHeight:300, realWidth:100, realHeight:100, frameX:3, frameY:2, currentFrameX:0, currentFrameY:0, speedX:5, speedY:5, method:'makeSprite' };
-    var gunParams = {color:'yellow', speedY:2, opacity:0.3, realWidth:30, method:'makeRect'};
+	var playerParams = { path:'image/nlo.png', x:0, y:0, imageWidth:300, imageHeight:300, realWidth:100, realHeight:100, frameX:3, frameY:2, currentFrameX:0, currentFrameY:0, speedX:5, speedY:5, method:'sprite' };
+    var gunParams = {color:'yellow', speedY:2, opacity:0.3, realWidth:30, method:'rect'};
 	var otherElements = [
-		{ color:'red', x:250, y:440, realWidth:10, realHeight:20, speedX:2, speedY:9.8, method:'makeRect' },
-		{ color:'green', x:250, y:440, realWidth:10, realHeight:20, speedX:-2, speedY:9.8, method:'makeRect'},
-		{ color:'black', x:250, y:440, realWidth:10, realHeight:20, speedX:-3, speedY:9.8, method:'makeRect'}
+		{ color:'red', x:250, y:440, realWidth:10, realHeight:20, speedX:2, speedY:9.8, method:'rect' },
+		{ color:'green', x:250, y:440, realWidth:10, realHeight:20, speedX:-2, speedY:9.8, method:'rect'},
+		{ color:'black', x:250, y:440, realWidth:10, realHeight:20, speedX:-3, speedY:9.8, method:'rect'}
 	];
-	var groundParams = {color:'black', x:0, y:460, realHeight:20, realWidth:640, method:'makeRect'};
+	var groundParams = {color:'black', x:0, y:460, realHeight:20, realWidth:640, method:'rect'};
 
-    this.gameCanvas = NCreateElements(canvasParam);
-	this.player = NCreateElements(playerParams);
-    this.gun = NCreateElements(gunParams);
-	this.ground = NCreateElements(groundParams);
+
+    this.gameCanvas = factory.createElement(canvasParam);
+	this.player = factory.createElement(playerParams);
+    this.gun = factory.createElement(gunParams);
+	this.ground = factory.createElement(groundParams);
 
 	this.elements = [];
 	for(var i = 0; i < otherElements.length; i++) {
-		this.elements[i] = new NCreateElements(otherElements[i]);
+		this.elements[i] = factory.createElement(otherElements[i]);
 	}
 
     // отрисовывающая функуия
@@ -114,9 +115,9 @@ function PlayGame(canvas) {
 
 				if(CrashController(this.player, this.elements[i])) {
 					this.elements.splice(i, 1);
-					if(this.elements.length <= 10) {
-						this.elements.push(NCreateElements({ color:'blue', x:0, y:440, realWidth:10, realHeight:20, speedX:3, speedY:9.8, method:'makeRect'}));
-						this.elements.push(NCreateElements({ color:'orange', x:630, y:440, realWidth:10, realHeight:20, speedX:-1, speedY:9.8, method:'makeRect'}));
+					if(this.elements.length <= 5) {
+						this.elements.push(factory.createElement({ color:'blue', x:0, y:440, realWidth:10, realHeight:20, speedX:3, speedY:9.8, method:'rect'}));
+						this.elements.push(factory.createElement({ color:'orange', x:630, y:440, realWidth:10, realHeight:20, speedX:-1, speedY:9.8, method:'rect'}));
 					}
 				}
 			}
