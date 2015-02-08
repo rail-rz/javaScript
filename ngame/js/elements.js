@@ -66,7 +66,6 @@ var NElement = {
 	}
 };
 
-// TODO: избавиться от постоянного вызова фабрики
 function NElementFactory(params) {
     this.params = params;
 }

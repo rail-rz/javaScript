@@ -5,10 +5,6 @@
 
 function PlayGame(canvas) {
 
-	this.setIntervalId = null;
-	// TODO:временная переменная, для создания элементов
-	var elementCreator;
-
 //    var canvasParam = { path:'image/background.png', realWidth:640, realHeight:480, imageWidth:800, imageHeight:600 };
 	var canvasParam = {color:'grey', realWidth:640, realHeight:480, imageWidth:800, imageHeight:600, method:'makeRect' };
     canvas.style.width = canvasParam.realWidth + 'px';
@@ -100,12 +96,20 @@ function PlayGame(canvas) {
 			this.elements[i].x += this.elements[i].speedX;
 			this.elements[i].y += this.elements[i].speedY;
 
-//			if(((this.gun.x + this.gun.width == this.elements[i].x - this.elements[i].width) || (this.gun.x == this.elements[i].x + this.elements[i].width - this.elements[i].speedX)) && keysMap[32]) {
-//				this.elements[i].speedX = -this.elements[i].speedX;
-//			}
+			// TODO: временный костыль, для предотвращения столкновения
+			if(
+				(this.gun.x + this.gun.width > this.elements[i].x - this.elements[i].width
+					&& this.gun.x < this.elements[i].x + 2*this.elements[i].width
+					&& this.gun.y + this.gun.height > this.elements[i].y
+					&& this.gun.y < this.elements[i].y + this.elements[i].height)
+				&& keysMap[32]
+				) {
+				this.elements[i].speedX = -this.elements[i].speedX;
+			}
+
 			// столкновение с оружием
 			if(CrashController(this.gun, this.elements[i]) && keysMap[32]) {
-				this.elements[i].x -= this.elements[i].speedX;
+				this.elements[i].x += this.elements[i].speedX;
 				this.elements[i].y -= this.gun.speedY + this.elements[i].speedY;
 
 				if(CrashController(this.player, this.elements[i])) {
@@ -137,7 +141,7 @@ function PlayGame(canvas) {
 	};
 
 	this.stop = function() {
-
+		clearInterval(this.setIntervalId);
 	};
 
 
