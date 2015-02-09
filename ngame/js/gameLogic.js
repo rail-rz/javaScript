@@ -6,23 +6,22 @@
 function PlayGame(canvas) {
 	var factory = new NElementFactory();
 
-//    var canvasParam = { path:'image/background.png', realWidth:640, realHeight:480, imageWidth:800, imageHeight:600 };
-	var canvasParam = {color:'grey', realWidth:640, realHeight:480, imageWidth:800, imageHeight:600, method:'rect' };
+	var canvasParam = {  method:'image', path:'image/background.jpg', color:'grey', realWidth:800, realHeight:600, imageWidth:800, imageHeight:600};
     canvas.style.width = canvasParam.realWidth + 'px';
     canvas.style.height = canvasParam.realHeight + 'px';
     // задаем размеры и разрешение canvas
     canvas.width = canvasParam.realWidth;
     canvas.height = canvasParam.realHeight;
+	var groundParams = {color:'black', y:canvasParam.realHeight-20, realHeight:20, realWidth:canvasParam.realWidth, method:'rect'};
 
 	var playerParams = { path:'image/nlo.png', x:0, y:0, imageWidth:300, imageHeight:300, realWidth:100, realHeight:100, frameX:3, frameY:2, currentFrameX:0, currentFrameY:0, speedX:5, speedY:5, method:'sprite' };
-    var gunParams = {color:'yellow', speedY:2, opacity:0.3, realWidth:30, method:'rect'};
 	var otherElements = [
-		{ color:'red', x:250, y:440, realWidth:10, realHeight:20, speedX:2, speedY:9.8, method:'rect' },
-		{ color:'green', x:250, y:440, realWidth:10, realHeight:20, speedX:-2, speedY:9.8, method:'rect'},
-		{ color:'black', x:250, y:440, realWidth:10, realHeight:20, speedX:-3, speedY:9.8, method:'rect'}
+		{ method:'rect', color:'red', x:250, y:canvasParam.realHeight, realWidth:10, realHeight:20, speedX:2, speedY:9.8, is_killed:1 },
+		{ method:'rect', color:'green', x:250, y:canvasParam.realHeight, realWidth:10, realHeight:20, speedX:-2, speedY:9.8, is_killed:1},
+		{ method:'rect', color:'black', x:250, y:canvasParam.realHeight, realWidth:10, realHeight:20, speedX:-3, speedY:9.8, is_killed:1},
+		{ method:'rect', color:'black', x:canvasParam.realWidth/2, y:canvasParam.realHeight,realHeight:playerParams.realHeight, realWidth:playerParams.realWidth, is_killed:0}
 	];
-	var groundParams = {color:'black', x:0, y:460, realHeight:20, realWidth:640, method:'rect'};
-
+	var gunParams = {method:'rect', color:'yellow', speedY:2, opacity:0.3, realWidth:30};
 
     this.gameCanvas = factory.createElement(canvasParam);
 	this.player = factory.createElement(playerParams);
@@ -48,8 +47,10 @@ function PlayGame(canvas) {
         if(keysMap[32]) {
             if(this.gun.height <= 2 * this.player.height) {
                 this.gun.height += this.gun.speedY;
-				if(WallController(this.gun)) {
-					this.gun.height -= this.gun.speedY;
+				if(CrashController(this.ground, this.gun) || WallController(this.gun)) {
+					this.gun.height = this.ground.y - this.gun.y;
+					console.log(this.gun.height);
+
 				}
             }
             this.gun.x = this.player.x + this.player.width/2 - this.gun.width/2;
@@ -109,21 +110,34 @@ function PlayGame(canvas) {
 			}
 
 			// столкновение с оружием
-			if(CrashController(this.gun, this.elements[i]) && keysMap[32]) {
-				this.elements[i].x += this.elements[i].speedX;
-				this.elements[i].y -= this.gun.speedY + this.elements[i].speedY;
+		if(CrashController(this.gun, this.elements[i]) && keysMap[32] && this.gun.height) {
+				if(this.elements[i].is_killed) {
+					this.elements[i].x += this.elements[i].speedX;
+					this.elements[i].y -= this.gun.speedY + this.elements[i].speedY;
 
-				if(CrashController(this.player, this.elements[i])) {
-					this.elements.splice(i, 1);
-					if(this.elements.length <= 5) {
-						this.elements.push(factory.createElement({ color:'blue', x:0, y:440, realWidth:10, realHeight:20, speedX:3, speedY:9.8, method:'rect'}));
-						this.elements.push(factory.createElement({ color:'orange', x:630, y:440, realWidth:10, realHeight:20, speedX:-1, speedY:9.8, method:'rect'}));
+					if(CrashController(this.player, this.elements[i])) {
+						this.elements.splice(i, 1);
+						if(this.elements.length <= 5) {
+							this.elements.push(factory.createElement({ method:'rect', color:'blue', x:0, y:gameCanvas.height, realWidth:10, realHeight:20, speedX:3, speedY:9.8, is_killed:1}));
+							this.elements.push(factory.createElement({ method:'rect', color:'orange', x:gameCanvas.width-10, y:gameCanvas.height, realWidth:10, realHeight:20, speedX:-1, speedY:9.8, is_killed:1}));
+						}
 					}
+				} else {
+					this.gun.height = this.elements[i].y - this.gun.y;
+//					console.log(this.gameCanvas.height - this.elements[i].y)
 				}
 			}
 
+
 			if(WallController(this.elements[i])) {
-				this.elements[i].speedX = -this.elements[i].speedX;
+				if(this.elements[i].x < 0 || this.elements[i].x + this.elements[i].width > this.gameCanvas.width) {
+					this.elements[i].speedX = -this.elements[i].speedX;
+				}
+				if(this.elements[i].y <0 ) {
+					this.elements[i].y = 0;
+				} else if(elements[i].y + this.elements[i].height > this.gameCanvas.height) {
+					this.elements[i].y = this.gameCanvas.height - elements[i].height;
+				}
 			}
 
 			if(CrashController(this.ground, this.elements[i])) {
