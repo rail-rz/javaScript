@@ -18,3 +18,25 @@ function WallController(obj) {
     }
     return false;
 }
+
+/**
+ * @author <bakhirev@>
+ * @param A
+ * @param B
+ * @returns {*}
+ */
+function penetration(A, B) {
+	var dx = A.width + 2 * A.x - 2 * B.x - B.width,
+		dy = 2 * A.y + A.height - 2 * B.y - B.height,
+		x = (A.x + A.width - A.x + B.x + B.width - B.x - Math.abs(dx)) / 2,
+		y = (A.y + A.height - A.y + B.y + B.height - B.y - Math.abs(dy)) / 2;
+	if (x > 0 && y > 0) return {
+		x: x,
+		y: y,
+		direction: {
+			x: dx / Math.abs(dx),
+			y: dy / Math.abs(dy)
+		}
+	};
+	return null;
+}

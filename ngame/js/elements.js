@@ -16,6 +16,7 @@ var NElement = {
 		this.speedY = params.speedY || 0; // скорость по Y
 		this.opacity = params.opacity || 1;
 		this.is_killed = params.is_killed || 0;
+		this.is_interaction = params.is_interaction || 1;
 		// Метод рисующий прямоугольник
 		this.drawing = function () {
 			NElement.context.fillStyle = this.color;
@@ -32,7 +33,9 @@ var NElement = {
 		this.height = params.realHeight; // высота
 		this.speedX = params.speedX;
 		this.speedY = params.speedY;
+		this.opacity = params.opacity || 1;
 		this.is_killed = params.is_killed || 0;
+		this.is_interaction = params.is_interaction || 1;
 		var image = new Image();
 		image.src = params.path;
 
@@ -59,10 +62,12 @@ var NElement = {
 		this.height = params.realHeight || 0; // высота
 		this.speedX = params.speedX || 0;
 		this.speedY = params.speedY || 0;
+		this.opacity = params.opacity || 1;
 		this.is_killed = params.is_killed || 0;
-
+		this.is_interaction = params.is_interaction || 1;
 		var image = new Image();
 		image.src = params.path;
+
 		this.drawing = function() {
 			NElement.context.drawImage(image,this.x, this.y, params.imageWidth, params.imageHeight);
 		}
