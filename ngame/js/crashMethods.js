@@ -20,7 +20,7 @@ function WallController(obj) {
 }
 
 /**
- * @author <bakhirev@>
+ * @author <Alexey-Bakhirev@yandex.ru>
  * @param A
  * @param B
  * @returns {*}
