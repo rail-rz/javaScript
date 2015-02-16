@@ -75,11 +75,24 @@ function PlayGame(canvas) {
 			if(this.elements[i].type == 'police') {
 //				console.log(timer);
 				if(timer%100==0) {
+
 					this.elements[i].x -= this.elements[i].speedX;
-					var plx = this.player.x - this.elements[i].x;
-					var ply = this.player.y - this.elements[i].y;
-					console.log(plx,ply);
-					this.elements.push(factory.createElement({ method:'rect', color:'white', x:this.elements[i].x, y:this.elements[i].y, realWidth:5, realHeight:5, speedX:-9.8, speedY:-9.8, is_killed:1, is_crash:0}));
+					var plx = this.player.x + this.player.width/2 - this.elements[i].x;
+					var ply = this.player.y + this.player.height/2 - this.elements[i].y;
+					this.elements.push(factory.createElement(
+						{
+							method:'rect',
+							color:'white',
+							x:this.elements[i].x,
+							y:this.elements[i].y,
+							realWidth:5,
+							realHeight:5,
+							speedX: plx/100,
+							speedY: ply/100,
+							is_killed:1,
+							is_crash:0
+						}));
+					console.log(this.elements);
 
 				}
 			}
