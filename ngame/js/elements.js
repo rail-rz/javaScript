@@ -17,7 +17,10 @@ var NElement = {
 		this.speedY = params.speedY || 0; // скорость по Y
 		this.opacity = params.opacity || 1;
 		this.is_killed = params.is_killed || 0;
+		this.is_kill = params.is_kill || 0;
+		this.is_attack = params.is_attack || 0;
 		this.is_crash = params.is_crash || 0;
+		this.health = params.health || 0;
 		// Метод рисующий прямоугольник
 		this.drawing = function () {
 			NElement.context.fillStyle = this.color;
@@ -37,6 +40,7 @@ var NElement = {
 		this.opacity = params.opacity || 1;
 		this.is_killed = params.is_killed || 0;
 		this.is_crash = params.is_crash || 1;
+		this.health = params.health || 0;
 		var image = new Image();
 		image.src = params.path;
 

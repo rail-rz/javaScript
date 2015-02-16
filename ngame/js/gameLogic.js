@@ -7,7 +7,7 @@ function PlayGame(canvas) {
 	var timer = 0,
 		factory = new NElementFactory();
 
-	var canvasParam = {  method:'rect', path:'image/background.jpg', color:'grey', realWidth:800, realHeight:600, imageWidth:800, imageHeight:600};
+	var canvasParam = {  method:'image', path:'image/background.jpg', color:'grey', realWidth:800, realHeight:600, imageWidth:800, imageHeight:600};
     canvas.style.width = canvasParam.realWidth + 'px';
     canvas.style.height = canvasParam.realHeight + 'px';
     // задаем размеры и разрешение canvas
@@ -15,13 +15,13 @@ function PlayGame(canvas) {
     canvas.height = canvasParam.realHeight;
 	var groundParams = { method:'rect', color:'black', y:canvasParam.realHeight-20, realHeight:20, realWidth:canvasParam.realWidth};
 
-	var playerParams = { method:'sprite', type:'player', path:'image/nlo.png', x:0, y:0, imageWidth:300, imageHeight:300, realWidth:100, realHeight:100, frameX:3, frameY:2, currentFrameX:0, currentFrameY:0, speedX:5, speedY:5};
+	var playerParams = { method:'sprite', type:'player', health:10, path:'image/nlo.png', x:0, y:0, imageWidth:300, imageHeight:300, realWidth:100, realHeight:100, frameX:3, frameY:2, currentFrameX:0, currentFrameY:0, speedX:5, speedY:5};
 	var otherElements = [
-		{ method:'rect', type:'police', color:'red', x:250, y:canvasParam.realHeight, realWidth:10, realHeight:20, speedX:2, speedY:9.8, is_killed:1, is_crash:0 },
-		{ method:'rect', type:'people', color:'green', x:250, y:canvasParam.realHeight, realWidth:10, realHeight:20, speedX:-2, speedY:9.8, is_killed:1, is_crash:0},
-		{ method:'rect', type:'people', color:'black', x:250, y:canvasParam.realHeight, realWidth:10, realHeight:20, speedX:-3, speedY:9.8, is_killed:1, is_crash:0},
-		{ method:'rect', color:'black', x:canvasParam.realWidth/2 - playerParams.realWidth/2, y:canvasParam.realHeight,realHeight:playerParams.realHeight, realWidth:playerParams.realWidth, is_killed:0,
-			is_crash:1},
+		{ method:'rect', type:'bot', color:'red', x:250, y:canvasParam.realHeight, realWidth:10, realHeight:20, speedX:2, speedY:9.8, is_killed:1, is_crash:0 },
+		{ method:'rect', type:'bot', color:'green', x:250, y:canvasParam.realHeight, realWidth:10, realHeight:20, speedX:-2, speedY:9.8, is_killed:1, is_crash:0},
+		{ method:'rect', type:'bot', color:'black', x:250, y:canvasParam.realHeight, realWidth:10, realHeight:20, speedX:-3, speedY:9.8, is_killed:1, is_crash:0, is_attack:1},
+		{ method:'rect', type:'build', color:'black', x:canvasParam.realWidth/2 - playerParams.realWidth/2, y:canvasParam.realHeight,realHeight:playerParams.realHeight, realWidth:playerParams.realWidth, is_killed:0,
+			is_crash:1}
 	];
 	var gunParams = {method:'rect', color:'yellow', speedY:2, opacity:0.3, realWidth:30};
 
@@ -72,16 +72,14 @@ function PlayGame(canvas) {
 			this.elements[i].x += this.elements[i].speedX;
 			this.elements[i].y += this.elements[i].speedY;
 
-			if(this.elements[i].type == 'police') {
-//				console.log(timer);
+			if(this.elements[i].is_attack) {
 				if(timer%100==0) {
-
-					this.elements[i].x -= this.elements[i].speedX;
 					var plx = this.player.x + this.player.width/2 - this.elements[i].x;
 					var ply = this.player.y + this.player.height/2 - this.elements[i].y;
 					this.elements.push(factory.createElement(
 						{
 							method:'rect',
+							type:'bullet',
 							color:'white',
 							x:this.elements[i].x,
 							y:this.elements[i].y,
@@ -90,14 +88,15 @@ function PlayGame(canvas) {
 							speedX: plx/100,
 							speedY: ply/100,
 							is_killed:1,
+							is_kill:1,
 							is_crash:0
 						}));
-					console.log(this.elements);
 
 				}
 			}
 
 			// TODO: временный костыль, для предотвращения столкновения
+			// будет тут, пока у ботов не появится здравая логика
 			if(
 				(this.gun.x + this.gun.width > this.elements[i].x - this.elements[i].width
 					&& this.gun.x < this.elements[i].x + 2*this.elements[i].width
@@ -108,8 +107,8 @@ function PlayGame(canvas) {
 				this.elements[i].speedX = -this.elements[i].speedX;
 			}
 
-			if(this.elements[i].is_crash == 1) {
-				// TODO: временное решение
+			// логика при столкновении с элементами
+			if(this.elements[i].is_crash ) {
 				var crash = penetration(this.player, this.elements[i]);
 				if(crash){
 					if(crash.x <= this.player.speedX) {
@@ -128,6 +127,17 @@ function PlayGame(canvas) {
 					}
 				}
 			}
+
+			if(this.elements[i].is_kill) {
+				if(CrashController(this.player, this.elements[i])) {
+					--this.player.health;
+					this.elements.splice(i, 1);
+					if(this.player.health <= 0) {
+						this.stop();
+					}
+				}
+			}
+
 			// столкновение с оружием
 			if(CrashController(this.gun, this.elements[i]) && keysMap[32] && this.gun.height) {
 				if(this.elements[i].is_killed) {
@@ -137,7 +147,7 @@ function PlayGame(canvas) {
 					if(CrashController(this.player, this.elements[i])) {
 						this.elements.splice(i, 1);
 						if(this.elements.length <= 5) {
-							this.elements.push(factory.createElement({ method:'rect', color:'blue', x:0, y:gameCanvas.height, realWidth:10, realHeight:20, speedX:3, speedY:9.8, is_killed:1, is_crash:0}));
+							this.elements.push(factory.createElement({ method:'rect', color:'blue', x:0, y:gameCanvas.height, realWidth:10, realHeight:20, speedX:4, speedY:9.8, is_killed:1, is_crash:0, is_attack:1}));
 							this.elements.push(factory.createElement({ method:'rect', color:'orange', x:gameCanvas.width-10, y:gameCanvas.height, realWidth:10, realHeight:20, speedX:-1, speedY:9.8, is_killed:1, is_crash:0}));
 						}
 					}
@@ -147,23 +157,28 @@ function PlayGame(canvas) {
 			}
 
 
-
-			if(WallController(this.elements[i])) {
-				if(this.elements[i].x < 0 || this.elements[i].x + this.elements[i].width > this.gameCanvas.width) {
-					this.elements[i].speedX = -this.elements[i].speedX;
-				}
-				if(this.elements[i].y <0 ) {
-					this.elements[i].y = 0;
-				} else if(this.elements[i].y + this.elements[i].height > this.gameCanvas.height) {
-					this.elements[i].y = this.gameCanvas.height - this.elements[i].height;
-				}
-			}
-
 			if(CrashController(this.ground, this.elements[i])) {
 				if(this.elements[i].y + this.elements[i].height > this.ground.y) {
 					this.elements[i].y = this.ground.y - this.elements[i].height;
 				}
 			}
+
+			if(WallController(this.elements[i])) {
+				if(this.elements[i].is_kill) {
+					this.elements.splice(i, 1);
+				} else {
+					if(this.elements[i].x < 0 || this.elements[i].x + this.elements[i].width > this.gameCanvas.width) {
+						this.elements[i].speedX = -this.elements[i].speedX;
+					}
+					if(this.elements[i].y <0 ) {
+						this.elements[i].y = 0;
+					} else if(this.elements[i].y + this.elements[i].height > this.gameCanvas.height) {
+						this.elements[i].y = this.gameCanvas.height - this.elements[i].height;
+					}
+				}
+			}
+
+
 		}
 
 
