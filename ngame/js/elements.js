@@ -7,6 +7,7 @@ var NElement = {
 
 	// элемент прямоугольников
     rect: function(params) {
+		this.type = params.type;
 		this.color = params.color;	// цвет прямоугольника
 		this.x = params.x || 0; // координата х
 		this.y = params.y || 0; // координата у
@@ -15,6 +16,11 @@ var NElement = {
 		this.speedX = params.speedX || 0; // скорость по X
 		this.speedY = params.speedY || 0; // скорость по Y
 		this.opacity = params.opacity || 1;
+		this.is_killed = params.is_killed || 0;
+		this.is_kill = params.is_kill || 0;
+		this.is_attack = params.is_attack || 0;
+		this.is_crash = params.is_crash || 0;
+		this.health = params.health || 0;
 		// Метод рисующий прямоугольник
 		this.drawing = function () {
 			NElement.context.fillStyle = this.color;
@@ -31,6 +37,10 @@ var NElement = {
 		this.height = params.realHeight; // высота
 		this.speedX = params.speedX;
 		this.speedY = params.speedY;
+		this.opacity = params.opacity || 1;
+		this.is_killed = params.is_killed || 0;
+		this.is_crash = params.is_crash || 1;
+		this.health = params.health || 0;
 		var image = new Image();
 		image.src = params.path;
 
@@ -57,34 +67,24 @@ var NElement = {
 		this.height = params.realHeight || 0; // высота
 		this.speedX = params.speedX || 0;
 		this.speedY = params.speedY || 0;
-
+		this.opacity = params.opacity || 1;
+		this.is_killed = params.is_killed || 0;
+		this.is_crash = params.is_crash || 1;
 		var image = new Image();
 		image.src = params.path;
+
 		this.drawing = function() {
 			NElement.context.drawImage(image,this.x, this.y, params.imageWidth, params.imageHeight);
 		}
 	}
+
 };
 
-// TODO: избавиться от постоянного вызова фабрики
-function NElementFactory(params) {
-    this.params = params;
-}
+function NElementFactory() {}
 
 NElementFactory.prototype = {
     constructor:NElementFactory,
-    makeRect:function() {return new NElement.rect( this.params)},
-    makeSprite:function() {return new NElement.sprite( this.params)},
-	makeImage:function() {return new NElement.image( this.params)}
-};
-
-function NCreateElements(params) {
-	// TODO: временно через if/else
-	if(params.method == 'makeRect') {
-		return new NElementFactory(params).makeRect();
-	} else if(params.method == 'makeSprite') {
-		return new NElementFactory(params).makeSprite();
-	} else if(params.method == 'makeImage') {
-		return new NElementFactory(params).makeImage();
+	createElement:function(params) {
+		return new NElement[params.method](params);
 	}
-}
+};

@@ -8,6 +8,7 @@ function Init() {
 	// инициализируем контекст для фабрики
 	NElement.context = canvas.getContext("2d");
 
+
     // функции слушатили
 //  canvas.onmousemove = mouseMove;
     window.addEventListener( "keydown", doKeyDown, false);
