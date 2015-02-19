@@ -97,15 +97,15 @@ function PlayGame(canvas) {
 
 			// TODO: временный костыль, для предотвращения столкновения
 			// будет тут, пока у ботов не появится здравая логика
-			if(
-				(this.gun.x + this.gun.width > this.elements[i].x - this.elements[i].width
-					&& this.gun.x < this.elements[i].x + 2*this.elements[i].width
-					&& this.gun.y + this.gun.height > this.elements[i].y
-					&& this.gun.y < this.elements[i].y + this.elements[i].height)
-				&& keysMap[32]
-				) {
-				this.elements[i].speedX = -this.elements[i].speedX;
-			}
+//			if(
+//				(this.gun.x + this.gun.width > this.elements[i].x - this.elements[i].width
+//					&& this.gun.x < this.elements[i].x + 2*this.elements[i].width
+//					&& this.gun.y + this.gun.height > this.elements[i].y
+//					&& this.gun.y < this.elements[i].y + this.elements[i].height)
+//				&& keysMap[32]
+//				) {
+//				this.elements[i].speedX = -this.elements[i].speedX;
+//			}
 
 			// логика при столкновении с элементами
 			if(this.elements[i].is_crash ) {
@@ -141,14 +141,14 @@ function PlayGame(canvas) {
 			// столкновение с оружием
 			if(CrashController(this.gun, this.elements[i]) && keysMap[32] && this.gun.height) {
 				if(this.elements[i].is_killed) {
-					this.elements[i].x += this.elements[i].speedX;
+					this.elements[i].x -= this.elements[i].speedX;
 					this.elements[i].y -= this.gun.speedY + this.elements[i].speedY;
 
 					if(CrashController(this.player, this.elements[i])) {
 						this.elements.splice(i, 1);
 						if(this.elements.length <= 5) {
-							this.elements.push(factory.createElement({ method:'rect', color:'blue', x:0, y:gameCanvas.height, realWidth:10, realHeight:20, speedX:4, speedY:9.8, is_killed:1, is_crash:0, is_attack:1}));
-							this.elements.push(factory.createElement({ method:'rect', color:'orange', x:gameCanvas.width-10, y:gameCanvas.height, realWidth:10, realHeight:20, speedX:-1, speedY:9.8, is_killed:1, is_crash:0}));
+							this.elements.push(factory.createElement({ method:'rect', color:'blue', x:0, y:this.gameCanvas.height, realWidth:10, realHeight:20, speedX:3, speedY:9.8, is_killed:1, is_crash:0, is_attack:1}));
+							this.elements.push(factory.createElement({ method:'rect', color:'orange', x:this.gameCanvas.width-10, y:this.gameCanvas.height, realWidth:10, realHeight:20, speedX:-1, speedY:9.8, is_killed:1, is_crash:0}));
 						}
 					}
 				} else {

@@ -31,15 +31,19 @@ var NElement = {
 
 	// анимированный спрайт
 	sprite: function(params) {
-		this.x = params.x; // координата х
-		this.y = params.y; // координата у
-		this.width = params.realWidth; // ширина
-		this.height = params.realHeight; // высота
-		this.speedX = params.speedX;
-		this.speedY = params.speedY;
+		this.type = params.type;
+		this.color = params.color;	// цвет прямоугольника
+		this.x = params.x || 0; // координата х
+		this.y = params.y || 0; // координата у
+		this.width = params.realWidth || 0; // ширина
+		this.height = params.realHeight || 0; // высота
+		this.speedX = params.speedX || 0; // скорость по X
+		this.speedY = params.speedY || 0; // скорость по Y
 		this.opacity = params.opacity || 1;
 		this.is_killed = params.is_killed || 0;
-		this.is_crash = params.is_crash || 1;
+		this.is_kill = params.is_kill || 0;
+		this.is_attack = params.is_attack || 0;
+		this.is_crash = params.is_crash || 0;
 		this.health = params.health || 0;
 		var image = new Image();
 		image.src = params.path;
@@ -61,15 +65,20 @@ var NElement = {
     },
 
 	image:function(params) {
+		this.type = params.type;
+		this.color = params.color;	// цвет прямоугольника
 		this.x = params.x || 0; // координата х
 		this.y = params.y || 0; // координата у
 		this.width = params.realWidth || 0; // ширина
 		this.height = params.realHeight || 0; // высота
-		this.speedX = params.speedX || 0;
-		this.speedY = params.speedY || 0;
+		this.speedX = params.speedX || 0; // скорость по X
+		this.speedY = params.speedY || 0; // скорость по Y
 		this.opacity = params.opacity || 1;
 		this.is_killed = params.is_killed || 0;
-		this.is_crash = params.is_crash || 1;
+		this.is_kill = params.is_kill || 0;
+		this.is_attack = params.is_attack || 0;
+		this.is_crash = params.is_crash || 0;
+		this.health = params.health || 0;
 		var image = new Image();
 		image.src = params.path;
 
