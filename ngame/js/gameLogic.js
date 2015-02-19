@@ -23,7 +23,7 @@ function PlayGame(canvas) {
 		{ method:'rect', type:'build', color:'black', x:canvasParam.realWidth/2 - playerParams.realWidth/2, y:canvasParam.realHeight,realHeight:playerParams.realHeight, realWidth:playerParams.realWidth, is_killed:0,
 			is_crash:1}
 	];
-	var gunParams = {method:'rect', color:'yellow', speedY:2, opacity:0.3, realWidth:30};
+	var gunParams = {method:'rect', color:'yellow', speedY:2, opacity:0.3, realWidth:30, is_kill:0};
 
     this.gameCanvas = factory.createElement(canvasParam);
 	this.player = factory.createElement(playerParams);
@@ -85,8 +85,8 @@ function PlayGame(canvas) {
 							y:this.elements[i].y,
 							realWidth:5,
 							realHeight:5,
-							speedX: plx/100,
-							speedY: ply/100,
+							speedX: plx/50,
+							speedY: ply/50,
 							is_killed:1,
 							is_kill:1,
 							is_crash:0
@@ -97,15 +97,15 @@ function PlayGame(canvas) {
 
 			// TODO: временный костыль, для предотвращения столкновения
 			// будет тут, пока у ботов не появится здравая логика
-//			if(
-//				(this.gun.x + this.gun.width > this.elements[i].x - this.elements[i].width
-//					&& this.gun.x < this.elements[i].x + 2*this.elements[i].width
-//					&& this.gun.y + this.gun.height > this.elements[i].y
-//					&& this.gun.y < this.elements[i].y + this.elements[i].height)
-//				&& keysMap[32]
-//				) {
-//				this.elements[i].speedX = -this.elements[i].speedX;
-//			}
+			if(
+				(this.gun.x + this.gun.width > this.elements[i].x - this.elements[i].width
+					&& this.gun.x < this.elements[i].x + 2*this.elements[i].width
+					&& this.gun.y + this.gun.height > this.elements[i].y
+					&& this.gun.y < this.elements[i].y + this.elements[i].height)
+				&& keysMap[32]
+				) {
+				this.elements[i].speedX = -this.elements[i].speedX;
+			}
 
 			// логика при столкновении с элементами
 			if(this.elements[i].is_crash ) {
@@ -188,6 +188,23 @@ function PlayGame(canvas) {
 	this.keyboardControl = function() {
 		if(keysMap[27]) {
 			this.stop();
+		}
+
+		if(keysMap[69]) {
+			this.gun.height = 0;
+			this.gun.width = 5;
+			this.gun.speedY = 100;
+			this.gun.is_kill = 1;
+			this.gun.color = 'red';
+			this.gun.opacity = 0.7;
+		}
+		if(keysMap[81]) {
+			this.gun.height = 0;
+			this.gun.width = gunParams.realWidth;
+			this.gun.speedY = gunParams.speedY;
+			this.gun.is_kill = gunParams.is_kill;
+			this.gun.color = gunParams.color;
+			this.gun.opacity = gunParams.opacity;
 		}
 		//player move
 		if(keysMap[32]) {
