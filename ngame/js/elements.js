@@ -21,6 +21,7 @@ var NElement = {
 		this.is_attack = params.is_attack || 0;
 		this.is_crash = params.is_crash || 0;
 		this.health = params.health || 1;
+		this.is_event = params.is_event || 0; // событие на элементе
 		// Метод рисующий прямоугольник
 		this.drawing = function () {
 			NElement.context.fillStyle = this.color;
@@ -45,6 +46,7 @@ var NElement = {
 		this.is_attack = params.is_attack || 0;
 		this.is_crash = params.is_crash || 0;
 		this.health = params.health || 1;
+		this.is_event = params.is_event || 0; // событие на элементе
 		var image = new Image();
 		image.src = params.path;
 
@@ -79,6 +81,7 @@ var NElement = {
 		this.is_attack = params.is_attack || 0;
 		this.is_crash = params.is_crash || 0;
 		this.health = params.health || 1;
+		this.is_event = params.is_event || 0; // событие на элементе
 		var image = new Image();
 		image.src = params.path;
 
