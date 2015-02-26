@@ -59,6 +59,10 @@ function PlayGame(canvas) {
 			}
 		}
 
+		if(this.player.y + this.player.height > this.gameCanvas.height - this.player.height) {
+			this.player.y = this.gameCanvas.height - 2* this.player.height;
+		}
+
 		// столкновение с землей
 		if(CrashController(this.ground, this.player)) {
 			if(this.player.y + this.player.height > this.ground.y) {
@@ -149,8 +153,9 @@ function PlayGame(canvas) {
 							this.elements.push(factory.createElement({ method:'rect', color:'blue', x:0, y:this.gameCanvas.height, realWidth:10, realHeight:20, speedX:3, speedY:9.8, is_killed:1, is_crash:0, is_attack:1}));
 							this.elements.push(factory.createElement({ method:'rect', color:'orange', x:this.gameCanvas.width-10, y:this.gameCanvas.height, realWidth:10, realHeight:20, speedX:-1, speedY:9.8, is_killed:1, is_crash:0}));
 						}
+					} else {
+						this.gun.height = this.elements[i].y - this.gun.y;
 					}
-					this.gun.height = this.elements[i].y - this.gun.y;
 
 				} else {
 					if(this.elements[i].is_killed) {
@@ -192,8 +197,6 @@ function PlayGame(canvas) {
 					}
 				}
 			}
-
-
 		}
 
 
@@ -205,7 +208,7 @@ function PlayGame(canvas) {
 			this.stop();
 		}
 		if(keysMap[69]) {
-			this.gun.width = 1;
+			this.gun.width = 2;
 			this.gun.speedY = 100;
 			this.gun.is_kill = 1;
 			this.gun.color = 'red';
