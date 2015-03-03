@@ -7,12 +7,13 @@ function PlayGame(canvas) {
 	var timer = 0,
 		factory = new NElementFactory();
 
-	var canvasParam = {  method:'rect', path:'image/background.jpg', color:'grey', realWidth:800, realHeight:600, imageWidth:800, imageHeight:600};
+	var canvasParam = {  method:'image', path:'image/background.jpg', color:'grey', realWidth:800, realHeight:600, imageWidth:800, imageHeight:600};
     canvas.style.width = canvasParam.realWidth + 'px';
     canvas.style.height = canvasParam.realHeight + 'px';
     // задаем размеры и разрешение canvas
     canvas.width = canvasParam.realWidth;
     canvas.height = canvasParam.realHeight;
+	var botMoveSizeConstant = canvasParam.realWidth/4;
 	var groundParams = { method:'rect', color:'black', y:canvasParam.realHeight-20, realHeight:20, realWidth:canvasParam.realWidth};
 
 	var playerParams = { method:'sprite', type:'player', health:100, path:'image/nlo.png', x:0, y:0, imageWidth:300, imageHeight:300, realWidth:100, realHeight:100, frameX:3, frameY:2, currentFrameX:0, currentFrameY:0, speedX:5, speedY:5};
@@ -77,7 +78,10 @@ function PlayGame(canvas) {
 			this.elements[i].y += this.elements[i].speedY;
 
 			if(this.elements[i].is_attack) {
-				if(timer%100==0) {
+				if(this.player.x - botMoveSizeConstant >= this.elements[i].x || this.player.x + this.player.width + botMoveSizeConstant <= this.elements[i].x) {
+					this.elements[i].x -= this.elements[i].speedX;
+					var fuckRa
+					if(Math.random()* (9 - 1 + 1) + 1 == 9) {
 					var plx = this.player.x + this.player.width/2 - this.elements[i].x;
 					var ply = this.player.y + this.player.height/2 - this.elements[i].y;
 					this.elements.push(factory.createElement(
@@ -96,20 +100,9 @@ function PlayGame(canvas) {
 							is_crash:0
 						}));
 
+					}
 				}
 			}
-
-			// TODO: временный костыль, для предотвращения столкновения
-			// будет тут, пока у ботов не появится здравая логика
-//			if(
-//				(this.gun.x + this.gun.width > this.elements[i].x - this.elements[i].width
-//					&& this.gun.x < this.elements[i].x + 2*this.elements[i].width
-//					&& this.gun.y + this.gun.height > this.elements[i].y
-//					&& this.gun.y < this.elements[i].y + this.elements[i].height)
-//				&& keysMap[32]
-//				) {
-//				this.elements[i].speedX = -this.elements[i].speedX;
-//			}
 
 			// логика при столкновении с элементами
 			if(this.elements[i].is_crash ) {
