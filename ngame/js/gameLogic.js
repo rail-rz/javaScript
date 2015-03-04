@@ -7,7 +7,7 @@ function PlayGame(canvas) {
 	var timer = 0,
 		factory = new NElementFactory();
 
-	var canvasParam = {  method:'image', path:'image/background.jpg', color:'grey', realWidth:800, realHeight:600, imageWidth:800, imageHeight:600};
+	var canvasParam = {  method:'rect', path:'image/background.jpg', color:'grey', realWidth:800, realHeight:600, imageWidth:800, imageHeight:600};
     canvas.style.width = canvasParam.realWidth + 'px';
     canvas.style.height = canvasParam.realHeight + 'px';
     // задаем размеры и разрешение canvas
@@ -18,9 +18,6 @@ function PlayGame(canvas) {
 
 	var playerParams = { method:'sprite', type:'player', health:100, path:'image/nlo.png', x:0, y:0, imageWidth:300, imageHeight:300, realWidth:100, realHeight:100, frameX:3, frameY:2, currentFrameX:0, currentFrameY:0, speedX:5, speedY:5};
 	var otherElements = [
-//		{ method:'rect', type:'bot', health:1, color:'red', x:250, y:canvasParam.realHeight, realWidth:10, realHeight:20, speedX:2, speedY:9.8, is_killed:1, is_crash:0 },
-//		{ method:'rect', type:'bot', health:1, color:'green', x:250, y:canvasParam.realHeight, realWidth:10, realHeight:20, speedX:-2, speedY:9.8, is_killed:1, is_crash:0},
-//		{ method:'rect', type:'bot', health:1, color:'black', x:250, y:canvasParam.realHeight, realWidth:10, realHeight:20, speedX:-3, speedY:9.8, is_killed:1, is_crash:0, is_attack:1},
 		{ method:'rect', type:'build', health:100, color:'black', x:canvasParam.realWidth/2 - playerParams.realWidth/2, y:canvasParam.realHeight,realHeight:playerParams.realHeight, realWidth:playerParams.realWidth, is_killed:0,
 			is_crash:1, is_event:1}
 	];
@@ -80,27 +77,30 @@ function PlayGame(canvas) {
 			if(this.elements[i].is_attack) {
 				if(this.player.x - botMoveSizeConstant >= this.elements[i].x || this.player.x + this.player.width + botMoveSizeConstant <= this.elements[i].x) {
 					this.elements[i].x -= this.elements[i].speedX;
-					var fuckRa
-					if(Math.random()* (9 - 1 + 1) + 1 == 9) {
-					var plx = this.player.x + this.player.width/2 - this.elements[i].x;
-					var ply = this.player.y + this.player.height/2 - this.elements[i].y;
-					this.elements.push(factory.createElement(
-						{
-							method:'rect',
-							type:'bullet',
-							color:'white',
-							x:this.elements[i].x,
-							y:this.elements[i].y,
-							realWidth:5,
-							realHeight:5,
-							speedX: plx/50,
-							speedY: ply/50,
-							is_killed:1,
-							is_kill:1,
-							is_crash:0
-						}));
+
+					if(++this.elements[i].timer%100 ==0) {
+
+						var plx = this.player.x + this.player.width/2 - this.elements[i].x;
+						var ply = this.player.y + this.player.height/2 - this.elements[i].y;
+						this.elements.push(factory.createElement(
+							{
+								method:'rect',
+								type:'bullet',
+								color:'white',
+								x:this.elements[i].x,
+								y:this.elements[i].y,
+								realWidth:5,
+								realHeight:5,
+								speedX: plx/50,
+								speedY: ply/50,
+								is_killed:1,
+								is_kill:1,
+								is_crash:0
+							}));
 
 					}
+				} else {
+					this.elements[i].timer = 0;
 				}
 			}
 
