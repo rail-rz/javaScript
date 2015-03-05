@@ -5,6 +5,11 @@
 
 function PlayGame(canvas) {
 	var timer = 0,
+		randomBotParams = {
+			color:[ 'red', 'green', 'blue', 'darkBlue', 'black', 'grey', 'orange', 'yellow'],
+			x:[ 0, this.gameCanvas.width-10]
+
+		},
 		factory = new NElementFactory();
 
 	var canvasParam = {  method:'rect', path:'image/background.jpg', color:'grey', realWidth:800, realHeight:600, imageWidth:800, imageHeight:600};
@@ -13,10 +18,10 @@ function PlayGame(canvas) {
     // задаем размеры и разрешение canvas
     canvas.width = canvasParam.realWidth;
     canvas.height = canvasParam.realHeight;
-	var botMoveSizeConstant = canvasParam.realWidth/4;
+	var botMoveSizeConstant = canvasParam.realWidth/6;
 	var groundParams = { method:'rect', color:'black', y:canvasParam.realHeight-20, realHeight:20, realWidth:canvasParam.realWidth};
 
-	var playerParams = { method:'sprite', type:'player', health:100, path:'image/nlo.png', x:0, y:0, imageWidth:300, imageHeight:300, realWidth:100, realHeight:100, frameX:3, frameY:2, currentFrameX:0, currentFrameY:0, speedX:5, speedY:5};
+	var playerParams = { method:'sprite', type:'player', health:100, path:'image/nlo.png', x:canvasParam.realWidth/2 - 100/2, y:0, imageWidth:300, imageHeight:300, realWidth:100, realHeight:100, frameX:3, frameY:2, currentFrameX:0, currentFrameY:0, speedX:5, speedY:5};
 	var otherElements = [
 		{ method:'rect', type:'build', health:100, color:'black', x:canvasParam.realWidth/2 - playerParams.realWidth/2, y:canvasParam.realHeight,realHeight:playerParams.realHeight, realWidth:playerParams.realWidth, is_killed:0,
 			is_crash:1, is_event:1}
@@ -152,7 +157,7 @@ function PlayGame(canvas) {
 						this.elements.splice(i, 1);
 						if(this.elements.length <= 5) {
 							this.elements.push(factory.createElement({ method:'rect', color:'blue', x:0, y:this.gameCanvas.height, realWidth:10, realHeight:20, speedX:3, speedY:9.8, is_killed:1, is_crash:0, is_attack:1}));
-							this.elements.push(factory.createElement({ method:'rect', color:'orange', x:this.gameCanvas.width-10, y:this.gameCanvas.height, realWidth:10, realHeight:20, speedX:-1, speedY:9.8, is_killed:1, is_crash:0}));
+							this.elements.push(factory.createElement({ method:'rect', color:'orange', x:this.gameCanvas.width-10, y:this.gameCanvas.height, realWidth:10, realHeight:20, speedX:-1, speedY:9.8, is_killed:1, is_crash:0, is_attack:1}));
 						}
 					} else {
 						this.gun.height = this.elements[i].y - this.gun.y;
@@ -167,7 +172,7 @@ function PlayGame(canvas) {
 							this.elements.splice(i, 1);
 							if(this.elements.length <= 5) {
 								this.elements.push(factory.createElement({ method:'rect', color:'blue', x:0, y:this.gameCanvas.height, realWidth:10, realHeight:20, speedX:3, speedY:9.8, is_killed:1, is_crash:0, is_attack:1}));
-								this.elements.push(factory.createElement({ method:'rect', color:'orange', x:this.gameCanvas.width-10, y:this.gameCanvas.height, realWidth:10, realHeight:20, speedX:-1, speedY:9.8, is_killed:1, is_crash:0}));
+								this.elements.push(factory.createElement({ method:'rect', color:'orange', x:this.gameCanvas.width-10, y:this.gameCanvas.height, realWidth:10, realHeight:20, speedX:-1, speedY:9.8, is_killed:1, is_crash:0, is_attack:1}));
 							}
 						}
 					} else {
@@ -257,6 +262,12 @@ function PlayGame(canvas) {
 
 	this.stop = function() {
 		clearInterval(this.setIntervalId);
+	};
+
+	this.getRandomBot = function(params) {
+		params.type = 'bot';
+		params.color = colorArray[getRandomValue( 0, colorArray.length-1 )];
+
 	};
 
 	this.start();
