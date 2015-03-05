@@ -100,6 +100,14 @@ function NElementFactory() {}
 NElementFactory.prototype = {
     constructor:NElementFactory,
 	createElement:function(params) {
-		return new NElement[params.method](params);
+		if( params.method in NElement ) {
+			return new NElement[params.method](params);
+		} else {
+			throw 'Невозможно создать элемент. Данного метода не существует';
+		}
 	}
 };
+
+function getRandomValue(min, max) {
+	return Math.random() * (max - min + 1) + min;
+}
