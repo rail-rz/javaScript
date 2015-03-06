@@ -5,10 +5,19 @@
 
 function PlayGame(canvas) {
 	var timer = 0,
+		newParamsForBot,
+	// Харкор
 		randomBotParams = {
+			method:'rect',
 			color:[ 'red', 'green', 'blue', 'darkBlue', 'black', 'grey', 'orange', 'yellow'],
-			x:[ 0, this.gameCanvas.width-10]
-
+			x:[ 0, (800-10)],
+			y:600-40,
+			realWidth:10,
+			realHeight:20,
+			speedX:[ 1, 2, 3, 4],
+			speedY:9.8,
+			is_attack:[0,1],
+			is_killed: 1
 		},
 		factory = new NElementFactory();
 
@@ -146,6 +155,9 @@ function PlayGame(canvas) {
 				if(this.elements[i].is_event) {
 					this.elements[i].is_event = 0;
 					if(this.elements.length <= 5) {
+						this.getRandomBot();
+//						this.getRandomBot({x:(this.elements[i].x + this.elements[i].width/2)});
+//						this.getRandomBot({x:(this.elements[i].x + this.elements[i].width/2), y:this.elements[i].y-20});
 						this.elements.push(factory.createElement({ method:'rect', color:'red', x:(this.elements[i].x + this.elements[i].width/2), y:this.gameCanvas.height-40, realWidth:10, realHeight:20, speedX:3, speedY:9.8, is_killed:1, is_crash:0, is_attack:1}));
 						this.elements.push(factory.createElement({ method:'rect', color:'blue', x:(this.elements[i].x + this.elements[i].width/2), y:this.gameCanvas.height-40, realWidth:10, realHeight:20, speedX:-3, speedY:9.8, is_killed:1, is_crash:0, is_attack:1}));
 						this.elements.push(factory.createElement({ method:'rect', color:'green', x:(this.elements[i].x + this.elements[i].width/2), y:this.elements[i].y-20, realWidth:10, realHeight:20, speedX:-1, speedY:9.8, is_killed:1, is_crash:0}));
@@ -264,10 +276,15 @@ function PlayGame(canvas) {
 		clearInterval(this.setIntervalId);
 	};
 
-	this.getRandomBot = function(params) {
-		params.type = 'bot';
-		params.color = colorArray[getRandomValue( 0, colorArray.length-1 )];
-
+	this.getRandomBot = function() {
+		newParamsForBot = randomBotParams;
+		newParamsForBot.color = randomBotParams.color[getRandomValue( 0, randomBotParams.color.length-1 )];
+		newParamsForBot.x = randomBotParams.x[getRandomValue( 0, 1 )];
+//		newParamsForBot.x = params.x || randomBotParams.x[getRandomValue( 0, randomBotParams.x.length-1 )];
+		newParamsForBot.speedX =randomBotParams.speedX[getRandomValue( 0, randomBotParams.speedX.length-1 )];
+		newParamsForBot.is_attack = randomBotParams.is_attack[getRandomValue( 0, randomBotParams.is_attack.length )];
+		console.log(newParamsForBot);
+		this.elements.push(factory.createElement( newParamsForBot ));
 	};
 
 	this.start();
