@@ -21,12 +21,12 @@ function PlayGame(canvas) {
 		},
 		factory = new NElementFactory();
 
-	var canvasParam = {  method:'image', path:'image/background.jpg', color:'grey', realWidth:800, realHeight:600, imageWidth:800, imageHeight:600};
-    canvas.style.width = canvasParam.realWidth + 'px';
-    canvas.style.height = canvasParam.realHeight + 'px';
-    // задаем размеры и разрешение canvas
-    canvas.width = canvasParam.realWidth;
-    canvas.height = canvasParam.realHeight;
+	var canvasParam = {  method:'rect', path:'image/background.jpg', color:'grey', realWidth:800, realHeight:600, imageWidth:800, imageHeight:600};
+//    canvas.style.width = canvasParam.realWidth + 'px';
+//    canvas.style.height = canvasParam.realHeight + 'px';
+//    // задаем размеры и разрешение canvas
+//    canvas.width = canvasParam.realWidth;
+//    canvas.height = canvasParam.realHeight;
 	var botMoveSizeConstant = canvasParam.realWidth/6;
 	var groundParams = { method:'rect', color:'black', y:canvasParam.realHeight-20, realHeight:20, realWidth:canvasParam.realWidth};
 
@@ -155,12 +155,9 @@ function PlayGame(canvas) {
 				if(this.elements[i].is_event) {
 					this.elements[i].is_event = 0;
 					if(this.elements.length <= 5) {
-						//this.getRandomBot();
-//						this.getRandomBot({x:(this.elements[i].x + this.elements[i].width/2)});
-//						this.getRandomBot({x:(this.elements[i].x + this.elements[i].width/2), y:this.elements[i].y-20});
-						this.elements.push(factory.createElement({ method:'rect', color:'red', x:(this.elements[i].x + this.elements[i].width/2), y:this.gameCanvas.height-40, realWidth:10, realHeight:20, speedX:3, speedY:9.8, is_killed:1, is_crash:0, is_attack:1}));
-						this.elements.push(factory.createElement({ method:'rect', color:'blue', x:(this.elements[i].x + this.elements[i].width/2), y:this.gameCanvas.height-40, realWidth:10, realHeight:20, speedX:-3, speedY:9.8, is_killed:1, is_crash:0, is_attack:1}));
-						this.elements.push(factory.createElement({ method:'rect', color:'green', x:(this.elements[i].x + this.elements[i].width/2), y:this.elements[i].y-20, realWidth:10, realHeight:20, speedX:-1, speedY:9.8, is_killed:1, is_crash:0}));
+						this.elements.push(factory.createElement({ method:'rect', color:'red', x:(this.elements[i].x + this.elements[i].width/2), y:this.gameCanvas.height-40, realWidth:10, realHeight:20, speedX:getRandomValueFromArray(randomBotParams.speedX), speedY:9.8, is_killed:1, is_crash:0, is_attack:1}));
+						this.elements.push(factory.createElement({ method:'rect', color:'blue', x:(this.elements[i].x + this.elements[i].width/2), y:this.gameCanvas.height-40, realWidth:10, realHeight:20, speedX:-getRandomValueFromArray(randomBotParams.speedX), speedY:9.8, is_killed:1, is_crash:0, is_attack:1}));
+						this.elements.push(factory.createElement({ method:'rect', color:'green', x:(this.elements[i].x + this.elements[i].width/2), y:this.elements[i].y-20, realWidth:10, realHeight:20, speedX:-getRandomValueFromArray(randomBotParams.speedX), speedY:9.8, is_killed:1, is_crash:0}));
 					}
 				}
 
