@@ -109,11 +109,9 @@ NElementFactory.prototype = {
 };
 
 function getRandomValue(min, max) {
-	console.log(min, max);
-	console.log(Math.floor(Math.random() * (max - min)) + min);
 	return Math.floor(Math.random() * (max - min)) + min;
 }
 
 function getRandomValueFromArray(arr) {
-	return Math.floor( Math.random() * arr.length );
+	return arr[Math.floor( Math.random() * arr.length )];
 }

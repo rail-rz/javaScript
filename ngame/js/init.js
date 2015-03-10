@@ -7,6 +7,12 @@ function Init() {
     var canvas = document.getElementById('namga-game');
 	// инициализируем контекст для фабрики
 	NElement.context = canvas.getContext("2d");
+	var constant = new NConstant();
+	canvas.style.width = constant.canvasWidth() + 'px';
+	canvas.style.height = constant.canvasHeight() + 'px';
+	// задаем размеры и разрешение canvas
+	canvas.width = constant.canvasWidth();
+	canvas.height = constant.canvasHeight();
 
 
     // функции слушатили
