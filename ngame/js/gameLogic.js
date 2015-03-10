@@ -21,7 +21,7 @@ function PlayGame(canvas) {
 		},
 		factory = new NElementFactory();
 
-	var canvasParam = {  method:'rect', path:'image/background.jpg', color:'grey', realWidth:800, realHeight:600, imageWidth:800, imageHeight:600};
+	var canvasParam = {  method:'image', path:'image/background.jpg', color:'grey', realWidth:800, realHeight:600, imageWidth:800, imageHeight:600};
 //    canvas.style.width = canvasParam.realWidth + 'px';
 //    canvas.style.height = canvasParam.realHeight + 'px';
 //    // задаем размеры и разрешение canvas
