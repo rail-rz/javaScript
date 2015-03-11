@@ -14,11 +14,11 @@ function Init() {
 	canvas.width = constant.canvasWidth();
 	canvas.height = constant.canvasHeight();
 
-
     // функции слушатили
 //  canvas.onmousemove = mouseMove;
     window.addEventListener( "keydown", doKeyDown, false);
     window.addEventListener( "keyup", doKeyUp, false);
 
-    PlayGame(canvas);
+	delete constant;
+    playGame(canvas);
 }

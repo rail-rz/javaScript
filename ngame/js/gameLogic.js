@@ -3,15 +3,14 @@
  * @author rail_rz <zamaletdinov.rz@gmail.com>
  */
 
-function PlayGame(canvas) {
+function playGame(canvas) {
 	var timer = 0,
-		newParamsForBot,
-	// Харкор
+		Constant = new NConstant(),
 		randomBotParams = {
 			method:'rect',
 			color:[ 'red', 'green', 'blue', 'darkBlue', 'black', 'grey', 'orange', 'yellow'],
-			x:[ 0, (800-10)],
-			y:600-40,
+			x:[ 0, (Constant.canvasWidth()-10)],
+			y:Constant.canvasHeight()-40,
 			realWidth:10,
 			realHeight:20,
 			speedX:[ 1, 2, 3, 4],
@@ -21,15 +20,9 @@ function PlayGame(canvas) {
 		},
 		factory = new NElementFactory();
 
-	var canvasParam = {  method:'rect', path:'image/background.jpg', color:'grey', realWidth:800, realHeight:600, imageWidth:800, imageHeight:600};
-//    canvas.style.width = canvasParam.realWidth + 'px';
-//    canvas.style.height = canvasParam.realHeight + 'px';
-//    // задаем размеры и разрешение canvas
-//    canvas.width = canvasParam.realWidth;
-//    canvas.height = canvasParam.realHeight;
+	var canvasParam = {  method:'rect', path:'image/background.jpg', color:'grey', realWidth:Constant.canvasWidth(), realHeight:Constant.canvasHeight(), imageWidth:800, imageHeight:600};
 	var botMoveSizeConstant = canvasParam.realWidth/6;
 	var groundParams = { method:'rect', color:'black', y:canvasParam.realHeight-20, realHeight:20, realWidth:canvasParam.realWidth};
-
 	var playerParams = { method:'sprite', type:'player', health:10, path:'image/nlo.png', x:canvasParam.realWidth/2 - 100/2, y:0, imageWidth:300, imageHeight:300, realWidth:100, realHeight:100, frameX:3, frameY:2, currentFrameX:0, currentFrameY:0, speedX:5, speedY:5};
 	var otherElements = [
 		{ method:'rect', type:'build', health:100, color:'black', x:canvasParam.realWidth/2 - playerParams.realWidth/2, y:canvasParam.realHeight,realHeight:playerParams.realHeight, realWidth:playerParams.realWidth, is_killed:0,
