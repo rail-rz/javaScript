@@ -3,7 +3,7 @@
  * @author rail_rz <zamaletdinov.rz@gmail.com>
  */
 
-function Init() {
+function init() {
     var canvas = document.getElementById('namga-game');
 	// инициализируем контекст для фабрики
 	NElement.context = canvas.getContext("2d");
