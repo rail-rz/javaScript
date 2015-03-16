@@ -21,4 +21,5 @@ function init() {
 
 	delete constant;
     playGame(canvas);
+
 }

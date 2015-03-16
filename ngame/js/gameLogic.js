@@ -21,7 +21,6 @@ function playGame(canvas) {
 		factory = new NElementFactory();
 
 	var canvasParam = {  method:'rect', path:'image/background.jpg', color:'grey', realWidth:Constant.canvasWidth(), realHeight:Constant.canvasHeight(), imageWidth:800, imageHeight:600};
-	var botMoveSizeConstant = canvasParam.realWidth/6;
 	var groundParams = { method:'rect', color:'black', y:canvasParam.realHeight-20, realHeight:20, realWidth:canvasParam.realWidth};
 	var playerParams = { method:'sprite', type:'player', health:10, path:'image/nlo.png', x:canvasParam.realWidth/2 - 100/2, y:0, imageWidth:300, imageHeight:300, realWidth:100, realHeight:100, frameX:3, frameY:2, currentFrameX:0, currentFrameY:0, speedX:5, speedY:5};
 	var otherElements = [
@@ -81,8 +80,9 @@ function playGame(canvas) {
 			this.elements[i].x += this.elements[i].speedX;
 			this.elements[i].y += this.elements[i].speedY;
 
+			// логика стреляющих ботов
 			if(this.elements[i].is_attack) {
-				if(this.player.x - botMoveSizeConstant >= this.elements[i].x || this.player.x + this.player.width + botMoveSizeConstant <= this.elements[i].x) {
+				if(this.player.x - Constant.botMoveSizeConstant() >= this.elements[i].x || this.player.x + this.player.width + Constant.botMoveSizeConstant() <= this.elements[i].x) {
 					this.elements[i].x -= this.elements[i].speedX;
 
 					if(++this.elements[i].timer%100 ==0) {
@@ -185,12 +185,14 @@ function playGame(canvas) {
 			}
 
 
+			// столкновение ботов с землей
 			if(CrashController(this.ground, this.elements[i])) {
 				if(this.elements[i].y + this.elements[i].height > this.ground.y) {
 					this.elements[i].y = this.ground.y - this.elements[i].height;
 				}
 			}
 
+			// столкновение ботов со стенами
 			if(WallController(this.elements[i])) {
 				if(this.elements[i].is_kill) {
 					this.elements.splice(i, 1);
