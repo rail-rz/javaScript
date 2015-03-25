@@ -53,8 +53,7 @@ function playGame(startParams) {
 					this.elements[i].x -= this.elements[i].speedX;
 
 					if(++this.elements[i].timer%100 ==0) {
-						this.elements.push(factory.createElement(
-							{
+						this.elements.push(factory.createElement( {
 								method:'rect',
 								type:'bullet',
 								color:'white',
@@ -143,9 +142,7 @@ function playGame(startParams) {
 						this.gun.height = this.elements[i].y - this.gun.y;
 					}
 				}
-
 			}
-
 
 			// столкновение ботов с землей
 			if(CrashController(this.ground, this.elements[i])) {
@@ -170,8 +167,6 @@ function playGame(startParams) {
 				}
 			}
 		}
-
-
 
 	};
 
