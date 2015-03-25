@@ -20,6 +20,6 @@ function init() {
     window.addEventListener( "keyup", doKeyUp, false);
 
 	delete Constants;
-    newGame();
+//    newGame();
 
 }

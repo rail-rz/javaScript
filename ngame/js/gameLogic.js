@@ -173,6 +173,7 @@ function playGame(startParams) {
 	this.keyboardControl = function() {
 		if(keysMap[27]) {
 			this.stop();
+			document.getElementById('ngame-menu').style.display = 'block';
 		}
 		if(keysMap[69]) {
 			// хардкор
@@ -258,6 +259,7 @@ function playGame(startParams) {
 
 
 function newGame() {
+	document.getElementById('ngame-menu').style.display = 'none';
 	var Constant = new NConstant(),
 		startParams = {
 			canvasParam: {  method:'image', path:'image/background.jpg', color:'grey', realWidth:Constant.canvasWidth(), realHeight:Constant.canvasHeight(), imageWidth:800, imageHeight:600},
