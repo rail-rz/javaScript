@@ -4,15 +4,17 @@
  */
 
 function init() {
-    var canvas = document.getElementById('namga-game');
+	var Constants = new NConstant(),
+    	canvas = document.getElementById('namga-game');
+
 	// инициализируем контекст для фабрики
 	NElement.context = canvas.getContext("2d");
-	var Constants = new NConstant();
 	canvas.style.width = Constants.canvasWidth() + 'px';
 	canvas.style.height = Constants.canvasHeight() + 'px';
 	// задаем размеры и разрешение canvas
 	canvas.width = Constants.canvasWidth();
 	canvas.height = Constants.canvasHeight();
+
 
     // функции слушатили
 //  canvas.onmousemove = mouseMove;
@@ -20,6 +22,5 @@ function init() {
     window.addEventListener( "keyup", doKeyUp, false);
 
 	delete Constants;
-//    newGame();
-
+    newGame();
 }

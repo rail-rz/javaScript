@@ -19,6 +19,11 @@ function NPropertyForElements(params) {
 	this.health = params.health || 1;
 	this.is_event = params.is_event || 0; // событие на элементе
 	this.timer = 0;
+
+	this.update = function() {
+		this.x += this.speedX;
+		this.y += this.speedY;
+	}
 }
 
 var NElement = {

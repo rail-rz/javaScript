@@ -20,6 +20,7 @@ function playGame(startParams) {
 		},
 		factory = new NElementFactory();
 
+
     this.gameCanvas = factory.createElement(startParams.canvasParam);
 	this.player = factory.createElement(startParams.playerParams);
     this.gun = factory.createElement(startParams.gunParams);
@@ -43,9 +44,8 @@ function playGame(startParams) {
 
 		// обработка игровых элементов
 		for(var i = 0; i < this.elements.length; i++) {
+			this.elements[i].update();
 			this.elements[i].drawing();
-			this.elements[i].x += this.elements[i].speedX;
-			this.elements[i].y += this.elements[i].speedY;
 
 			// логика стреляющих ботов
 			if(this.elements[i].is_attack) {
@@ -173,7 +173,6 @@ function playGame(startParams) {
 	this.keyboardControl = function() {
 		if(keysMap[27]) {
 			this.stop();
-			document.getElementById('ngame-menu').style.display = 'block';
 		}
 		if(keysMap[69]) {
 			// хардкор
@@ -259,7 +258,6 @@ function playGame(startParams) {
 
 
 function newGame() {
-	document.getElementById('ngame-menu').style.display = 'none';
 	var Constant = new NConstant(),
 		startParams = {
 			canvasParam: {  method:'image', path:'image/background.jpg', color:'grey', realWidth:Constant.canvasWidth(), realHeight:Constant.canvasHeight(), imageWidth:800, imageHeight:600},
