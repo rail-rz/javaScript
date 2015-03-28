@@ -11,7 +11,7 @@ function CrashController(objA, objB) {
     }
 }
 
-function WallController(obj) {
+function WallController(gameCanvas, obj) {
     // запрет на выход за пределы экрана
     if(obj.x < 0 || obj.x + obj.width > gameCanvas.width || obj.y <0 || obj.y + obj.height > gameCanvas.height) {
         return true;
