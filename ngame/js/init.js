@@ -3,16 +3,17 @@
  * @author rail_rz <zamaletdinov.rz@gmail.com>
  */
 
-function Init() {
-    var canvas = document.getElementById('namga-game');
+function init() {
+	var Constants = new NConstant(),
+    	canvas = document.getElementById('namga-game');
+
 	// инициализируем контекст для фабрики
 	NElement.context = canvas.getContext("2d");
-	var constant = new NConstant();
-	canvas.style.width = constant.canvasWidth() + 'px';
-	canvas.style.height = constant.canvasHeight() + 'px';
+	canvas.style.width = Constants.canvasWidth() + 'px';
+	canvas.style.height = Constants.canvasHeight() + 'px';
 	// задаем размеры и разрешение canvas
-	canvas.width = constant.canvasWidth();
-	canvas.height = constant.canvasHeight();
+	canvas.width = Constants.canvasWidth();
+	canvas.height = Constants.canvasHeight();
 
 
     // функции слушатили
@@ -20,5 +21,7 @@ function Init() {
     window.addEventListener( "keydown", doKeyDown, false);
     window.addEventListener( "keyup", doKeyUp, false);
 
-    PlayGame(canvas);
+	delete Constants;
+    playGame();
+	startGame();
 }

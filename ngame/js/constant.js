@@ -4,6 +4,10 @@
  */
 
 var NConstant = function () {
-	this.canvasWidth = function () { return 800; };
-	this.canvasHeight = function () { return 600; };
+	var canvasWidth = 800,
+		canvasHeight = 600;
+
+	this.canvasWidth = function () { return canvasWidth; };
+	this.canvasHeight = function () { return canvasHeight; };
+	this.botMoveSizeConstant = function() { return canvasWidth/6 };
 };
