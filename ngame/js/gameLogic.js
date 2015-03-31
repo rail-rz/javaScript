@@ -20,6 +20,7 @@ function playGame() {
 			is_attack:[0,1],
 			is_killed: 1
 		},
+		score = 0,
 		factory = new NElementFactory(),
 		gameCanvas = {},
 		player = {},
@@ -49,7 +50,7 @@ function playGame() {
 				if(player.x - Constant.botMoveSizeConstant() >= elements[i].x || player.x + player.width + Constant.botMoveSizeConstant() <= elements[i].x) {
 					elements[i].x -= elements[i].speedX;
 
-					if(++elements[i].timer%100 ==0) {
+					if(++elements[i].timer%100 == 0) {
 						elements.push(factory.createElement( {
 								method:'rect',
 								type:'bullet',
@@ -98,7 +99,7 @@ function playGame() {
 					--player.health;
 					elements.splice(i, 1);
 					if(player.health <= 0) {
-						this.stopGame();
+						stopGame();
 					}
 				}
 			}
@@ -116,6 +117,7 @@ function playGame() {
 				if(gun.is_kill) {
 					if(--elements[i].health <= 0) {
 						elements.splice(i, 1);
+						score += 10;
 						if(elements.length <= 5) {
 							elements.push(factory.createElement({ method:'rect', color:'blue', x:0, y:gameCanvas.height, realWidth:10, realHeight:20, speedX:getRandomValueFromArray(randomBotParams.speedX), speedY:9.8, is_killed:1, is_crash:0, is_attack:1}));
 							elements.push(factory.createElement({ method:'rect', color:'orange', x:gameCanvas.width-10, y:gameCanvas.height, realWidth:10, realHeight:20, speedX:-getRandomValueFromArray(randomBotParams.speedX), speedY:9.8, is_killed:1, is_crash:0, is_attack:1}));
@@ -127,8 +129,10 @@ function playGame() {
 					if(elements[i].is_killed) {
 						elements[i].x -= elements[i].speedX;
 						elements[i].y -= gun.speedY + elements[i].speedY;
+						++elements[i].timer;
 
 						if(CrashController(player, elements[i])) {
+							score += (10 + elements[i].timer);
 							elements.splice(i, 1);
 							if(elements.length <= 5) {
 								elements.push(factory.createElement({ method:'rect', color:'blue', x:0, y:gameCanvas.height, realWidth:10, realHeight:20, speedX:getRandomValueFromArray(randomBotParams.speedX), speedY:9.8, is_killed:1, is_crash:0, is_attack:1}));
@@ -169,7 +173,7 @@ function playGame() {
 
 	keyboardControl = function() {
 		if(keysMap[27]) {
-			this.stopGame();
+			stopGame();
 		}
 		if(keysMap[69]) {
 			// хардкор
