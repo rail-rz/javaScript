@@ -69,6 +69,20 @@ var NElement = {
 			NElement.context.drawImage(image,this.x, this.y, params.imageWidth, params.imageHeight);
 		};
 		return property;
+	},
+	text:function(params){
+		var property = new NPropertyForElements(params);
+		property.message = params.message;
+		property.name = '';
+		if(params.name ) {
+			property.name = params.name + ': '
+		}
+		property.drawing = function() {
+			NElement.context.font = "15pt Arial";
+			NElement.context.fillStyle = property.color;
+			NElement.context.fillText(property.name + property.message, property.x, property.y)
+		};
+		return property;
 	}
 
 };

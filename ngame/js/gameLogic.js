@@ -20,13 +20,14 @@ function playGame() {
 			is_attack:[0,1],
 			is_killed: 1
 		},
-		score = 0,
 		factory = new NElementFactory(),
-		gameCanvas = {},
-		player = {},
-		gun = {},
-		ground = {},
-		elements = [],
+		gameCanvas,
+		player,
+		gun,
+		ground,
+		elements,
+		score,
+		healthInfo,
 		drawingGame;
 
     // отрисовывающая функуия
@@ -36,6 +37,8 @@ function playGame() {
         player.drawing();
         gun.drawing();
 		ground.drawing();
+		score.drawing();
+		healthInfo.drawing();
 
 		keyboardControl();
 		playerLogic();
@@ -117,7 +120,7 @@ function playGame() {
 				if(gun.is_kill) {
 					if(--elements[i].health <= 0) {
 						elements.splice(i, 1);
-						score += 10;
+						score.message += 10;
 						if(elements.length <= 5) {
 							elements.push(factory.createElement({ method:'rect', color:'blue', x:0, y:gameCanvas.height, realWidth:10, realHeight:20, speedX:getRandomValueFromArray(randomBotParams.speedX), speedY:9.8, is_killed:1, is_crash:0, is_attack:1}));
 							elements.push(factory.createElement({ method:'rect', color:'orange', x:gameCanvas.width-10, y:gameCanvas.height, realWidth:10, realHeight:20, speedX:-getRandomValueFromArray(randomBotParams.speedX), speedY:9.8, is_killed:1, is_crash:0, is_attack:1}));
@@ -132,7 +135,7 @@ function playGame() {
 						++elements[i].timer;
 
 						if(CrashController(player, elements[i])) {
-							score += (10 + elements[i].timer);
+							score.message += (10 + elements[i].timer);
 							elements.splice(i, 1);
 							if(elements.length <= 5) {
 								elements.push(factory.createElement({ method:'rect', color:'blue', x:0, y:gameCanvas.height, realWidth:10, realHeight:20, speedX:getRandomValueFromArray(randomBotParams.speedX), speedY:9.8, is_killed:1, is_crash:0, is_attack:1}));
@@ -169,6 +172,7 @@ function playGame() {
 			}
 		}
 
+		healthInfo.message = player.health;
 	};
 
 	keyboardControl = function() {
@@ -255,12 +259,16 @@ function playGame() {
 			otherElements: [
 				{ method:'rect', type:'build', health:100, color:'black', x:Constant.canvasWidth()/2 - 100/2, y:Constant.canvasWidth(),realHeight:100, realWidth:100, is_killed:0, is_crash:1, is_event:1}
 			],
-			gunParams: {method:'rect', color:'yellow', speedY:2, opacity:0.3, realWidth:30, is_kill:0}
+			gunParams: {method:'rect', color:'yellow', speedY:2, opacity:0.3, realWidth:30, is_kill:0},
+			scoreParams: {method:'text', message:0, name:"score", x:25, y:35, color:'white'},
+			healthInfoParams: {method:'text', message:0, name:"health", x:25, y:60, color:'white'}
 		};
 		gameCanvas = factory.createElement(startParams.canvasParam);
 		player = factory.createElement(startParams.playerParams);
 		gun = factory.createElement(startParams.gunParams);
 		ground = factory.createElement(startParams.groundParams);
+		score = factory.createElement(startParams.scoreParams);
+		healthInfo = factory.createElement(startParams.healthInfoParams);
 
 		elements = [];
 		for(var i = 0; i < startParams.otherElements.length; i++) {
