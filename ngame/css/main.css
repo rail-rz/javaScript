@@ -5,7 +5,9 @@ fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td
 { margin:0; padding:0; border:0; outline:0; font-weight:inherit; font-style:inherit; font-size:100%; font-family:inherit; vertical-align:baseline; }
 
 #ngame-menu {
-
+    text-align: center;
+    background-color: darkgrey;
+    position: absolute;
 }
 .ngame {
     text-align: center;
