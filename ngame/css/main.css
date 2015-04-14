@@ -3,12 +3,19 @@ a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q
 small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td
 { margin:0; padding:0; border:0; outline:0; font-weight:inherit; font-style:inherit; font-size:100%; font-family:inherit; vertical-align:baseline; }
+#content {
+    top: 50%; /* Отступ в процентах от верхнего края окна */
+    left: 50%; /* Отступ в процентах от левого края окна */
+    width: 800px; /* Ширина блока */
+    height: 800px; /* Высота блока */
+    position: absolute; /* Абсолютное позиционирование блока */
+    margin-top: -400px; /* Отрицательный отступ от верхнего края страницы, должен равняться половине высоты блока со знаком минус */
+    margin-left: -400px; /* Отрицательный отступ от левого края страницы, должен равняться половине высоты блока со знаком минус */
 
+}
 #ngame-menu {
-    text-align: center;
     background-color: darkgrey;
     position: absolute;
 }
 .ngame {
-    text-align: center;
 }

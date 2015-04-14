@@ -21,6 +21,7 @@ function playGame() {
 			is_killed: 1
 		},
 		factory = new NElementFactory(),
+		menu = document.getElementById('ngame-menu'),
 		gameCanvas,
 		player,
 		gun,
@@ -275,16 +276,20 @@ function playGame() {
 			elements[i] = factory.createElement(startParams.otherElements[i]);
 		}
 		setIntervalId = setInterval(drawingGame, 1000 / 50);
+		menu.style.display = 'none';
+
 		return true;
 	};
 
 	this.continueGame = function() {
 		this.stopGame();
 		setIntervalId = setInterval(drawingGame, 1000 / 50);
+		menu.style.display = 'none';
 		return true;
 	};
 
 	this.stopGame = function() {
+		menu.style.display = 'block';
 		if(setIntervalId != null ) {
 			clearInterval(setIntervalId);
 		}

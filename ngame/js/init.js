@@ -29,5 +29,7 @@ function init() {
     window.addEventListener( "keyup", doKeyUp, false);
 
     playGame();
+	// времнное решение
 	startGame();
+	stopGame();
 }
