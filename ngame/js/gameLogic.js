@@ -283,13 +283,20 @@ function playGame() {
 
 	this.continueGame = function() {
 		this.stopGame();
-		setIntervalId = setInterval(drawingGame, 1000 / 50);
-		menu.style.display = 'none';
-		return true;
+		if(player.health <= 1) {
+			this.startGame();
+		} else {
+			setIntervalId = setInterval(drawingGame, 1000 / 50);
+			menu.style.display = 'none';
+			return true;
+		}
 	};
 
 	this.stopGame = function() {
 		menu.style.display = 'block';
+		if(score) {
+			menu.childNodes[1].innerHTML = "Score: " + score.message;
+		}
 		if(setIntervalId != null ) {
 			clearInterval(setIntervalId);
 		}

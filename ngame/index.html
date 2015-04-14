@@ -12,15 +12,16 @@
     <script src="js/crashMethods.js"></script>
 </head>
 
-<body style="height: 100%" onload="init()">
+<body style="height: 100%; background-color: black" onload="init()">
 <div id="content">
     <div class="ngame">
         <canvas id="namga-game"></canvas>
     </div>
 	<div id="ngame-menu">
+		<p id="ngame-score"></p>
 		<p id="ngame-start"><a onclick="startGame()">Start</a></p>
 		<p id="ngame-continue"><a onclick="continueGame()">Continue</a></p>
-		<p id="ngame-stop"><a onclick="stopGame()">Stop</a></p>
+		<!--<p id="ngame-stop"><a onclick="stopGame()">Stop</a></p>-->
 	</div>
 </div>
 </body>

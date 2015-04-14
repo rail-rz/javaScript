@@ -14,8 +14,13 @@ fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td
 
 }
 #ngame-menu {
-    background-color: darkgrey;
+    background-color: black;
     position: absolute;
+    color: white;
+    font: 20pt Arial;
+    text-align: center;
+    line-height: 50pt;
+    /*padding-top: 10pt;*/
 }
 .ngame {
 }
