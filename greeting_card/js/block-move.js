@@ -6,10 +6,11 @@
 
 var dragMaster = (function () {
 
-	var dragObject;
-	var mouseOffset;
-	var sizeButton;
-    var rotateButton;
+    var Constants = new NConstant(),
+        dragObject,
+        mouseOffset,
+	    sizeButton,
+        rotateButton;
 
 	function mouseUp() {
 		dragObject = null;
@@ -28,11 +29,11 @@ var dragMaster = (function () {
 			position = 'absolute';
 
 			//TODO: эта часть кода обязательна для переписки!
-			if ((e.pageY - mouseOffset.y+ dragObject.offsetHeight/2) > 0 && (e.pageY - mouseOffset.y + dragObject.offsetHeight/2) < sizeControl(window.innerHeight, 75)) {
+			if ((e.pageY - mouseOffset.y+ dragObject.offsetHeight/2) > 0 && (e.pageY - mouseOffset.y + dragObject.offsetHeight/2) < Constants.canvasHeight()) {
 				top = e.pageY - mouseOffset.y + 'px'
 			}
 
-			if ((e.pageX - mouseOffset.x + dragObject.offsetWidth/2) >= 0 && (e.pageX - mouseOffset.x + dragObject.offsetWidth/2) <= sizeControl(window.innerWidth, 75)) {
+			if ((e.pageX - mouseOffset.x + dragObject.offsetWidth/2) >= 0 && (e.pageX - mouseOffset.x + dragObject.offsetWidth/2) <= Constants.canvasWidth()) {
 				left = e.pageX - mouseOffset.x + 'px'
 			}
             

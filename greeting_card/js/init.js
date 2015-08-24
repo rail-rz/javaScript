@@ -3,26 +3,33 @@
  */
 
 function Init() {
-    // сохраняем макс высоту и ширину
-    var heightWindow = window.innerHeight;
-    var widthWindow = window.innerWidth; 
-    
+    var Constants = new NConstant();
+
     // сразу задаем полную нужным блокамы
-    document.getElementById('content-right').style.height = heightWindow+'px';
-    document.getElementById('content-left-workzone').style.height = sizeControl(heightWindow, 75) -2 + "px";
-    document.getElementById('content-left-workzone').style.width = sizeControl(widthWindow, 75) + "px";
-    document.getElementById('content-left-helperzone').style.height = sizeControl(heightWindow, 25) - 2 + "px";
-    document.getElementById('content-left-helperzone').style.width = sizeControl(widthWindow, 75) + "px";
-    document.getElementById('content-right').style.width = sizeControl(widthWindow, 20) + "px";
+    var work_zone_border = document.getElementById('work-zone-border');
+    work_zone_border.style.width  = Constants.canvasWidth() + 5 + "px";
+    work_zone_border.style.height = Constants.canvasHeight() + 5 + "px";
+    var work_zone = document.getElementById('content-left-workzone');
+    work_zone.style.width  = Constants.canvasWidth() + "px";
+    work_zone.style.height = Constants.canvasHeight() + "px";
+
+    var content_left_helperzone = document.getElementById('content-left-helperzone');
+    content_left_helperzone.style.height = Constants.heightWindow() - Constants.canvasHeight() - 5 + "px";
+    content_left_helperzone.style.width  = Constants.canvasWidth() + 'px';
+
+    var content_right = document.getElementById('content-right-elements');
+    content_right.style.width = Constants.widthWindow() - Constants.canvasWidth() - 20 + "px";
+    content_right.style.height = Constants.canvasHeight() + "px";
+    var content_right_bottom = document.getElementById('content-right-bottom');
+    content_right_bottom.style.width = content_right.style.width;
+    content_right_bottom.style.height = content_left_helperzone.style.height;
+
     // опеределение какие эл-ты можно двигать а какие нет
     var dragObjects = document.getElementById('all-elements').childNodes;
     for(var i=0; i<dragObjects.length; i++) {
         new DragObject(dragObjects[i]);
-        
     }
-//    new WorkZone(document.getElementById('content-left-workzone'));
 
-    
   //TODO: создание канвасом треогальника, подумать как
 //        var canvas = document.getElementById('triangle');
 //        var context = canvas.getContext('2d');

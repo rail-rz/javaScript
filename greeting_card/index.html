@@ -5,6 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/main.css" type="text/css">
         <link rel="stylesheet" href="css/block-move.css" type="text/css">
+        <script src="js/constant.js"></script>
         <script src="js/init.js"></script>
         <script src="js/work-zone.js"></script>
         <script src="js/block-helper.js"></script>
@@ -13,6 +14,7 @@
         <script src="js/resize-block.js"></script>
         <script src="js/rotate-block.js"></script>
         <script src="js/info-block.js"></script>
+
     </head>
     <body onload="Init()">
         
@@ -20,22 +22,24 @@
             
             <div id="content-left">
 
-                <div id="content-left-workzone">
-                    
-                    <div style="position:relative;cursor: pointer;" >
-                        <div id='bottom-right-button' class='size-button' style="left:100px; top:50px; z-index: 100"></div>
-                        <div id="rotate-button"></div>
-                    </div>
-                    
-                    <div id="all-elements">
-                       
-                        <h1>Рабочая область</h1>
+                <div id="work-zone-border">
+                    <div id="content-left-workzone">
 
-                        <div id="moving-element">123</div>
-                        
-                         <div class="triangle2"></div>
-                         <!--<canvas id="triangle" height="100" width="100">Triangle</canvas>-->
+                        <div style="position:relative;cursor: pointer;" >
+                            <div id='bottom-right-button' class='size-button' style="left:100px; top:50px; z-index: 100"></div>
+                            <div id="rotate-button"></div>
+                        </div>
 
+                        <div id="all-elements">
+
+                            <h1>Рабочая область</h1>
+
+                            <div id="moving-element">123</div>
+
+                             <div class="triangle2"></div>
+                             <!--<canvas id="triangle" height="100" width="100">Triangle</canvas>-->
+
+                        </div>
                     </div>
                 </div>
 
@@ -58,12 +62,18 @@
             </div>
 
             <div id="content-right">
-                <h1>Место обитания всех эл-тов, которые можно будет добавлять в рабочую зону</h1>
-                <div id="new-element" onclick="NewBlock(1)">Push Me</div>
-                <div id="circule" onclick="NewBlock(2)">Push Me</div>
-                <div id="picture" onclick="NewBlock(3)">Push Me</div>
-                <div id="texte" onclick="NewBlock(4)">Push Me</div>
-
+                <div id="content-right-elements">
+                    <h1>Место обитания всех эл-тов, которые можно будет добавлять в рабочую зону</h1>
+                    <div id="new-element" onclick="NewBlock(1)">Push Me</div>
+                    <div id="circule" onclick="NewBlock(2)">Push Me</div>
+                    <div id="picture" onclick="NewBlock(3)">Push Me</div>
+                    <div id="texte" onclick="NewBlock(4)">Push Me</div>
+                </div>
+                <div id="content-right-bottom">
+                    <p>Save</p>
+                    <p>View</p>
+                    <p>Donate</p>
+                </div>
             </div>
         
         </div>

@@ -7,7 +7,9 @@ var counter = 0;
 
 // добавление блока 
 function NewBlock(elementId) {
-    var element;
+    var element,
+        elements = {};
+
     
     ++counter;
     

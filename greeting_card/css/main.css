@@ -1,4 +1,4 @@
-/* 
+/*
     Document   : prototype
     Created on : 08.05.2014, 11:22:11
     Author     : rail
@@ -9,13 +9,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td{
-    margin: 0;
-    padding: 0;
-    outline: 0;
-    font-weight: inherit;
-    font-style: inherit;
-    font-family: inherit;
-    vertical-align: baseline;
+    margin: 0; padding: 0; outline: 0; font-weight: inherit; font-style: inherit; font-family: inherit; vertical-align: baseline;
 }
 
 #content {}
@@ -23,29 +17,31 @@ fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td{
 #content-left {
     float: left;
 }
-
-#content-left-workzone{
-    height: 500px;
-    border: 1px solid black;
-/*    здесь хиден, чтобы поверх дива не отображалось*/
-    overflow: hidden;
+#work-zone-border {
+    background-color: #191970;
 }
-
+#content-left-workzone{
+    /*    здесь хиден, чтобы поверх дива не отображалось*/
+    overflow: hidden;
+    background-color: #ffffff;
+}
 #all-elements {
     /*overflow: hidden;*/
-/*    здесь абсолют, чтобы позволить передвигать все дивы;)*/
+    /*    здесь абсолют, чтобы позволить передвигать все дивы;)*/
     cursor: move;
     position: relative;
 }
 
 #content-left-helperzone {
-    height: 100px;
-    border: 1px solid black;
+    border-right: 5px solid #191970;
 }
 
 #content-right {
     float: left;
-    /*border-left: 1px solid black;*/
 }
-
-
+#content-right-elements {
+    border-bottom: 5px solid #191970;
+}
+#content-right-elements div {
+    float:left;
+}
