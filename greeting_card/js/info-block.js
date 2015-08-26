@@ -13,36 +13,40 @@ var infoBlock = (function() {
     var background;
     var opacity;
     var text;
+    var remove;
     
     function updateBlock() {
-//        height = document.getElementById('element-size-height');
-//        width = document.getElementById('element-size-width');
-//        background = document.getElementById('element-background');
-
-
         height.oninput = function() {
             block.style.height = height.value + 'px';
             sizeButton.style.top = block.offsetTop + block.offsetHeight + 'px';
-        }
-        
+        };
 
         width.oninput = function() {
             block.style.width = width.value + 'px';
             sizeButton.style.left = block.offsetLeft + block.offsetWidth + 'px';
-        }
+        };
         
         background.oninput = function() {
             block.style.background = background.value;
-        }
+        };
         
         zIndex.oninput = function() {
             block.style.zIndex = zIndex.value;
-        }
+        };
         
         opacity.oninput = function() {
             block.style.opacity = opacity.value;
-        }
-        
+        };
+
+        remove.onclick = function() {
+            if (!block) return;
+
+            if (confirm("Вы подтверждаете удаление?")) {
+                block.parentNode.removeChild(block);
+            } else {
+                return false;
+            }
+        };
 //        text.oninput = function() {
 //            block.innerHtml = text.value;
 //        }
@@ -52,7 +56,7 @@ var infoBlock = (function() {
     function setting(element) {
         block = element;
         sizeButton = document.getElementById("bottom-right-button");
-        
+
         height = document.getElementById('element-size-height');
         width = document.getElementById('element-size-width');
         background = document.getElementById('element-background');
@@ -65,6 +69,7 @@ var infoBlock = (function() {
         background.value = block.style.backgroundColor;
         zIndex.value = block.style.zIndex;
         opacity.value = block.style.opacity;
+        remove = document.getElementById('element-delete');
 //        text.value = block.innerHTML;
         
         updateBlock();
@@ -80,4 +85,4 @@ var infoBlock = (function() {
         }
     }
  
-}())
+}());

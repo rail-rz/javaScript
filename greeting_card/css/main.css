@@ -11,7 +11,6 @@ small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td{
     margin: 0; padding: 0; outline: 0; font-weight: inherit; font-style: inherit; font-family: inherit; vertical-align: baseline;
 }
-
 #content {}
 
 #content-left {
@@ -31,9 +30,9 @@ fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td{
     cursor: move;
     position: relative;
 }
-
 #content-left-helperzone {
     border-right: 5px solid #191970;
+    overflow: scroll;
 }
 
 #content-right {
@@ -41,6 +40,7 @@ fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td{
 }
 #content-right-elements {
     border-bottom: 5px solid #191970;
+    overflow: scroll;
 }
 #content-right-elements div {
     float:left;

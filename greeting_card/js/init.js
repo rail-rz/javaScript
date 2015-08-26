@@ -46,6 +46,8 @@ function Init() {
 //        context.fill();
 //
 //    new DragObject(document.getElementById('bottom-right-button'));
+
+    CreateElements();
 }
 
 //контроль за размером hundredPercentSize - 100% размер в px, percentage - процент уменьшения

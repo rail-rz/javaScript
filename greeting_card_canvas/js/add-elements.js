@@ -4,7 +4,7 @@
  */
 
 function CreateElements() {
-     elements = [],
+     var elements = [],
         factory = new NElementFactory()
     ;
 

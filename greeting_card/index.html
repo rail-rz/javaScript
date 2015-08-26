@@ -50,6 +50,7 @@
                     <p>Цвет фона: <input id="element-background" type="text"></p>
                     <p>Приоретет: <input id="element-zindex" type="number"  min="0" max="99"></p>
                     <p>Прозрачность: <input id="element-opacity" type="number" min="0.1" max="1" step="0.1"></p>
+                    <input id="element-delete" type="button" value="Удалить">
                     <!--<p>Текст:<input id="element-text" type="text"></p>-->
 <!--                    <div>
                         <input id="element-color-red" type="button" style="background-color: red; border: none;" onclick="alert(this)">
@@ -64,10 +65,10 @@
             <div id="content-right">
                 <div id="content-right-elements">
                     <h1>Место обитания всех эл-тов, которые можно будет добавлять в рабочую зону</h1>
-                    <div id="new-element" onclick="NewBlock(1)">Push Me</div>
-                    <div id="circule" onclick="NewBlock(2)">Push Me</div>
-                    <div id="picture" onclick="NewBlock(3)">Push Me</div>
-                    <div id="texte" onclick="NewBlock(4)">Push Me</div>
+                    <div id="new-element" onclick="addElement(1)">Push Me</div>
+                    <div id="circule" onclick="addElement(2)">Push Me</div>
+                    <div id="picture" onclick="addElement(3)">Push Me</div>
+                    <div id="texte" onclick="addElement(4)">Push Me</div>
                 </div>
                 <div id="content-right-bottom">
                     <p>Save</p>
