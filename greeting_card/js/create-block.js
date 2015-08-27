@@ -54,19 +54,15 @@
 
 
 function CreateElements() {
-    var elements = [],
-        element,
-        pushElement,
+    var element,
         counter = 0
-        //factory = new NElementFactory()
     ;
 
     this.addElement = function(id) {
         ++counter;
         if(id == 2) {
             element = document.createElement('div');
-            pushElement = { id:'name-'+counter, width:100, height:50, backgroundColor: 'green'}
-            element.id = pushElement.id;
+            element.id = 'name-'+counter;
             element.style.width = '100px';
             element.style.height = '50px';
             element.style.backgroundColor = 'green';
@@ -91,7 +87,7 @@ function CreateElements() {
 
 //    https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQL82tckOtHxX4LwHGEFCJ1OxL2JcHWCrJ_FMF8La0FLFlqw-h2cgn2KyZj
         document.getElementById('all-elements').appendChild(element);
-        elements.push(pushElement);
+        //elements.push(pushElement);
         if(id == 4) {
             element.innerHTML = 'text';
         }
@@ -100,6 +96,6 @@ function CreateElements() {
         // опеределение какие эл-ты можно двигать а какие нет
         var dragObject = document.getElementById(element.id);
         new DragObject(dragObject);
-        console.log(elements[0]);
+        //console.log(elements);
     }
 }

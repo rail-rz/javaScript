@@ -14,6 +14,7 @@ var infoBlock = (function() {
     var opacity;
     var text;
     var remove;
+    var textColor;
     
     function updateBlock() {
         height.oninput = function() {
@@ -47,9 +48,12 @@ var infoBlock = (function() {
                 return false;
             }
         };
-//        text.oninput = function() {
-//            block.innerHtml = text.value;
-//        }
+        text.oninput = function() {
+            block.innerHTML = text.value;
+        };
+        textColor.oninput = function () {
+            block.style.color = textColor.value;
+        };
 //        
     }
     
@@ -62,7 +66,8 @@ var infoBlock = (function() {
         background = document.getElementById('element-background');
         zIndex = document.getElementById('element-zindex');
         opacity = document.getElementById('element-opacity');
-//        text = document.getElementById('element-text');
+        text = document.getElementById('element-text');
+        textColor = document.getElementById('element-text-color');
 
         height.value = block.offsetHeight;
         width.value = block.offsetWidth;
@@ -70,8 +75,9 @@ var infoBlock = (function() {
         zIndex.value = block.style.zIndex;
         opacity.value = block.style.opacity;
         remove = document.getElementById('element-delete');
-//        text.value = block.innerHTML;
-        
+        text.value = block.innerHTML;
+        textColor.value = block.style.color;
+
         updateBlock();
     }
     

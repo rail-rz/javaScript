@@ -45,11 +45,44 @@
 
                 <div id="content-left-helperzone">
                     Вспомогательная зона, позволяет видеть доп. свединиия об элементе
-                    <p>Высота: <input id="element-size-height" type="number" min="5"></p>
-                    <p>Ширина: <input id="element-size-width" type="number" min="5"></p>
-                    <p>Цвет фона: <input id="element-background" type="text"></p>
-                    <p>Приоретет: <input id="element-zindex" type="number"  min="0" max="99"></p>
-                    <p>Прозрачность: <input id="element-opacity" type="number" min="0.1" max="1" step="0.1"></p>
+                    <table>
+                        <tr>
+                            <td><p>Высота:</p></td>
+                            <td> <input id="element-size-height" type="number" min="5"></td>
+                        </tr>
+                        <tr>
+                            <td><p>Ширина:</p></td>
+                            <td> <input id="element-size-width" type="number" min="5"></td>
+                        </tr>
+                        <tr>
+                            <td><p>Цвет фона: </p></td>
+                            <td><input id="element-background" type="text"></td>
+                        </tr>
+                        <tr>
+                            <td><p>Приоретет: </p></td>
+                            <td><input id="element-zindex" type="number"  min="0" max="99"></td>
+                        </tr>
+                        <tr>
+                            <td><p>Прозрачность:</p></td>
+                            <td> <input id="element-opacity" type="number" min="0.1" max="1" step="0.1"></td>
+                        </tr>
+                        <tr>
+                            <td>Вставить текст:</td>
+                            <td> <input id="element-text" ></td>
+                        </tr>
+                    </table>
+                    <table id="text-setting">
+                        <tr>
+                            <td>Цвет текста:</td>
+                            <td><input id="element-text-color" ></td>
+                        </tr>
+                    </table>
+
+
+
+
+
+
                     <input id="element-delete" type="button" value="Удалить">
                     <!--<p>Текст:<input id="element-text" type="text"></p>-->
 <!--                    <div>
