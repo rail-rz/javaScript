@@ -31,8 +31,26 @@ fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td{
     position: relative;
 }
 #content-left-helperzone {
+    width: 100%;
     border-right: 5px solid #191970;
     overflow: scroll;
+}
+#elements-setting {
+    width: 50%;
+    float: left;
+}
+#text-setting {
+    /*display: none;*/
+}
+#select-color{
+    width: 50%;
+    float: left;
+    display: none;
+}
+#select-color div {
+    float: left;
+    width: 15px;
+    height: 15px;
 }
 
 #content-right {
@@ -45,3 +63,4 @@ fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td{
 #content-right-elements div {
     float:left;
 }
+

@@ -15,6 +15,7 @@ var infoBlock = (function() {
     var text;
     var remove;
     var textColor;
+    var selectColor;
     
     function updateBlock() {
         height.oninput = function() {
@@ -26,7 +27,11 @@ var infoBlock = (function() {
             block.style.width = width.value + 'px';
             sizeButton.style.left = block.offsetLeft + block.offsetWidth + 'px';
         };
-        
+
+        background.onclick = function() {
+            selectColor.style.display = 'block';
+            selectColor.type = 'background';
+        };
         background.oninput = function() {
             block.style.background = background.value;
         };
@@ -54,7 +59,20 @@ var infoBlock = (function() {
         textColor.oninput = function () {
             block.style.color = textColor.value;
         };
-//        
+        textColor.onclick = function () {
+            block.style.color = textColor.value;
+            selectColor.style.display = 'block';
+            selectColor.type = 'textColor';
+        };
+
+        selectColor.onclick = function(event) {
+            if(selectColor.type == 'background') {
+                background.value = block.style.background = event.srcElement.style.backgroundColor;
+            }
+            else if(selectColor.type == 'textColor') {
+                textColor.value = block.style.color = event.srcElement.style.backgroundColor;
+            }
+        };
     }
     
     function setting(element) {
@@ -68,6 +86,9 @@ var infoBlock = (function() {
         opacity = document.getElementById('element-opacity');
         text = document.getElementById('element-text');
         textColor = document.getElementById('element-text-color');
+
+        selectColor = document.getElementById('select-color');
+        selectColor.style.display = 'none';
 
         height.value = block.offsetHeight;
         width.value = block.offsetWidth;

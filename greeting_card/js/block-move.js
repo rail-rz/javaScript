@@ -81,7 +81,7 @@ var dragMaster = (function () {
 		resizeBlock.resize(dragObject);
         rotateBlock.goRotate(dragObject);
 
-		return false
+		return false;
 	}
 
 	function buttonPosition() {
