@@ -24,10 +24,13 @@ function Init() {
     content_right_bottom.style.width = content_right.style.width;
     content_right_bottom.style.height = content_left_helperzone.style.height;
 
+    CreateElements();
+    var elements = getGlobalElements();
     // опеределение какие эл-ты можно двигать а какие нет
     var dragObjects = document.getElementById('all-elements').childNodes;
     for(var i=0; i<dragObjects.length; i++) {
         new DragObject(dragObjects[i]);
+        elements['old-element' + i] = {};
     }
 
   //TODO: создание канвасом треогальника, подумать как
@@ -47,7 +50,6 @@ function Init() {
 //
 //    new DragObject(document.getElementById('bottom-right-button'));
 
-    CreateElements();
 }
 
 //контроль за размером hundredPercentSize - 100% размер в px, percentage - процент уменьшения

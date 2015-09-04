@@ -16,6 +16,7 @@ var infoBlock = (function() {
     var remove;
     var textColor;
     var selectColor;
+    var nElement;
     
     function updateBlock() {
         height.oninput = function() {
@@ -77,6 +78,8 @@ var infoBlock = (function() {
     
     function setting(element) {
         block = element;
+        nElement = getGlobalElementById(element.id);
+        console.log( nElement);
         sizeButton = document.getElementById("bottom-right-button");
 
         height = document.getElementById('element-size-height');
@@ -99,6 +102,7 @@ var infoBlock = (function() {
         text.value = block.innerHTML;
         textColor.value = block.style.color;
 
+        nElement.height = height.value;
         updateBlock();
     }
     
