@@ -32,7 +32,6 @@
 
                         <div id="all-elements">
                             <div style="width: 100px; height: 100px; background-color: blue; position: absolute; left:350px; top:250px; text-align: center; color: white;">Рабочая область</div>
-                             <!--<canvas id="triangle" height="100" width="100">Triangle</canvas>-->
                         </div>
                     </div>
                 </div>
@@ -94,11 +93,11 @@
                     <div id="new-element" onclick="addElement(1)">Push Me</div>
                     <div id="circule" onclick="addElement(2)">Push Me</div>
                     <div id="picture" onclick="addElement(3)">Push Me</div>
-                    <div id="texte" onclick="addElement(4)">Push Me</div>
+                    <!--<div id="texte" onclick="addElement(4)">Push Me</div>-->
                 </div>
                 <div id="content-right-bottom">
-                    <p>Save</p>
-                    <p>View</p>
+                    <p onclick="console.log(getGlobalElementById('element-1'))">Save</p>
+                    <p onclick="console.log(getGlobalElements())">View</p>
                     <p>Donate</p>
                 </div>
             </div>

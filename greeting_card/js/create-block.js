@@ -68,7 +68,7 @@ function CreateElements() {
                 'id':'element-'+counter,
                 'width': 100,
                 'height': 50,
-                'backgroundColor': 'green'
+                'background_color': 'green'
             };
             element.id = 'element-'+counter;
             element.style.width = '100px';
@@ -82,7 +82,7 @@ function CreateElements() {
                 'id':'element-'+counter,
                 'width': 100,
                 'height': 50,
-                'backgroundColor': 'red'
+                'background_color': 'red'
             };
             element.id = 'element-'+counter;
             element.style.width = '100px';
@@ -116,7 +116,6 @@ function CreateElements() {
         // опеределение какие эл-ты можно двигать а какие нет
         var dragObject = document.getElementById(element.id);
         new DragObject(dragObject);
-        console.log(elements);
     };
 
     this.getGlobalElementById = function(id) {
@@ -127,3 +126,4 @@ function CreateElements() {
         return elements;
     };
 }
+

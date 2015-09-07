@@ -5,18 +5,19 @@
 
 var infoBlock = (function() {
     
-    var block;
-    var sizeButton;
-    var height;
-    var width;
-    var zIndex;
-    var background;
-    var opacity;
-    var text;
-    var remove;
-    var textColor;
-    var selectColor;
-    var nElement;
+    var block,
+        sizeButton,
+        height,
+        width,
+        zIndex,
+        background,
+        opacity,
+        text,
+        remove,
+        textColor,
+        selectColor,
+        nElement
+    ;
     
     function updateBlock() {
         height.oninput = function() {
@@ -35,14 +36,17 @@ var infoBlock = (function() {
         };
         background.oninput = function() {
             block.style.background = background.value;
+            nElement.background_color = background.value;
         };
         
         zIndex.oninput = function() {
             block.style.zIndex = zIndex.value;
+            nElement.z_index = zIndex.value;
         };
         
         opacity.oninput = function() {
             block.style.opacity = opacity.value;
+            nElement.opacity = opacity.value;
         };
 
         remove.onclick = function() {
@@ -55,10 +59,10 @@ var infoBlock = (function() {
             }
         };
         text.oninput = function() {
-            block.innerHTML = text.value;
+            nElement.text = block.innerHTML = text.value;
         };
         textColor.oninput = function () {
-            block.style.color = textColor.value;
+            nElement.text_color = block.style.color = textColor.value;
         };
         textColor.onclick = function () {
             block.style.color = textColor.value;
@@ -68,10 +72,10 @@ var infoBlock = (function() {
 
         selectColor.onclick = function(event) {
             if(selectColor.type == 'background') {
-                background.value = block.style.background = event.srcElement.style.backgroundColor;
+                nElement.background_color = background.value = block.style.background = event.srcElement.style.backgroundColor;
             }
             else if(selectColor.type == 'textColor') {
-                textColor.value = block.style.color = event.srcElement.style.backgroundColor;
+                nElement.text_color = textColor.value = block.style.color = event.srcElement.style.backgroundColor;
             }
         };
     }
@@ -79,7 +83,6 @@ var infoBlock = (function() {
     function setting(element) {
         block = element;
         nElement = getGlobalElementById(element.id);
-        console.log( nElement);
         sizeButton = document.getElementById("bottom-right-button");
 
         height = document.getElementById('element-size-height');
@@ -102,7 +105,12 @@ var infoBlock = (function() {
         text.value = block.innerHTML;
         textColor.value = block.style.color;
 
+
+        //nElement.top    = block.offsetTop;
+        //nElement.left   = block.offsetLeft;
         nElement.height = height.value;
+        nElement.width  = width.value;
+
         updateBlock();
     }
     

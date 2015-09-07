@@ -10,7 +10,9 @@ var dragMaster = (function () {
         dragObject,
         mouseOffset,
 	    sizeButton,
-        rotateButton;
+        rotateButton,
+        nElement
+        ;
 
 	function mouseUp() {
 		dragObject = null;
@@ -30,11 +32,13 @@ var dragMaster = (function () {
 
 			//TODO: эта часть кода обязательна для переписки!
 			if ((e.pageY - mouseOffset.y+ dragObject.offsetHeight/2) > 0 && (e.pageY - mouseOffset.y + dragObject.offsetHeight/2) < Constants.canvasHeight()) {
-				top = e.pageY - mouseOffset.y + 'px'
+				top = e.pageY - mouseOffset.y + 'px';
+                nElement.top = dragObject.offsetTop;
 			}
 
 			if ((e.pageX - mouseOffset.x + dragObject.offsetWidth/2) >= 0 && (e.pageX - mouseOffset.x + dragObject.offsetWidth/2) <= Constants.canvasWidth()) {
-				left = e.pageX - mouseOffset.x + 'px'
+				left = e.pageX - mouseOffset.x + 'px';
+                nElement.left = dragObject.offsetLeft;
 			}
             
 			buttonPosition();
@@ -81,6 +85,7 @@ var dragMaster = (function () {
 		resizeBlock.resize(dragObject);
         rotateBlock.goRotate(dragObject);
 
+        nElement = getGlobalElementById(dragObject.id);
 		return false;
 	}
 
