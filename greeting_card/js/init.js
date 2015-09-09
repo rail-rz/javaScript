@@ -25,13 +25,22 @@ function Init() {
     content_right_bottom.style.height = content_left_helperzone.style.height;
 
     CreateElements();
+    var nElements = getGlobalElements();
     // опеределение какие эл-ты можно двигать а какие нет
     var dragObjects = document.getElementById('all-elements').childNodes;
     for(var i=0; i<dragObjects.length; i++) {
-        new DragObject(dragObjects[i]);
+        if((dragObjects[i].tagName == 'DIV') || (dragObjects[i].tagName == 'IMG')) {
+            dragObjects[i].id = 'old-element-' + i;
+            new DragObject(dragObjects[i]);
+            nElements[dragObjects[i].id] = {
+                "top":dragObjects[i].offsetTop,
+                "left":dragObjects[i].offsetLeft,
+                "height":dragObjects[i].offsetHeight,
+                "width":dragObjects[i].offsetWidth
+            }
+        }
     }
-
-  //TODO: создание канвасом треогальника, подумать как
+//TODO: создание канвасом треогальника, подумать как
 //        var canvas = document.getElementById('triangle');
 //        var context = canvas.getContext('2d');
 //
