@@ -18,7 +18,8 @@ function Init() {
     content_left_helperzone.style.width  = Constants.canvasWidth() + 'px';
 
     var content_right = document.getElementById('content-right-elements');
-    content_right.style.width = Constants.widthWindow() - Constants.canvasWidth() - 20 + "px";
+    var content = document.getElementById('content');
+    content_right.style.width = content.offsetWidth - Constants.canvasWidth() - 5 + "px";
     content_right.style.height = Constants.canvasHeight() + "px";
     var content_right_bottom = document.getElementById('content-right-bottom');
     content_right_bottom.style.width = content_right.style.width;
@@ -36,7 +37,12 @@ function Init() {
                 "top":dragObjects[i].offsetTop,
                 "left":dragObjects[i].offsetLeft,
                 "height":dragObjects[i].offsetHeight,
-                "width":dragObjects[i].offsetWidth
+                "width":dragObjects[i].offsetWidth,
+                "background-color":dragObjects[i].backgroundColor,
+                "text":dragObjects[i].innerHTML,
+                "text_color":dragObjects[i].color,
+                "opacity":dragObjects[i].opacity,
+                "z_index":dragObjects[i].zIndex
             }
         }
     }

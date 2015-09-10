@@ -23,11 +23,13 @@ var infoBlock = (function() {
         height.oninput = function() {
             block.style.height = height.value + 'px';
             sizeButton.style.top = block.offsetTop + block.offsetHeight + 'px';
+            nElement.height = height.value;
         };
 
         width.oninput = function() {
             block.style.width = width.value + 'px';
             sizeButton.style.left = block.offsetLeft + block.offsetWidth + 'px';
+            nElement.width  = width.value;
         };
 
         background.onclick = function() {
@@ -105,9 +107,6 @@ var infoBlock = (function() {
         text.value = block.innerHTML;
         textColor.value = block.style.color;
 
-
-        //nElement.top    = block.offsetTop;
-        //nElement.left   = block.offsetLeft;
         nElement.height = height.value;
         nElement.width  = width.value;
 
