@@ -69,5 +69,5 @@ fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td{
     clear: left;
 }
 .transChooser {
-    background: transparent url(greeting_card/images/helpers/transChooser.gif);
+    background: transparent url(images/helpers/transChooser.gif);
 }

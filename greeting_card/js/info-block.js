@@ -16,7 +16,8 @@ var infoBlock = (function() {
         remove,
         textColor,
         selectColor,
-        nElement
+        nElement,
+        rotate
     ;
     
     function updateBlock() {
@@ -49,6 +50,19 @@ var infoBlock = (function() {
         opacity.oninput = function() {
             block.style.opacity = opacity.value;
             nElement.opacity = opacity.value;
+        };
+        rotate.oninput = function() {
+            //-moz-transform: rotate(15deg); /* Для Firefox */
+            //-ms-transform: rotate(15deg); /* Для IE */
+            //-webkit-transform: rotate(15deg); /* Для Safari, Chrome, iOS */
+            //-o-transform: rotate(15deg); /* Для Opera */
+            //transform: rotate(15deg);
+            block.style.mozTransform = 'rotate(' + rotate.value + 'deg)';
+            block.style.msTransform = 'rotate(' + rotate.value + 'deg)';
+            block.style.webkitTransform = 'rotate(' + rotate.value + 'deg)';
+            block.style.oTransform = 'rotate(' + rotate.value + 'deg)';
+            block.style.transform = 'rotate(' + rotate.value + 'deg)';
+            nElement.rotate = rotate.value;
         };
 
         remove.onclick = function() {
@@ -92,6 +106,7 @@ var infoBlock = (function() {
         background = document.getElementById('element-background');
         zIndex = document.getElementById('element-zindex');
         opacity = document.getElementById('element-opacity');
+        rotate = document.getElementById('element-rotate');
         text = document.getElementById('element-text');
         textColor = document.getElementById('element-text-color');
 
@@ -104,6 +119,7 @@ var infoBlock = (function() {
         zIndex.value = block.style.zIndex;
         opacity.value = block.style.opacity;
         remove = document.getElementById('element-delete');
+        rotate.value = nElement.rotate;
         text.value = block.innerHTML;
         textColor.value = block.style.color;
 
