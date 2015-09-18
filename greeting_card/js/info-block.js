@@ -52,11 +52,6 @@ var infoBlock = (function() {
             nElement.opacity = opacity.value;
         };
         rotate.oninput = function() {
-            //-moz-transform: rotate(15deg); /* Для Firefox */
-            //-ms-transform: rotate(15deg); /* Для IE */
-            //-webkit-transform: rotate(15deg); /* Для Safari, Chrome, iOS */
-            //-o-transform: rotate(15deg); /* Для Opera */
-            //transform: rotate(15deg);
             block.style.mozTransform = 'rotate(' + rotate.value + 'deg)';
             block.style.msTransform = 'rotate(' + rotate.value + 'deg)';
             block.style.webkitTransform = 'rotate(' + rotate.value + 'deg)';
@@ -70,6 +65,7 @@ var infoBlock = (function() {
 
             if (confirm("Вы подтверждаете удаление?")) {
                 block.parentNode.removeChild(block);
+                deleteGlobalElementById(block.id);
             } else {
                 return false;
             }

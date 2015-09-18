@@ -125,5 +125,9 @@ function CreateElements() {
     this.getGlobalElements = function() {
         return elements;
     };
+
+    this.deleteGlobalElementById = function(id) {
+        delete(elements[id]);
+    }
 }
 
