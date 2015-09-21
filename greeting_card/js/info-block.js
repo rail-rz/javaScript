@@ -95,18 +95,21 @@ var infoBlock = (function() {
     function setting(element) {
         block = element;
         nElement = getGlobalElementById(element.id);
-        sizeButton = document.getElementById("bottom-right-button");
 
-        height = document.getElementById('element-size-height');
-        width = document.getElementById('element-size-width');
-        background = document.getElementById('element-background');
-        zIndex = document.getElementById('element-zindex');
-        opacity = document.getElementById('element-opacity');
-        rotate = document.getElementById('element-rotate');
-        text = document.getElementById('element-text');
-        textColor = document.getElementById('element-text-color');
+        if(!sizeButton) {
+            sizeButton = document.getElementById("bottom-right-button");
 
-        selectColor = document.getElementById('select-color');
+            height = document.getElementById('element-size-height');
+            width = document.getElementById('element-size-width');
+            background = document.getElementById('element-background');
+            zIndex = document.getElementById('element-zindex');
+            opacity = document.getElementById('element-opacity');
+            rotate = document.getElementById('element-rotate');
+            text = document.getElementById('element-text');
+            textColor = document.getElementById('element-text-color');
+            selectColor = document.getElementById('select-color');
+        }
+
         selectColor.style.display = 'none';
 
         height.value = block.offsetHeight;
