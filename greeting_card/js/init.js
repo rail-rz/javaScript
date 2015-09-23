@@ -38,11 +38,12 @@ function Init() {
                 "left":dragObjects[i].offsetLeft,
                 "height":dragObjects[i].offsetHeight,
                 "width":dragObjects[i].offsetWidth,
-                "background-color":dragObjects[i].backgroundColor,
+                "background_color":dragObjects[i].backgroundColor,
                 "text":dragObjects[i].innerHTML,
                 "text_color":dragObjects[i].color,
                 "opacity":dragObjects[i].opacity,
-                "z_index":dragObjects[i].zIndex
+                "z_index":dragObjects[i].zIndex,
+				"rotate":dragObjects[i].style.transform
             }
         }
     }
