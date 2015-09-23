@@ -34,6 +34,7 @@ function Init() {
             dragObjects[i].id = 'old-element-' + i;
             new DragObject(dragObjects[i]);
             nElements[dragObjects[i].id] = {
+				"type":dragObjects[i].tagName,
                 "top":dragObjects[i].offsetTop,
                 "left":dragObjects[i].offsetLeft,
                 "height":dragObjects[i].offsetHeight,

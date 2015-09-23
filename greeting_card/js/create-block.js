@@ -65,6 +65,7 @@ function CreateElements() {
         if(id == 2) {
             element = document.createElement('div');
             newElement = {
+				'type':'div',
                 'id':'element-'+counter,
                 'width': 100,
                 'height': 50,
@@ -79,6 +80,7 @@ function CreateElements() {
         } else if(id == 1) {
             element = document.createElement('div');
             newElement = {
+				'type':'div',
                 'id':'element-'+counter,
                 'width': 100,
                 'height': 50,
@@ -91,6 +93,7 @@ function CreateElements() {
         } else if( id == 3) {
             element = document.createElement('img');
             newElement = {
+				'type':'img',
                 'id':'element-'+counter,
                 'width': 100,
                 'height': 50
