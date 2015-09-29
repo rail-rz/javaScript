@@ -14,7 +14,7 @@ function playGame() {
 
     // отрисовывающая функуия
     drawingGame = function() {
-        gameCanvas.drawing();
+        //gameCanvas.drawing();
 
        	// обработка игровых элементов
 		for(var i = 0; i < elements.length; i++) {
@@ -49,12 +49,12 @@ function playGame() {
 	this.startGame = function() {
 		this.stopGame();
 		startParams = {
-			canvasParam: {  method:'image', path:'image/background.jpg', color:'grey', realWidth:Constant.canvasWidth(), realHeight:Constant.canvasHeight(), imageWidth:800, imageHeight:600},
+			//canvasParam: {  method:'image', path:'image/background.jpg', color:'grey', realWidth:Constant.canvasWidth(), realHeight:Constant.canvasHeight(), imageWidth:800, imageHeight:600},
 			otherElements: [
-				{ method:'rect', type:'build', health:100, color:'black', x:Constant.canvasWidth()/2 - 100/2, y:Constant.canvasWidth(),realHeight:100, realWidth:100, is_killed:0, is_crash:1, is_event:1}
+				{ method:'rect', type:'div', health:100, color:'red', x:Constant.canvasWidth()/2 - 100/2, y:Constant.canvasWidth(),realHeight:100, realWidth:100, is_killed:0, is_crash:1, is_event:1, speedX:1}
 			]
 		};
-		gameCanvas = factory.createElement(startParams.canvasParam);
+		//gameCanvas = factory.createElement(startParams.canvasParam);
 
 		elements = [];
 		for(var i = 0; i < startParams.otherElements.length; i++) {

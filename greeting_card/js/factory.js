@@ -3,38 +3,45 @@
  * @author rail_rz <zamaletdinov.rz@gmail.com>
  */
 function NPropertyForElements(params) {
-    this.type = params.type;
-    this.color = params.color;	// цвет прямоугольника
-    this.x = params.x || 0; // координата х
-    this.y = params.y || 0; // координата у
-    this.width = params.realWidth || 0; // ширина
-    this.height = params.realHeight || 0; // высота
-    this.speedX = params.speedX || 0; // скорость по X
-    this.speedY = params.speedY || 0; // скорость по Y
-    this.opacity = params.opacity || 1;
-    this.is_killed = params.is_killed || 0;
-    this.is_kill = params.is_kill || 0;
-    this.is_attack = params.is_attack || 0;
-    this.is_crash = params.is_crash || 0;
-    this.health = params.health || 1;
-    this.is_event = params.is_event || 0; // событие на элементе
-    this.timer = 0;
+    var newDiv = document.createElement(params.type);
+
+    //params.type;
+    newDiv.style.position = 'absolute';
+    newDiv.style.backgroundColor = params.color;	// цвет прямоугольника
+    newDiv.style.top = params.x + 'px'; // координата х
+    newDiv.style.left = params.y + 'px'; // координата у
+    newDiv.style.width = params.realWidth  + 'px'; // ширина
+    newDiv.style.height = params.realHeight + 'px'; // высота
+    newDiv.style.speedX = params.speedX || 0; // скорость по X
+    newDiv.style.speedY = params.speedY || 0; // скорость по Y
+    newDiv.style.opacity = params.opacity || 1;
+    newDiv.style.is_killed = params.is_killed || 0;
+    newDiv.style.is_kill = params.is_kill || 0;
+    newDiv.style.is_attack = params.is_attack || 0;
+    newDiv.style.is_crash = params.is_crash || 0;
+    newDiv.style.health = params.health || 1;
+    newDiv.style.is_event = params.is_event || 0; // событие на элементе
+    newDiv.style.timer = 0;
 
     this.update = function() {
-        this.x += this.speedX;
-        this.y += this.speedY;
+        console.log(1);
+        newDiv.style.top = this.x += this.speedX +'px';
+        newDiv.style.top += 'px';
+        newDiv.style.left = this.y += this.speedY;
+        newDiv.style.left += 'px';
     }
+    NElement.context.appendChild(newDiv);
 }
 
 var NElement = {
     // элемент прямоугольников
-    div: function(params) {
+    rect: function(params) {
         var property = new NPropertyForElements(params);
+
+
         // Метод рисующий прямоугольник
         property.drawing = function () {
-            NElement.context.fillStyle = this.color;
-            NElement.context.globalAlpha = this.opacity;
-            NElement.context.fillRect(this.x, this.y, this.width, this.height);
+
         };
         return property;
     },
@@ -92,7 +99,8 @@ function NElementFactory() {}
 NElementFactory.prototype = {
     constructor:NElementFactory,
     createElement:function(params) {
-        if( params.type in NElement ) {
+        //console.log(params.method);
+        if( params.method in NElement ) {
             return new NElement[params.method](params);
         } else {
             throw 'Невозможно создать элемент. Данного метода не существует';

@@ -5,17 +5,20 @@
 
 function init() {
     var Constants = new NConstant(),
-        canvas = document.getElementById('namga-game');
+        elements = document.getElementById('ngame');
+        //canvas = document.getElementById('namga-game');
 
     // инициализируем контекст для фабрики
-    NElement.context = canvas.getContext("2d");
-    canvas.style.width = Constants.canvasWidth() + 'px';
-    canvas.style.height = Constants.canvasHeight() + 'px';
-    canvas.style.top = canvas.offsetTop + 'px';
-    canvas.style.left = canvas.offsetLeft + 'px';
+
+    elements.style.width = Constants.canvasWidth() + 'px';
+    elements.style.height = Constants.canvasHeight() + 'px';
+    NElement.context = elements;
+
+    //canvas.style.top = canvas.offsetTop + 'px';
+    //canvas.style.left = canvas.offsetLeft + 'px';
     // задаем размеры и разрешение canvas
-    canvas.width = Constants.canvasWidth();
-    canvas.height = Constants.canvasHeight();
+    //canvas.width = Constants.canvasWidth();
+    //canvas.height = Constants.canvasHeight();
 
     // функции слушатили
 //  canvas.onmousemove = mouseMove;
@@ -25,5 +28,5 @@ function init() {
     playGame();
     // времнное решение
     startGame();
-    stopGame();
+    //stopGame();
 }
