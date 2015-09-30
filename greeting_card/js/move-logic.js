@@ -19,7 +19,7 @@ function playGame() {
        	// обработка игровых элементов
 		for(var i = 0; i < elements.length; i++) {
 			elements[i].update();
-			elements[i].drawing();
+			//elements[i].drawing();
 
 			// логика при столкновении с элементами
 			/*if(elements[i].is_crash ) {
@@ -51,7 +51,9 @@ function playGame() {
 		startParams = {
 			//canvasParam: {  method:'image', path:'image/background.jpg', color:'grey', realWidth:Constant.canvasWidth(), realHeight:Constant.canvasHeight(), imageWidth:800, imageHeight:600},
 			otherElements: [
-				{ method:'rect', type:'div', health:100, color:'red', x:Constant.canvasWidth()/2 - 100/2, y:Constant.canvasWidth(),realHeight:100, realWidth:100, is_killed:0, is_crash:1, is_event:1, speedX:1}
+				{ method:'rect', type:'div', color:'red', x:2, y:100, realWidth:100, realHeight:100, speedX:4},
+                { method:'rect', type:'div', color:'blue', x:500, y:0, realWidth:100, realHeight:100, speedY:4},
+                { method:'rect', type:'div', color:'green', x:0, y:0, realWidth:100, realHeight:100, speedY:5, speedX:5}
 			]
 		};
 		//gameCanvas = factory.createElement(startParams.canvasParam);

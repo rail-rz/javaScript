@@ -1,0 +1,14 @@
+#content {
+    position: absolute;
+    left: 100px;
+    top: 100px;
+    width: 800px;
+    height: 600px;
+    overflow: hidden;
+}
+#ngame {
+    /*left: 100px;*/
+    /*overflow: hidden;*/
+    /*    здесь абсолют, чтобы позволить передвигать все дивы;)*/
+    position: relative;
+}

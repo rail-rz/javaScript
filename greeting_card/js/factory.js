@@ -2,34 +2,45 @@
  * Фабрика для создания элементов div
  * @author rail_rz <zamaletdinov.rz@gmail.com>
  */
+
 function NPropertyForElements(params) {
     var newDiv = document.createElement(params.type);
+    var Constants = new NConstant();
 
     //params.type;
     newDiv.style.position = 'absolute';
     newDiv.style.backgroundColor = params.color;	// цвет прямоугольника
-    newDiv.style.top = params.x + 'px'; // координата х
-    newDiv.style.left = params.y + 'px'; // координата у
-    newDiv.style.width = params.realWidth  + 'px'; // ширина
-    newDiv.style.height = params.realHeight + 'px'; // высота
-    newDiv.style.speedX = params.speedX || 0; // скорость по X
-    newDiv.style.speedY = params.speedY || 0; // скорость по Y
+    this.x = params.x;
+    newDiv.style.left = this.x + 'px'; // координата х
+    this.y = params.y; // координата у
+    newDiv.style.top = this.y + 'px';
+    this.width = params.realWidth;
+    newDiv.style.width = this.width + 'px'; // ширина
+    this.height = params.realHeight;
+    newDiv.style.height = this.height + 'px'; // высота
+    this.speedX = params.speedX || 0; // скорость по X
+    this.speedY = params.speedY || 0; // скорость по Y
     newDiv.style.opacity = params.opacity || 1;
-    newDiv.style.is_killed = params.is_killed || 0;
-    newDiv.style.is_kill = params.is_kill || 0;
-    newDiv.style.is_attack = params.is_attack || 0;
-    newDiv.style.is_crash = params.is_crash || 0;
-    newDiv.style.health = params.health || 1;
-    newDiv.style.is_event = params.is_event || 0; // событие на элементе
-    newDiv.style.timer = 0;
+    //newDiv.style.is_killed = params.is_killed || 0;
+    //newDiv.style.is_kill = params.is_kill || 0;
+    //newDiv.style.is_attack = params.is_attack || 0;
+    //newDiv.style.is_crash = params.is_crash || 0;
+    //newDiv.style.health = params.health || 1;
+    //newDiv.style.is_event = params.is_event || 0; // событие на элементе
+    //newDiv.style.timer = 0;
 
     this.update = function() {
-        console.log(1);
-        newDiv.style.top = this.x += this.speedX +'px';
-        newDiv.style.top += 'px';
-        newDiv.style.left = this.y += this.speedY;
-        newDiv.style.left += 'px';
-    }
+        this.x += this.speedX;
+        if(this.x > Constants.canvasWidth()) {
+            this.x = 0 - this.width;
+        }
+        newDiv.style.left = this.x + 'px';
+        this.y += this.speedY;
+        if(this.y > Constants.canvasHeight()) {
+            this.y = 0 - this.height;
+        }
+        newDiv.style.top = this.y + 'px';
+    };
     NElement.context.appendChild(newDiv);
 }
 

@@ -37,6 +37,9 @@ fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td{
     border-right: 5px solid #191970;
     overflow: scroll;
 }
+#ngame {
+    overflow: hidden;
+}
 #elements-setting {
     width: 50%;
     float: left;
