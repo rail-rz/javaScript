@@ -4,56 +4,56 @@
  */
 
 function NPropertyForElements(params) {
-    var newDiv = document.createElement(params.type);
-    var Constants = new NConstant();
-
-    //params.type;
-    newDiv.style.position = 'absolute';
-    newDiv.style.backgroundColor = params.color;	// цвет прямоугольника
-    this.x = params.x;
-    newDiv.style.left = this.x + 'px'; // координата х
-    this.y = params.y; // координата у
-    newDiv.style.top = this.y + 'px';
-    this.width = params.realWidth;
-    newDiv.style.width = this.width + 'px'; // ширина
-    this.height = params.realHeight;
-    newDiv.style.height = this.height + 'px'; // высота
+    this.type   = params.type;
+    this.x      = params.x;
+    this.y      = params.y; // координата у
+    this.width  = params.width;
+    this.height = params.height;
     this.speedX = params.speedX || 0; // скорость по X
     this.speedY = params.speedY || 0; // скорость по Y
-    newDiv.style.opacity = params.opacity || 1;
-    //newDiv.style.is_killed = params.is_killed || 0;
-    //newDiv.style.is_kill = params.is_kill || 0;
-    //newDiv.style.is_attack = params.is_attack || 0;
-    //newDiv.style.is_crash = params.is_crash || 0;
-    //newDiv.style.health = params.health || 1;
-    //newDiv.style.is_event = params.is_event || 0; // событие на элементе
-    //newDiv.style.timer = 0;
 
-    this.update = function() {
-        this.x += this.speedX;
-        if(this.x > Constants.canvasWidth()) {
-            this.x = 0 - this.width;
-        }
-        newDiv.style.left = this.x + 'px';
-        this.y += this.speedY;
-        if(this.y > Constants.canvasHeight()) {
-            this.y = 0 - this.height;
-        }
-        newDiv.style.top = this.y + 'px';
-    };
-    NElement.context.appendChild(newDiv);
+    this.newElement = function() {
+        var nElement = document.createElement(this.type);
+
+        nElement.style.position = 'absolute';
+        nElement.style.left     = this.x + 'px'; // координата х
+        nElement.style.top      = this.y + 'px';
+        nElement.style.width    = this.width + 'px'; // ширина
+        nElement.style.height   = this.height + 'px'; // высота
+        nElement.style.opacity  = this.opacity || 1;
+
+        return nElement;
+    }
+
 }
 
 var NElement = {
     // элемент прямоугольников
     rect: function(params) {
-        var property = new NPropertyForElements(params);
+        var property  = new NPropertyForElements(params),
+            newDiv    = property.newElement(params),
+            Constants = new NConstant();
 
+        newDiv.style.backgroundColor = params.color;	// цвет прямоугольника
 
-        // Метод рисующий прямоугольник
-        property.drawing = function () {
-
+        property.update = function() {
+            this.x += this.speedX;
+            if(this.x > Constants.canvasWidth()) {
+                this.x = 0 - this.width;
+            } else if(this.x < -this.width) {
+                this.x = Constants.canvasWidth();
+            }
+            newDiv.style.left = this.x + 'px';
+            this.y += this.speedY;
+            if(this.y > Constants.canvasHeight()) {
+                this.y = 0 - this.height;
+            } else if(this.y < -this.height) {
+                this.y = Constants.canvasHeight();
+            }
+            newDiv.style.top = this.y + 'px';
         };
+        NElement.context.appendChild(newDiv);
+
         return property;
     },
     // анимированный спрайт
@@ -76,33 +76,37 @@ var NElement = {
                 params.currentFrameX ++;
             }
         };
+        //NElement.context.appendChild(newDiv);
+
         return property;
     },
     image:function(params) {
-        var property = new NPropertyForElements(params);
-        var image = new Image();
+        var property  = new NPropertyForElements(params),
+            image     = property.newElement(params),
+            Constants = new NConstant();
+
         image.src = params.path;
 
-        property.drawing = function() {
-            NElement.context.drawImage(image,this.x, this.y, params.imageWidth, params.imageHeight);
+        property.update = function() {
+            this.x += this.speedX;
+            if(this.x > Constants.canvasWidth()) {
+                this.x = 0 - this.width;
+            } else if(this.x < -this.width) {
+                this.x = Constants.canvasWidth();
+            }
+            image.style.left = this.x + 'px';
+            this.y += this.speedY;
+            if(this.y > Constants.canvasHeight()) {
+                this.y = 0 - this.height;
+            } else if(this.y < -this.height) {
+                this.y = Constants.canvasHeight();
+            }
+            image.style.top = this.y + 'px';
         };
-        return property;
-    },
-    text:function(params){
-        var property = new NPropertyForElements(params);
-        property.message = params.message;
-        property.name = '';
-        if(params.name ) {
-            property.name = params.name + ': '
-        }
-        property.drawing = function() {
-            NElement.context.font = "15pt Arial";
-            NElement.context.fillStyle = property.color;
-            NElement.context.fillText(property.name + property.message, property.x, property.y)
-        };
+        NElement.context.appendChild(image);
+
         return property;
     }
-
 };
 
 function NElementFactory() {}
