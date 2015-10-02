@@ -1,83 +1,51 @@
 /**
  * @author rail_rz <zamaletdinov.rz@gmail.com>
  */
+
+
 function Init() {
-	var canvas = document.getElementById("canvas");
-	var context = canvas.getContext("2d");
+    var params = {
+        width: 100,
+        height: 100,
+        frameX:4,
+        frameY:3,
+        currentFrameX:0,
+        currentFrameY:0
+    };
+    var nElement = document.getElementById('sprite');
+    nElement.style.backgroundImage = 'url(image/nlo.png)';
+    //nElement.style.backgroundSize = 'cover';
+    var bSizeX = params.width * params.frameX;
+    var bSizeY = params.height * params.frameY;
+    var stringSize = bSizeX + 'px ' + bSizeY + 'px';
+    nElement.style.backgroundSize = stringSize;
+    //nElement.style.backgroundColor = 'blue';
+    nElement.style.width = params.width + 'px';
+    nElement.style.height = params.height + 'px';
+    nElement.style.backgroundPosition = -100 + 'px ' + -100 +'px';
+    nElement.style.overflow = 'hidden';
 
-	var rect = new Element(0, 0, 10, 100);
-	rect.elementColor(context, 'blue');
-	rect.rectDrawing(context);
-
-//	var nlo = new Element(20, 0, 100, 100);
-//	nlo.imageDrawing(context, 'image/mod1.png');
-
-	var nlo = new Element(10, 10, 300, 300);
-	nlo.spriteDrawing(context, 'image/nlo.png');
+    start(params, nElement);
 }
 
-// создаем класс Element для отрисовки прямоугольников
-function Element(x, y, width, height) {
-	this.x = x; // координата х
-	this.y = y; // координата у
-	this.width = width; // ширина
-	this.height = height; // высота
-}
+function start(params, nElement) {
+    if (params.currentFrameX == (params.frameX - 1)) {
+        params.currentFrameX = 0;
+        if(params.currentFrameY == (params.frameY -1)) {
+            params.currentFrameY = 0;
+        } else {
+            params.currentFrameY ++;
+        }
+        nElement.style.backgroundPositionY = (-params.height * params.currentFrameY) +'px';
 
+    } else {
+        params.currentFrameX ++;
 
+    }
+    nElement.style.backgroundPositionX = (-params.width * params.currentFrameX) + 'px ';
 
-// Метод для отрисовки прямоугольников
-Element.prototype.rectDrawing = function (context) {
-	context.fillRect(this.x, this.y, this.width, this.height);
-}
-
-// метод для задания цвета элемента
-Element.prototype.elementColor = function (context, color) {
-	context.fillStyle = color;
-}
-
-Element.prototype.imageDrawing = function (context, way) {
-	var x = this.x;
-	var y = this.y;
-	var w = this.width;
-	var h = this.height;
-	var img = new Image();
-	img.src = way;
-	img.onload = function() {    // Событие onLoad, ждём момента пока загрузится изображение
-		context.drawImage(img, x,  y);  // Рисуем изображение от точки с координатами 0, 0
-	}
-}
-
-Element.prototype.spriteDrawing = function(context, way) {
-	var x = this.x;
-	var y = this.y;
-	var w = this.width;
-	var h = this.height;
-	var frames = 4;
-	var currentFrame = 0;
-
-	var img = new Image();
-	img.src = way;
-	img.onload = function() {
-		Element.prototype.spriteDrawingFPS(context, img, w, h, frames, currentFrame);
-	}
+    console.log(nElement.style.backgroundPosition);
+    setInterval(start(params, nElement), 1000/50);
 
 
 }
-
-Element.prototype.spriteDrawingFPS = function(context,img,  w, h, frames, currentFrame) {
-	context.clearRect(0, 0, w, h);
-	context.drawImage(img, 0, h * currentFrame, w, h, 0, 0, w, h);
-	if (currentFrame == frames) {
-		currentFrame = 0;
-	} else {
-		currentFrame++;
-	}
-	console.log(1);
-	Element.prototype.drawing();
-}
-
-Element.prototype.drawing = function(){
-	setInterval(Element.prototype.spriteDrawingFPS, 100);
-}
-//setInterval(Element.prototype.spriteDrawingFPS, 100);
