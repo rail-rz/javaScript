@@ -4,34 +4,41 @@
  */
 
 function NPropertyForElements(params) {
-    this.type   = params.type;
-    this.x      = params.x;
-    this.y      = params.y; // координата у
-    this.width  = params.width;
-    this.height = params.height;
-    this.speedX = params.speedX || 0; // скорость по X
-    this.speedY = params.speedY || 0; // скорость по Y
+    var  Constants = new NConstant();
+    // общие свойства объекта
+    this.type        = params.type;
+    this.x           = params.x;
+    this.y           = params.y; // координата у
+    this.width       = params.width;
+    this.height      = params.height;
+    this.rotate      = params.rotate || 0;
+    this.speedX      = params.speedX || 0; // скорость по X
+    this.speedY      = params.speedY || 0; // скорость по Y
+    this.speedRotate = params.speedRotate || 0;
 
-    this.newElement = function() {
-        var nElement = document.createElement(this.type);
+    // объявляем документ и добавляем ему свойства
+    this.nElement = document.createElement(this.type);
 
-        nElement.style.position = 'absolute';
-        nElement.style.left     = this.x + 'px'; // координата х
-        nElement.style.top      = this.y + 'px';
-        nElement.style.width    = this.width + 'px'; // ширина
-        nElement.style.height   = this.height + 'px'; // высота
-        nElement.style.opacity  = this.opacity || 1;
-
-        return nElement;
+    this.nElement.style.position = 'absolute';
+    this.nElement.style.left     = this.x + 'px'; // координата х
+    this.nElement.style.top      = this.y + 'px';
+    this.nElement.style.width    = this.width + 'px'; // ширина
+    this.nElement.style.height   = this.height + 'px'; // высота
+    this.nElement.style.opacity  = this.opacity || 1;
+    if(this.rotate != 0) {
+        this.nElement.style.mozTransform    = 'rotate(' + this.rotate + 'deg)';
+        this.nElement.style.msTransform     = 'rotate(' + this.rotate + 'deg)';
+        this.nElement.style.webkitTransform = 'rotate(' + this.rotate + 'deg)';
+        this.nElement.style.oTransform      = 'rotate(' + this.rotate + 'deg)';
+        this.nElement.style.transform       = 'rotate(' + this.rotate + 'deg)';
     }
-
 }
 
 var NElement = {
     // элемент прямоугольников
     rect: function(params) {
         var property  = new NPropertyForElements(params),
-            newDiv    = property.newElement(params),
+            newDiv    = property.nElement,
             Constants = new NConstant();
 
         newDiv.style.backgroundColor = params.color;	// цвет прямоугольника
@@ -51,6 +58,15 @@ var NElement = {
                 this.y = Constants.canvasHeight();
             }
             newDiv.style.top = this.y + 'px';
+
+            if(this.speedRotate != 0) {
+                this.rotate += this.speedRotate;
+                newDiv.style.mozTransform    = 'rotate(' + this.rotate + 'deg)';
+                newDiv.style.msTransform     = 'rotate(' + this.rotate + 'deg)';
+                newDiv.style.webkitTransform = 'rotate(' + this.rotate + 'deg)';
+                newDiv.style.oTransform      = 'rotate(' + this.rotate + 'deg)';
+                newDiv.style.transform       = 'rotate(' + this.rotate + 'deg)';
+            }
         };
         NElement.context.appendChild(newDiv);
 
@@ -59,7 +75,7 @@ var NElement = {
     // анимированный спрайт
     sprite: function(params) {
         var property  = new NPropertyForElements(params),
-            newDiv    = property.newElement(params),
+            newDiv    = property.nElement,
             Constants = new NConstant();
 
         newDiv.style.backgroundImage = 'url(' + params.path + ')';
@@ -99,6 +115,15 @@ var NElement = {
 
             }
             newDiv.style.backgroundPositionX = (-params.width * params.currentFrameX) + 'px ';
+
+            if(this.speedRotate != 0) {
+                this.rotate += this.speedRotate;
+                newDiv.style.mozTransform    = 'rotate(' + this.rotate + 'deg)';
+                newDiv.style.msTransform     = 'rotate(' + this.rotate + 'deg)';
+                newDiv.style.webkitTransform = 'rotate(' + this.rotate + 'deg)';
+                newDiv.style.oTransform      = 'rotate(' + this.rotate + 'deg)';
+                newDiv.style.transform       = 'rotate(' + this.rotate + 'deg)';
+            }
         };
 
         NElement.context.appendChild(newDiv);
@@ -107,10 +132,10 @@ var NElement = {
     },
     image:function(params) {
         var property  = new NPropertyForElements(params),
-            image     = property.newElement(params),
+            newDiv    = property.nElement,
             Constants = new NConstant();
 
-        image.src = params.path;
+        newDiv.src = params.path;
 
         property.update = function() {
             this.x += this.speedX;
@@ -119,16 +144,25 @@ var NElement = {
             } else if(this.x < -this.width) {
                 this.x = Constants.canvasWidth();
             }
-            image.style.left = this.x + 'px';
+            newDiv.style.left = this.x + 'px';
             this.y += this.speedY;
             if(this.y > Constants.canvasHeight()) {
                 this.y = 0 - this.height;
             } else if(this.y < -this.height) {
                 this.y = Constants.canvasHeight();
             }
-            image.style.top = this.y + 'px';
+            newDiv.style.top = this.y + 'px';
+
+            if(this.speedRotate != 0) {
+                this.rotate += this.speedRotate;
+                newDiv.style.mozTransform    = 'rotate(' + this.rotate + 'deg)';
+                newDiv.style.msTransform     = 'rotate(' + this.rotate + 'deg)';
+                newDiv.style.webkitTransform = 'rotate(' + this.rotate + 'deg)';
+                newDiv.style.oTransform      = 'rotate(' + this.rotate + 'deg)';
+                newDiv.style.transform       = 'rotate(' + this.rotate + 'deg)';
+            }
         };
-        NElement.context.appendChild(image);
+        NElement.context.appendChild(newDiv);
 
         return property;
     }

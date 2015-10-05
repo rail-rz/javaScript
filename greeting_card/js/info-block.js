@@ -17,7 +17,10 @@ var infoBlock = (function() {
         textColor,
         selectColor,
         nElement,
-        rotate
+        rotate,
+        speedX,
+        speedY,
+        speedRotate
     ;
     
     function updateBlock() {
@@ -58,6 +61,15 @@ var infoBlock = (function() {
             block.style.oTransform = 'rotate(' + rotate.value + 'deg)';
             block.style.transform = 'rotate(' + rotate.value + 'deg)';
             nElement.rotate = rotate.value;
+        };
+        speedX.oninput = function () {
+            nElement.speedX = speedX.value;
+        };
+        speedY.oninput = function () {
+            nElement.speedY = speedY.value;
+        };
+        speedRotate.oninput = function () {
+            nElement.speedRotate = speedRotate.value;
         };
 
         remove.onclick = function() {
@@ -107,6 +119,9 @@ var infoBlock = (function() {
             rotate = document.getElementById('element-rotate');
             text = document.getElementById('element-text');
             textColor = document.getElementById('element-text-color');
+            speedX      = document.getElementById('element-speed-x');
+            speedY      = document.getElementById('element-speed-y');
+            speedRotate = document.getElementById('element-speed-rotate');
             selectColor = document.getElementById('select-color');
         }
 
@@ -119,6 +134,9 @@ var infoBlock = (function() {
         opacity.value = block.style.opacity;
         remove = document.getElementById('element-delete');
         rotate.value = nElement.rotate;
+        speedX.value      = nElement.speedX;
+        speedY.value      = nElement.speedY;
+        speedRotate.value = nElement.speedRotate;
         text.value = block.innerHTML;
         textColor.value = block.style.color;
 
