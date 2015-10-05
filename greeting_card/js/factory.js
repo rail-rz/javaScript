@@ -58,25 +58,50 @@ var NElement = {
     },
     // анимированный спрайт
     sprite: function(params) {
-        var property = new NPropertyForElements(params);
-        var image = new Image();
-        image.src = params.path;
+        var property  = new NPropertyForElements(params),
+            newDiv    = property.newElement(params),
+            Constants = new NConstant();
 
-        property.drawing = function(){
-            NElement.context.drawImage(image, params.imageWidth * params.currentFrameX, params.imageHeight*params.currentFrameY , params.imageWidth, params.imageHeight, this.x, this.y, params.realWidth, params.realHeight);
+        newDiv.style.backgroundImage = 'url(' + params.path + ')';
+        property.bSizeX = params.width * params.frameX;
+        property.bSizeY = params.height * params.frameY;
 
-            if (params.currentFrameX == params.frameX) {
+        newDiv.style.backgroundSize = property.bSizeX + 'px ' + property.bSizeY + 'px';
+        newDiv.style.backgroundPosition = -property.bSizeX + 'px ' + -property.bSizeY +'px';
+
+        property.update = function() {
+            this.x += this.speedX;
+            if(this.x > Constants.canvasWidth()) {
+                this.x = 0 - this.width;
+            } else if(this.x < -this.width) {
+                this.x = Constants.canvasWidth();
+            }
+            newDiv.style.left = this.x + 'px';
+            this.y += this.speedY;
+            if(this.y > Constants.canvasHeight()) {
+                this.y = 0 - this.height;
+            } else if(this.y < -this.height) {
+                this.y = Constants.canvasHeight();
+            }
+            newDiv.style.top = this.y + 'px';
+
+            if (params.currentFrameX == (params.frameX - 1)) {
                 params.currentFrameX = 0;
-                if(params.currentFrameY == params.frameY) {
-                    params.currentFrameY =0;
+                if(params.currentFrameY == (params.frameY -1)) {
+                    params.currentFrameY = 0;
                 } else {
                     params.currentFrameY ++;
                 }
+                newDiv.style.backgroundPositionY = (-params.height * params.currentFrameY) +'px';
+
             } else {
                 params.currentFrameX ++;
+
             }
+            newDiv.style.backgroundPositionX = (-params.width * params.currentFrameX) + 'px ';
         };
-        //NElement.context.appendChild(newDiv);
+
+        NElement.context.appendChild(newDiv);
 
         return property;
     },

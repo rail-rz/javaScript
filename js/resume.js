@@ -5,8 +5,8 @@
 
 function Init() {
     var params = {
-        width: 100,
-        height: 100,
+        width: 600,
+        height: 600,
         frameX:4,
         frameY:3,
         currentFrameX:0,
@@ -17,13 +17,13 @@ function Init() {
     //nElement.style.backgroundSize = 'cover';
     var bSizeX = params.width * params.frameX;
     var bSizeY = params.height * params.frameY;
-    var stringSize = bSizeX + 'px ' + bSizeY + 'px';
+    var stringSize = (params.width * params.frameX) + 'px ' + (params.height * params.frameY) + 'px';
     nElement.style.backgroundSize = stringSize;
     //nElement.style.backgroundColor = 'blue';
     nElement.style.width = params.width + 'px';
     nElement.style.height = params.height + 'px';
-    nElement.style.backgroundPosition = -100 + 'px ' + -100 +'px';
-    nElement.style.overflow = 'hidden';
+    nElement.style.backgroundPosition = -bSizeX + 'px ' + -bSizeY +'px';
+    //nElement.style.overflow = 'hidden';
 
     start(params, nElement);
 }
@@ -44,8 +44,5 @@ function start(params, nElement) {
     }
     nElement.style.backgroundPositionX = (-params.width * params.currentFrameX) + 'px ';
 
-    console.log(nElement.style.backgroundPosition);
     setInterval(start(params, nElement), 1000/50);
-
-
 }

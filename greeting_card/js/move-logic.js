@@ -28,11 +28,11 @@ function playGame() {
 		startParams = {
 			//canvasParam: {  method:'image', path:'image/background.jpg', color:'grey', width:Constant.canvasWidth(), height:Constant.canvasHeight(), imageWidth:800, imageHeight:600},
 			otherElements: [
-				{ method:'rect', type:'div', color:'red', x:2, y:100, width:100, height:100, speedX:4},
-                { method:'rect', type:'div', color:'blue', x:500, y:0, width:100, height:100, speedY:4},
-                { method:'rect', type:'div', color:'green', x:0, y:0, width:100, height:100, speedY:5, speedX:5},
-                { method:'image', type:'img', path:'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQL82tckOtHxX4LwHGEFCJ1OxL2JcHWCrJ_FMF8La0FLFlqw-h2cgn2KyZj', x:50, y:50, width:100, height:100, speedY:-3, speedX:-2},
-                //{ method:'sprite', type:'div', path:'images/nlo.png', x:700, y:500, width:100, height:100, speedY:-3, speedX:-2}
+				{ method:'rect',   type:'div', color:'red', x:2, y:100, width:100, height:100, speedX:4},
+                { method:'rect',   type:'div', color:'blue', x:500, y:0, width:100, height:100, speedY:4},
+                { method:'rect',   type:'div', color:'green', x:0, y:0, width:100, height:100, speedY:5, speedX:5},
+                { method:'image',  type:'img', path:'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQL82tckOtHxX4LwHGEFCJ1OxL2JcHWCrJ_FMF8La0FLFlqw-h2cgn2KyZj', x:50, y:50, width:100, height:100, speedY:-3, speedX:-2},
+                { method:'sprite', type:'div', path:'images/nlo.png', x:700, y:500, width:100, height:100, speedY:-3, speedX:-2, frameX:4, frameY:3, currentFrameX:0,currentFrameY:0}
 			]
 		};
 		//gameCanvas = factory.createElement(startParams.canvasParam);
