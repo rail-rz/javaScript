@@ -19,6 +19,7 @@ function playGame() {
        	// обработка игровых элементов
 		for(var i = 0; i < elements.length; i++) {
 			elements[i].update();
+            elements[i].updateUnique();
 		}
 	};
 

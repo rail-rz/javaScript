@@ -32,7 +32,44 @@ function NPropertyForElements(params) {
         this.nElement.style.oTransform      = 'rotate(' + this.rotate + 'deg)';
         this.nElement.style.transform       = 'rotate(' + this.rotate + 'deg)';
     }
+
+    this.update = function() {
+        if(this.speedX != 0) {
+            this.x += this.speedX;
+            if(this.x > Constants.canvasWidth()) {
+                this.x = 0 - this.width;
+            } else if(this.x < -this.width) {
+                this.x = Constants.canvasWidth();
+            }
+            this.nElement.style.left = this.x + 'px';
+        }
+
+        if(this.speedY != 0) {
+            this.y += this.speedY;
+            if(this.y > Constants.canvasHeight()) {
+                this.y = 0 - this.height;
+            } else if(this.y < -this.height) {
+                this.y = Constants.canvasHeight();
+            }
+            this.nElement.style.top = this.y + 'px';
+        }
+
+        if(this.speedRotate != 0) {
+            this.rotate += this.speedRotate;
+            this.nElement.style.mozTransform    = 'rotate(' + this.rotate + 'deg)';
+            this.nElement.style.msTransform     = 'rotate(' + this.rotate + 'deg)';
+            this.nElement.style.webkitTransform = 'rotate(' + this.rotate + 'deg)';
+            this.nElement.style.oTransform      = 'rotate(' + this.rotate + 'deg)';
+            this.nElement.style.transform       = 'rotate(' + this.rotate + 'deg)';
+        }
+    };
+
+
 }
+
+NPropertyForElements.prototype.update = function() {
+
+};
 
 var NElement = {
     // элемент прямоугольников
@@ -43,30 +80,9 @@ var NElement = {
 
         newDiv.style.backgroundColor = params.color;	// цвет прямоугольника
 
-        property.update = function() {
-            this.x += this.speedX;
-            if(this.x > Constants.canvasWidth()) {
-                this.x = 0 - this.width;
-            } else if(this.x < -this.width) {
-                this.x = Constants.canvasWidth();
-            }
-            newDiv.style.left = this.x + 'px';
-            this.y += this.speedY;
-            if(this.y > Constants.canvasHeight()) {
-                this.y = 0 - this.height;
-            } else if(this.y < -this.height) {
-                this.y = Constants.canvasHeight();
-            }
-            newDiv.style.top = this.y + 'px';
-
-            if(this.speedRotate != 0) {
-                this.rotate += this.speedRotate;
-                newDiv.style.mozTransform    = 'rotate(' + this.rotate + 'deg)';
-                newDiv.style.msTransform     = 'rotate(' + this.rotate + 'deg)';
-                newDiv.style.webkitTransform = 'rotate(' + this.rotate + 'deg)';
-                newDiv.style.oTransform      = 'rotate(' + this.rotate + 'deg)';
-                newDiv.style.transform       = 'rotate(' + this.rotate + 'deg)';
-            }
+        property.updateUnique = function() {
+            // если нужны какие-то персональные изменения
+            // по обновлению, тебе сюда
         };
         NElement.context.appendChild(newDiv);
 
@@ -85,22 +101,7 @@ var NElement = {
         newDiv.style.backgroundSize = property.bSizeX + 'px ' + property.bSizeY + 'px';
         newDiv.style.backgroundPosition = -property.bSizeX + 'px ' + -property.bSizeY +'px';
 
-        property.update = function() {
-            this.x += this.speedX;
-            if(this.x > Constants.canvasWidth()) {
-                this.x = 0 - this.width;
-            } else if(this.x < -this.width) {
-                this.x = Constants.canvasWidth();
-            }
-            newDiv.style.left = this.x + 'px';
-            this.y += this.speedY;
-            if(this.y > Constants.canvasHeight()) {
-                this.y = 0 - this.height;
-            } else if(this.y < -this.height) {
-                this.y = Constants.canvasHeight();
-            }
-            newDiv.style.top = this.y + 'px';
-
+        property.updateUnique = function() {
             if (params.currentFrameX == (params.frameX - 1)) {
                 params.currentFrameX = 0;
                 if(params.currentFrameY == (params.frameY -1)) {
@@ -115,15 +116,6 @@ var NElement = {
 
             }
             newDiv.style.backgroundPositionX = (-params.width * params.currentFrameX) + 'px ';
-
-            if(this.speedRotate != 0) {
-                this.rotate += this.speedRotate;
-                newDiv.style.mozTransform    = 'rotate(' + this.rotate + 'deg)';
-                newDiv.style.msTransform     = 'rotate(' + this.rotate + 'deg)';
-                newDiv.style.webkitTransform = 'rotate(' + this.rotate + 'deg)';
-                newDiv.style.oTransform      = 'rotate(' + this.rotate + 'deg)';
-                newDiv.style.transform       = 'rotate(' + this.rotate + 'deg)';
-            }
         };
 
         NElement.context.appendChild(newDiv);
@@ -137,31 +129,11 @@ var NElement = {
 
         newDiv.src = params.path;
 
-        property.update = function() {
-            this.x += this.speedX;
-            if(this.x > Constants.canvasWidth()) {
-                this.x = 0 - this.width;
-            } else if(this.x < -this.width) {
-                this.x = Constants.canvasWidth();
-            }
-            newDiv.style.left = this.x + 'px';
-            this.y += this.speedY;
-            if(this.y > Constants.canvasHeight()) {
-                this.y = 0 - this.height;
-            } else if(this.y < -this.height) {
-                this.y = Constants.canvasHeight();
-            }
-            newDiv.style.top = this.y + 'px';
-
-            if(this.speedRotate != 0) {
-                this.rotate += this.speedRotate;
-                newDiv.style.mozTransform    = 'rotate(' + this.rotate + 'deg)';
-                newDiv.style.msTransform     = 'rotate(' + this.rotate + 'deg)';
-                newDiv.style.webkitTransform = 'rotate(' + this.rotate + 'deg)';
-                newDiv.style.oTransform      = 'rotate(' + this.rotate + 'deg)';
-                newDiv.style.transform       = 'rotate(' + this.rotate + 'deg)';
-            }
+        property.updateUnique = function() {
+            // если нужны какие-то персональные изменения
+            // по обновлению, тебе сюда
         };
+
         NElement.context.appendChild(newDiv);
 
         return property;
