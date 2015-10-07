@@ -7,8 +7,8 @@ function NPropertyForElements(params) {
     var  Constants = new NConstant();
     // общие свойства объекта
     this.type        = params.type;
-    this.x           = params.x;
-    this.y           = params.y; // координата у
+    this.left        = params.left;
+    this.top         = params.top; // координата у
     this.width       = params.width;
     this.height      = params.height;
     this.rotate      = params.rotate || 0;
@@ -20,8 +20,8 @@ function NPropertyForElements(params) {
     this.nElement = document.createElement(this.type);
 
     this.nElement.style.position = 'absolute';
-    this.nElement.style.left     = this.x + 'px'; // координата х
-    this.nElement.style.top      = this.y + 'px';
+    this.nElement.style.left     = this.left + 'px'; // координата х
+    this.nElement.style.top      = this.top + 'px';
     this.nElement.style.width    = this.width + 'px'; // ширина
     this.nElement.style.height   = this.height + 'px'; // высота
     this.nElement.style.opacity  = this.opacity || 1;
@@ -35,23 +35,23 @@ function NPropertyForElements(params) {
 
     this.update = function() {
         if(this.speedX != 0) {
-            this.x += this.speedX;
-            if(this.x > Constants.canvasWidth()) {
-                this.x = 0 - this.width;
-            } else if(this.x < -this.width) {
-                this.x = Constants.canvasWidth();
+            this.left += this.speedX;
+            if(this.left > Constants.canvasWidth()) {
+                this.left = 0 - this.width;
+            } else if(this.left < -this.width) {
+                this.left = Constants.canvasWidth();
             }
-            this.nElement.style.left = this.x + 'px';
+            this.nElement.style.left = this.left + 'px';
         }
 
         if(this.speedY != 0) {
-            this.y += this.speedY;
-            if(this.y > Constants.canvasHeight()) {
-                this.y = 0 - this.height;
-            } else if(this.y < -this.height) {
-                this.y = Constants.canvasHeight();
+            this.top += this.speedY;
+            if(this.top > Constants.canvasHeight()) {
+                this.top = 0 - this.height;
+            } else if(this.top < -this.height) {
+                this.top = Constants.canvasHeight();
             }
-            this.nElement.style.top = this.y + 'px';
+            this.nElement.style.top = this.top + 'px';
         }
 
         if(this.speedRotate != 0) {
@@ -74,9 +74,8 @@ NPropertyForElements.prototype.update = function() {
 var NElement = {
     // элемент прямоугольников
     rect: function(params) {
-        var property  = new NPropertyForElements(params),
-            newDiv    = property.nElement,
-            Constants = new NConstant();
+        var property = new NPropertyForElements(params),
+            newDiv   = property.nElement;
 
         newDiv.style.backgroundColor = params.color;	// цвет прямоугольника
 
@@ -90,9 +89,8 @@ var NElement = {
     },
     // анимированный спрайт
     sprite: function(params) {
-        var property  = new NPropertyForElements(params),
-            newDiv    = property.nElement,
-            Constants = new NConstant();
+        var property = new NPropertyForElements(params),
+            newDiv   = property.nElement;
 
         newDiv.style.backgroundImage = 'url(' + params.path + ')';
         property.bSizeX = params.width * params.frameX;
@@ -123,9 +121,8 @@ var NElement = {
         return property;
     },
     image:function(params) {
-        var property  = new NPropertyForElements(params),
-            newDiv    = property.nElement,
-            Constants = new NConstant();
+        var property = new NPropertyForElements(params),
+            newDiv   = property.nElement;
 
         newDiv.src = params.path;
 
