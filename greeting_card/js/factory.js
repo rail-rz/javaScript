@@ -4,7 +4,9 @@
  */
 
 function NPropertyForElements(params) {
-    var  Constants = new NConstant();
+    var Constants   = new NConstant(),
+        opacityFlag = 1
+        ;
     // общие свойства объекта
     this.type        = params.type;
     this.left        = params.left;
@@ -15,7 +17,17 @@ function NPropertyForElements(params) {
     this.speedX      = params.speedX || 0; // скорость по X
     this.speedY      = params.speedY || 0; // скорость по Y
     this.speedRotate = params.speedRotate || 0;
+    this.opacityMin  = params.opacityMin || 0;
+    this.opacityMax  = params.opacityMax || 0;
+    this.opacity     = params.opacity || 1;
 
+    if(this.opacityMin > 0) {
+        this.opacity = params.opacityMin + 0.01;
+
+    }
+
+
+    console.log(params.opacity );
     // объявляем документ и добавляем ему свойства
     this.nElement = document.createElement(this.type);
 
@@ -24,7 +36,7 @@ function NPropertyForElements(params) {
     this.nElement.style.top      = this.top + 'px';
     this.nElement.style.width    = this.width + 'px'; // ширина
     this.nElement.style.height   = this.height + 'px'; // высота
-    this.nElement.style.opacity  = this.opacity || 1;
+    this.nElement.style.opacity  = this.opacity;
     if(this.rotate != 0) {
         this.nElement.style.mozTransform    = 'rotate(' + this.rotate + 'deg)';
         this.nElement.style.msTransform     = 'rotate(' + this.rotate + 'deg)';
@@ -61,6 +73,19 @@ function NPropertyForElements(params) {
             this.nElement.style.webkitTransform = 'rotate(' + this.rotate + 'deg)';
             this.nElement.style.oTransform      = 'rotate(' + this.rotate + 'deg)';
             this.nElement.style.transform       = 'rotate(' + this.rotate + 'deg)';
+        }
+
+        if(this.opacityMin != this.opacityMax) {
+            if((this.opacity > this.opacityMax) || (this.opacity < this.opacityMin)) {
+                opacityFlag *= -1;
+            }
+            if(opacityFlag > 0) {
+                this.opacity += 0.01;
+            } else {
+                this.opacity -= 0.01;
+            }
+
+            this.nElement.style.opacity = this.opacity;
         }
     };
 
