@@ -8,18 +8,19 @@ function NPropertyForElements(params) {
         opacityFlag = 1
         ;
     // общие свойства объекта
-    this.type        = params.type;
-    this.left        = params.left;
-    this.top         = params.top; // координата у
-    this.width       = params.width;
-    this.height      = params.height;
-    this.rotate      = params.rotate || 0;
-    this.speedX      = params.speedX || 0; // скорость по X
-    this.speedY      = params.speedY || 0; // скорость по Y
-    this.speedRotate = params.speedRotate || 0;
-    this.opacityMin  = params.opacityMin || 0;
-    this.opacityMax  = params.opacityMax || 0;
-    this.opacity     = params.opacity || 1;
+    this.type         = params.type;
+    this.left         = params.left;
+    this.top          = params.top; // координата у
+    this.width        = params.width;
+    this.height       = params.height;
+    this.rotate       = params.rotate || 0;
+    this.speedX       = params.speedX || 0; // скорость по X
+    this.speedY       = params.speedY || 0; // скорость по Y
+    this.speedRotate  = params.speedRotate || 0;
+    this.opacity      = params.opacity || 1;
+    this.opacityMin   = params.opacityMin || 0;
+    this.opacityMax   = params.opacityMax || 0;
+    this.opacitySpeed = params.opacitySpeed || 0.01;
 
     if(this.opacityMin > 0) {
         this.opacity = params.opacityMin + 0.01;
@@ -80,9 +81,9 @@ function NPropertyForElements(params) {
                 opacityFlag *= -1;
             }
             if(opacityFlag > 0) {
-                this.opacity += 0.01;
+                this.opacity += this.opacitySpeed;
             } else {
-                this.opacity -= 0.01;
+                this.opacity -= this.opacitySpeed;
             }
 
             this.nElement.style.opacity = this.opacity;
