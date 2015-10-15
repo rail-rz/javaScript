@@ -69,12 +69,12 @@ function CreateElements() {
                 'id':'element-'+counter,
                 'width': 100,
                 'height': 50,
-                'background_color': 'green'
+                'background_color': '#16661c'
             };
             element.id = 'element-'+counter;
             element.style.width = '100px';
             element.style.height = '50px';
-            element.style.backgroundColor = 'green';
+            element.style.backgroundColor = '#16661c';
             element.className = 'circule-element';
 
         } else if(id == 1) {
@@ -84,12 +84,12 @@ function CreateElements() {
                 'id':'element-'+counter,
                 'width': 100,
                 'height': 50,
-                'background_color': 'red'
+                'background_color': '#f81414'
             };
             element.id = 'element-'+counter;
             element.style.width = '100px';
             element.style.height = '50px';
-            element.style.backgroundColor = 'red';
+            element.style.backgroundColor = '#f81414';
         } else if( id == 3) {
             element = document.createElement('img');
             newElement = {
