@@ -164,10 +164,7 @@ var infoBlock = (function() {
 
         updateBlock();
     }
-    
 
-    
-    
     return {
         getInfo: function(element){
             setting(element);
