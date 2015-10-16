@@ -74,3 +74,22 @@ fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td{
 .transChooser {
     background: transparent url(images/helpers/transChooser.gif);
 }
+#number-line {
+
+}
+.number-line-top-left {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.number-line-top div {
+    position: absolute;
+    top: 0;
+    border-left: 1px #000000 solid;
+    /*border: #000000;*/
+}
+.number-line-left div {
+    position: absolute;
+    left: 0;
+    border-top: 1px #000000 solid;
+}
