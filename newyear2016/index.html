@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>NGame</title>
+	<link rel="stylesheet" href="css/main.css" type="text/css">
+	<script src="js/init.js"></script>
+	<script src="js/constant.js"></script>
+	<script src="js/listeners.js"></script>
+    <script src="js/elements.js"></script>
+    <script src="js/gameLogic.js"></script>
+    <script src="js/crashMethods.js"></script>
+</head>
+
+<body style="height: 100%; background-color: black" onload="init()">
+<div id="content">
+    <div class="ngame">
+        <canvas id="namga-game"></canvas>
+    </div>
+	<div id="ngame-menu">
+		<p id="ngame-score"></p>
+
+		<p id="ngame-start"><a onclick="startGame()">Start</a></p>
+		<p id="ngame-continue"><a onclick="continueGame()">Continue</a></p>
+		<p>
+			<audio controls autoplay preload>
+				<source src="audio/jingle_bells.mp3" type="audio/mpeg">
+				Тег audio не поддерживается вашим браузером.
+			</audio>
+		</p>
+		<!--<p id="ngame-stop"><a onclick="stopGame()">Stop</a></p>-->
+	</div>
+</div>
+</body>
+
+</html>
