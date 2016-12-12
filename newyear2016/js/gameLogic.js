@@ -240,7 +240,7 @@ function playGame() {
 	this.startGame = function() {
 		this.stopGame();
 		startParams = {
-			canvasParam: {  method:'image', path:'image/back_new.png', color:'grey', realWidth:Constant.canvasWidth(), realHeight:Constant.canvasHeight(), imageWidth:800, imageHeight:600},
+			canvasParam: { method:'image', path:'image/background.png', color:'grey', realWidth:Constant.canvasWidth(), realHeight:Constant.canvasHeight(), imageWidth:800, imageHeight:600},
 			playerParams: { method:'rect', type:'player', health:10, color:'red', x:Constant.canvasWidth()/2, y:0, realWidth:40, realHeight:40, speedX:5, speedY:10},
 			otherElements: [
 				{ method:'rect', type:'build', color:'grey', y:Constant.canvasHeight(), realHeight:25, realWidth:Constant.canvasWidth(), is_killed:0, is_crash:1, is_event:1, name:'block-0' },
@@ -281,6 +281,7 @@ function playGame() {
 		elements = [];
 		for(var i = 0; i < startParams.otherElements.length; i++) {
 			elements[i] = factory.createElement(startParams.otherElements[i]);
+			elements[i].opacity = 0;
 		}
 		bots = [];
 		for(var j = 0; j < startParams.bots.length; j++) {
