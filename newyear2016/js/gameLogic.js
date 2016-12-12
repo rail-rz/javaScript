@@ -288,7 +288,7 @@ function playGame() {
 			bots[j] = factory.createElement(startParams.bots[j]);
 			bots[j].restartWay = true;
 		}
-		setIntervalId = setInterval(drawingGame, 1000 / 60);
+		setIntervalId = setInterval(drawingGame, 1000 / 50);
 		menu.style.display = 'none';
 
 		return true;
@@ -299,7 +299,7 @@ function playGame() {
 		if(player.health <= 1) {
 			this.startGame();
 		} else {
-			setIntervalId = setInterval(drawingGame,  1000 / 60);
+			setIntervalId = setInterval(drawingGame,  1000 / 50);
 			menu.style.display = 'none';
 			return true;
 		}
