@@ -29,7 +29,9 @@ function playGame() {
 		crash,
 		stratTime,
 		endTime,
-		bots
+		bots,
+		toys,
+		eventsBlogs
 		;
 
     // отрисовывающая функуия
@@ -105,8 +107,9 @@ function playGame() {
 				}
 			}
 			crash = penetration(player, bots[j]);
-			if(crash) {
+			if(crash && player.shieldTimer > 100) {
 				--player.health;
+				player.shieldTimer = 0;
 			}
 
 			// столкновение ботов с строениями
@@ -182,6 +185,39 @@ function playGame() {
 			}
 		}
 
+		for(var z = 0; z < toys.length; z++) {
+			toys[z].drawing();
+			if(player.bag.length == 0 && toys[z].is_up && penetration(player, toys[z])) {
+				if(keysMap[70]) {
+					player.bag[0] = toys[z];
+					toys.splice(z, 1);
+				}
+			}
+		}
+
+		if(player.bag.length > 0){
+			for(var a = 0; a < eventsBlogs.length; a++) {
+				eventsBlogs[a].drawing();
+				if(keysMap[70] && penetration(player, eventsBlogs[a])) {
+					player.bag[0].x = eventsBlogs[a].x + eventsBlogs[a].width/2 - player.bag[0].width/2;
+					player.bag[0].y = eventsBlogs[a].y + eventsBlogs[a].height;
+					player.bag[0].is_up = false;
+					toys.push(player.bag[0]);
+					player.bag.splice(0, 1);
+					eventsBlogs.splice(a,1);
+				}
+			}
+		}
+
+		// щит игрока
+		++player.shieldTimer;
+		if(player.shieldTimer <= 100) {
+			player.opacity = 0.6;
+		}
+		else {
+			player.opacity = 1;
+		}
+
 		healthInfo.message = player.health;
 		endTime = new Date().getTime();
 	};
@@ -197,7 +233,6 @@ function playGame() {
 			player.x -= player.speedX;
 		}
 
-
 		if(keysMap[32]) {
 			if( player.startJump < 9) {
 				if(player.canJump) {
@@ -205,19 +240,11 @@ function playGame() {
 				}
 				player.startJump += 1;
 			}
-			//else
-			//{
-			//	player.startJump = 20;
-			//}
 		} else {
 			player.startJump = 0;
 			player.canJump = false;
 		}
 
-		if(keysMap[83]) {
-			console.log(endTime, new Date().getTime());
-			console.log(new Date().getTime() - stratTime);
-		}
 		player.y += 10;
 	};
 
@@ -241,10 +268,10 @@ function playGame() {
 		this.stopGame();
 		startParams = {
 			canvasParam: { method:'image', path:'image/background.png', color:'grey', realWidth:Constant.canvasWidth(), realHeight:Constant.canvasHeight(), imageWidth:800, imageHeight:600},
-			playerParams: { method:'rect', type:'player', health:10, color:'red', x:Constant.canvasWidth()/2, y:0, realWidth:40, realHeight:40, speedX:5, speedY:10},
+			playerParams: { method:'rect', type:'player', health:10, color:'red', x:Constant.canvasWidth()/2, y:70, realWidth:40, realHeight:40, speedX:5, speedY:10, opacity:1},
 			otherElements: [
 				{ method:'rect', type:'build', color:'grey', y:Constant.canvasHeight(), realHeight:25, realWidth:Constant.canvasWidth(), is_killed:0, is_crash:1, is_event:1, name:'block-0' },
-				{ method: "rect", color: "#f81414",  realHeight: 65, x: 222, y: 508, realWidth: 80,  is_crash:1, name:'block-1' },
+				{ method: "rect", color: "#f81414",  realHeight: 65, x: 215, y: 508, realWidth: 80,  is_crash:1, name:'block-1' },
 				{ method: "rect", color: "#f81414",  realHeight: 65, x: 495, y: 508, realWidth: 80,  is_crash:1, name:'block-2' },
 				{ method: "rect", color: "#f81414",  realHeight: 3,  x: 357, y: 460, realWidth: 70,  is_crash:1, name:'block-3' },
 				{ method: "rect", color: "#f81414",  realHeight: 3,  x: 63,  y: 443, realWidth: 138, is_crash:1, name:'block-4' },
@@ -265,16 +292,37 @@ function playGame() {
 
 			],
 			bots : [
-				{ method:'rect', type:'bot',   color:'blue', x:0, y:550, realWidth:40, realHeight:40, speedX:3, speedY:5, is_crash:1, is_kill:1},
-				{ method:'rect', type:'bot',   color:'blue', x:720, y:550, realWidth:40, realHeight:40, speedX:-3, speedY:5, is_crash:1, is_kill:1}
-				// { method:'rect', type:'bot',   color:'green', x:380, y:550, realWidth:40, realHeight:40, speedX:4, speedY:4, is_crash:1, is_kill:1}
+				{ method:'rect', type:'bot', color:'blue', x:0, y:550, realWidth:40, realHeight:40, speedX:3, speedY:5, is_crash:1, is_kill:1},
+				{ method:'rect', type:'bot', color:'green', x:720, y:550, realWidth:40, realHeight:40, speedX:-3, speedY:5, is_crash:1, is_kill:1},
+				{ method:'rect', type:'bot',   color:'green', x:350, y:550, realWidth:40, realHeight:40, speedX:2, speedY:9, is_crash:1, is_kill:1}
+			],
+			toys: [
+				{ method:'rect', type:'toy', color:'green',  x:0, y:550, realWidth:30, realHeight:30 },
+				{ method:"rect", type:'toy', color:'blue',   x:50, y:550, realWidth:30, realHeight:30 },
+				{ method:'rect', type:'toy', color:'red',    x:100, y:550, realWidth:30, realHeight:30 },
+				{ method:'rect', type:'toy', color:'grey',   x:150, y:550, realWidth:30, realHeight:30 },
+				{ method:'rect', type:'toy', color:'orange', x:620, y:550, realWidth:30, realHeight:30 },
+				{ method:"rect", type:'toy', color:'purple', x:670, y:550, realWidth:30, realHeight:30 },
+				{ method:'rect', type:'toy', color:'pink',   x:720, y:550, realWidth:30, realHeight:30 },
+				{ method:'rect', type:'toy', color:'black',  x:770, y:550, realWidth:30, realHeight:30 }
+			],
+			eventsBlogs: [
+				{method:'rect', color:'white',realWidth:40, realHeight:40, x: 700, y: 410, opacity:0.5},
+				{method:'rect', color:'white',realWidth:40, realHeight:40, x: 367, y: 423, opacity:0.5},
+				{method:'rect', color:'white',realWidth:40, realHeight:40, x: 261, y: 378, opacity:0.5},
+				{method:'rect', color:'white',realWidth:40, realHeight:40, x: 109, y: 310, opacity:0.5},
+				{method:'rect', color:'white',realWidth:40, realHeight:40, x: 530, y: 314, opacity:0.5},
+				{method:'rect', color:'white',realWidth:40, realHeight:40, x: 570, y: 205, opacity:0.5},
+				{method:'rect', color:'white',realWidth:40, realHeight:40, x: 385, y: 170, opacity:0.5},
+				{method:'rect', color:'white',realWidth:40, realHeight:40, x: 269, y: 130, opacity:0.5}
+
+				// {method:'rect', type:'event', color:'white',realWidth:60, realHeight:60, x: 680, y: 390, opacity:0.5}
 			],
 			scoreParams: {method:'text', message:0, name:"score", x:25, y:35, color:'white'},
 			healthInfoParams: {method:'text', message:0, name:"health", x:25, y:60, color:'white'}
 		};
 		gameCanvas = factory.createElement(startParams.canvasParam);
-		player = factory.createElement(startParams.playerParams);
-		player.startJump = 0;
+
 		score = factory.createElement(startParams.scoreParams);
 		healthInfo = factory.createElement(startParams.healthInfoParams);
 
@@ -288,6 +336,19 @@ function playGame() {
 			bots[j] = factory.createElement(startParams.bots[j]);
 			bots[j].restartWay = true;
 		}
+		toys = [];
+		for(var z = 0; z < startParams.toys.length; z++) {
+			toys[z] = factory.createElement(startParams.toys[z]);
+			toys[z].is_up = true;
+		}
+		eventsBlogs = [];
+		for(var a = 0; a < startParams.eventsBlogs.length; a++) {
+			eventsBlogs[a] = factory.createElement(startParams.eventsBlogs[a]);
+		}
+		player = factory.createElement(startParams.playerParams);
+		player.startJump = 0;
+		player.shieldTimer = 0;
+		player.bag = [];
 		setIntervalId = setInterval(drawingGame, 1000 / 50);
 		menu.style.display = 'none';
 
