@@ -6,18 +6,6 @@
 function playGame() {
 	var setIntervalId = null,
 		Constant = new NConstant(),
-		randomBotParams = {
-			method:'rect',
-			color:[ 'red', 'green', 'blue', 'darkBlue', 'black', 'grey', 'orange', 'yellow'],
-			x:[ 0, (Constant.canvasWidth()-10)],
-			y:Constant.canvasHeight()-40,
-			realWidth:10,
-			realHeight:20,
-			speedX:[ 1, 2, 3, 4],
-			speedY:9.8,
-			is_attack:[0,1],
-			is_killed: 1
-		},
 		factory = new NElementFactory(),
 		menu = document.getElementById('ngame-menu'),
 		gameCanvas,
@@ -69,24 +57,47 @@ function playGame() {
 						if(crash.direction.y < 0) {
 							player.y -= crash.y;
 							player.canJump = true;
-						} else if(crash.direction.y > 0) {
+						}
+						// else if(crash.direction.y > 0) {
 							// вот тут возможно перепрыгнуть снизу на вверх
 							//player.y += crash.y;
-						}
+						// }
 					}
 				}
 			}
+		}
 
-			// столкновение ботов со стенами
-			if(WallController( gameCanvas, elements[i] )) {
-				if(elements[i].x < 0 || elements[i].x + elements[i].width > gameCanvas.width) {
-						elements[i].speedX = -elements[i].speedX;
+		for(var z = 0; z < toys.length; z++) {
+			toys[z].drawing();
+			if(player.bag.length == 0 && toys[z].is_up && penetration(player, toys[z])) {
+				if(keysMap[70]) {
+					player.bag[0] = toys[z];
+					toys.splice(z, 1);
+				}
+			}
+		}
+
+		if(player.bag.length > 0){
+			for(var a = 0; a < eventsBlogs.length; a++) {
+				eventsBlogs[a].drawing();
+				if(keysMap[70] && penetration(player, eventsBlogs[a])) {
+					player.bag[0].x = eventsBlogs[a].x + eventsBlogs[a].width/2 - player.bag[0].width/2;
+					player.bag[0].y = eventsBlogs[a].y + eventsBlogs[a].height;
+					if(toys.length == 8) {
+						player.bag[0].x = 390;
+						player.bag[0].y = 0;
 					}
-					if(elements[i].y <0 ) {
-						elements[i].y = 0;
-					} else if(elements[i].y + elements[i].height > gameCanvas.height) {
-						elements[i].y = gameCanvas.height - elements[i].height;
+					player.bag[0].is_up = false;
+					toys.push(player.bag[0]);
+					player.bag.splice(0, 1);
+					eventsBlogs.splice(a,1);
+					if(eventsBlogs.length == 0 && toys.length < 9) {
+						var toy = factory.createElement({ method:'rect', type:'toy', color:'white',  x:385 , y:520, realWidth:30, realHeight:60 });
+						toy.is_up = true;
+						toys.push(toy);
+						eventsBlogs.push(factory.createElement({method:'rect', color:'white',realWidth:30, realHeight:60, x:385, y: 50, opacity:0.5}));
 					}
+				}
 			}
 		}
 
@@ -106,6 +117,7 @@ function playGame() {
 					bots[j].y = gameCanvas.height - bots[j].height;
 				}
 			}
+
 			crash = penetration(player, bots[j]);
 			if(crash && player.shieldTimer > 100) {
 				--player.health;
@@ -185,29 +197,6 @@ function playGame() {
 			}
 		}
 
-		for(var z = 0; z < toys.length; z++) {
-			toys[z].drawing();
-			if(player.bag.length == 0 && toys[z].is_up && penetration(player, toys[z])) {
-				if(keysMap[70]) {
-					player.bag[0] = toys[z];
-					toys.splice(z, 1);
-				}
-			}
-		}
-
-		if(player.bag.length > 0){
-			for(var a = 0; a < eventsBlogs.length; a++) {
-				eventsBlogs[a].drawing();
-				if(keysMap[70] && penetration(player, eventsBlogs[a])) {
-					player.bag[0].x = eventsBlogs[a].x + eventsBlogs[a].width/2 - player.bag[0].width/2;
-					player.bag[0].y = eventsBlogs[a].y + eventsBlogs[a].height;
-					player.bag[0].is_up = false;
-					toys.push(player.bag[0]);
-					player.bag.splice(0, 1);
-					eventsBlogs.splice(a,1);
-				}
-			}
-		}
 
 		// щит игрока
 		++player.shieldTimer;
@@ -216,6 +205,14 @@ function playGame() {
 		}
 		else {
 			player.opacity = 1;
+		}
+
+		if(player.health <= 0) {
+			score.message = "Sorry, you die and don't save Christmass!";
+			stopGame();
+		} else if(toys.length == 9 && eventsBlogs.length == 0) {
+			score.message = "Cool! You save The Christmass";
+			stopGame();
 		}
 
 		healthInfo.message = player.health;
@@ -268,9 +265,9 @@ function playGame() {
 		this.stopGame();
 		startParams = {
 			canvasParam: { method:'image', path:'image/background.png', color:'grey', realWidth:Constant.canvasWidth(), realHeight:Constant.canvasHeight(), imageWidth:800, imageHeight:600},
-			playerParams: { method:'rect', type:'player', health:10, color:'red', x:Constant.canvasWidth()/2, y:70, realWidth:40, realHeight:40, speedX:5, speedY:10, opacity:1},
+			playerParams: { method:'rect', type:'player', health:3, color:'red', x:Constant.canvasWidth()/2, y:70, realWidth:40, realHeight:40, speedX:5, speedY:10, opacity:1},
 			otherElements: [
-				{ method:'rect', type:'build', color:'grey', y:Constant.canvasHeight(), realHeight:25, realWidth:Constant.canvasWidth(), is_killed:0, is_crash:1, is_event:1, name:'block-0' },
+				{ method:'rect', type:'build', color:'grey', y:Constant.canvasHeight() - 25, realHeight:25, realWidth:Constant.canvasWidth(), is_killed:0, is_crash:1, is_event:1, name:'block-0' },
 				{ method: "rect", color: "#f81414",  realHeight: 65, x: 215, y: 508, realWidth: 80,  is_crash:1, name:'block-1' },
 				{ method: "rect", color: "#f81414",  realHeight: 65, x: 495, y: 508, realWidth: 80,  is_crash:1, name:'block-2' },
 				{ method: "rect", color: "#f81414",  realHeight: 3,  x: 357, y: 460, realWidth: 70,  is_crash:1, name:'block-3' },
@@ -289,7 +286,6 @@ function playGame() {
 				{ method: "rect", color: "#f81414",  realHeight: 3,  x: 476, y: 182, realWidth: 60,  is_crash:1, name:'block-16' },
 				{ method: "rect", color: "#f81414",  realHeight: 3,  x: 289, y: 167, realWidth: 67,  is_crash:1, name:'block-17' },
 				{ method: "rect", color: "#f81414",  realHeight: 3,  x: 378, y: 111, realWidth: 67,  is_crash:1, name:'block-18' }
-
 			],
 			bots : [
 				{ method:'rect', type:'bot', color:'blue', x:0, y:550, realWidth:40, realHeight:40, speedX:3, speedY:5, is_crash:1, is_kill:1},
@@ -307,18 +303,16 @@ function playGame() {
 				{ method:'rect', type:'toy', color:'black',  x:770, y:550, realWidth:30, realHeight:30 }
 			],
 			eventsBlogs: [
-				{method:'rect', color:'white',realWidth:40, realHeight:40, x: 700, y: 410, opacity:0.5},
-				{method:'rect', color:'white',realWidth:40, realHeight:40, x: 367, y: 423, opacity:0.5},
-				{method:'rect', color:'white',realWidth:40, realHeight:40, x: 261, y: 378, opacity:0.5},
-				{method:'rect', color:'white',realWidth:40, realHeight:40, x: 109, y: 310, opacity:0.5},
-				{method:'rect', color:'white',realWidth:40, realHeight:40, x: 530, y: 314, opacity:0.5},
-				{method:'rect', color:'white',realWidth:40, realHeight:40, x: 570, y: 205, opacity:0.5},
-				{method:'rect', color:'white',realWidth:40, realHeight:40, x: 385, y: 170, opacity:0.5},
-				{method:'rect', color:'white',realWidth:40, realHeight:40, x: 269, y: 130, opacity:0.5}
-
-				// {method:'rect', type:'event', color:'white',realWidth:60, realHeight:60, x: 680, y: 390, opacity:0.5}
+				{method:'rect', color:'white',realWidth:40, realHeight:40, x: 700, y: 410},
+				{method:'rect', color:'white',realWidth:40, realHeight:40, x: 367, y: 423},
+				{method:'rect', color:'white',realWidth:40, realHeight:40, x: 261, y: 378},
+				{method:'rect', color:'white',realWidth:40, realHeight:40, x: 109, y: 310},
+				{method:'rect', color:'white',realWidth:40, realHeight:40, x: 530, y: 314},
+				{method:'rect', color:'white',realWidth:40, realHeight:40, x: 570, y: 205},
+				{method:'rect', color:'white',realWidth:40, realHeight:40, x: 385, y: 170},
+				{method:'rect', color:'white',realWidth:40, realHeight:40, x: 269, y: 130}
 			],
-			scoreParams: {method:'text', message:0, name:"score", x:25, y:35, color:'white'},
+			scoreParams: {method:'text', message:'', name:"score", x:25, y:35, color:'white'},
 			healthInfoParams: {method:'text', message:0, name:"health", x:25, y:60, color:'white'}
 		};
 		gameCanvas = factory.createElement(startParams.canvasParam);
@@ -344,6 +338,7 @@ function playGame() {
 		eventsBlogs = [];
 		for(var a = 0; a < startParams.eventsBlogs.length; a++) {
 			eventsBlogs[a] = factory.createElement(startParams.eventsBlogs[a]);
+			eventsBlogs[a].opacity = 0.2;
 		}
 		player = factory.createElement(startParams.playerParams);
 		player.startJump = 0;
@@ -369,7 +364,7 @@ function playGame() {
 	this.stopGame = function() {
 		menu.style.display = 'block';
 		if(score) {
-			menu.childNodes[1].innerHTML = "Score: " + score.message;
+			menu.childNodes[1].innerHTML = score.message;
 		}
 		if(setIntervalId != null ) {
 			clearInterval(setIntervalId);
