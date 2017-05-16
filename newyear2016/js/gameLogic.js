@@ -208,10 +208,10 @@ function playGame() {
 		}
 
 		if(player.health <= 0) {
-			score.message = "Sorry, you die and don't save Christmass!";
+			score.message = "Fail!";
 			stopGame();
 		} else if(toys.length == 9 && eventsBlogs.length == 0) {
-			score.message = "Cool! You save The Christmass";
+			score.message = "Cool!";
 			stopGame();
 		}
 
