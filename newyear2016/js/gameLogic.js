@@ -225,11 +225,13 @@ function playGame() {
 		}
 		if(keysMap[68]) {
 			player.x += player.speedX;
+			player.animation();
 		}
 		if(keysMap[65]) {
 			player.x -= player.speedX;
-		}
+			player.animation();
 
+		}
 		if(keysMap[32]) {
 			if( player.startJump < 9) {
 				if(player.canJump) {
@@ -265,7 +267,7 @@ function playGame() {
 		this.stopGame();
 		startParams = {
 			canvasParam: { method:'image', path:'image/background.png', color:'grey', realWidth:Constant.canvasWidth(), realHeight:Constant.canvasHeight(), imageWidth:800, imageHeight:600},
-			playerParams: { method:'rect', type:'player', health:3, color:'red', x:Constant.canvasWidth()/2, y:70, realWidth:40, realHeight:40, speedX:5, speedY:10, opacity:1},
+			playerParams: { method:'sprite', path:'image/pers.png', type:'player', health:3, color:'red', x:Constant.canvasWidth()/2, y:70, speedX:5, speedY:10, frameX:4, frameY:0, currentFrameX:0, currentFrameY:0,imageWidth:40, imageHeight:40, realWidth:40, realHeight:40, opacity:1},
 			otherElements: [
 				{ method:'rect', type:'build', color:'grey', y:Constant.canvasHeight() - 25, realHeight:25, realWidth:Constant.canvasWidth(), is_killed:0, is_crash:1, is_event:1, name:'block-0' },
 				{ method: "rect", color: "#f81414",  realHeight: 65, x: 215, y: 508, realWidth: 80,  is_crash:1, name:'block-1' },

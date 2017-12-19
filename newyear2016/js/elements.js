@@ -49,7 +49,8 @@ var NElement = {
 		property.drawing = function(){
 			NElement.context.globalAlpha = this.opacity;
 			NElement.context.drawImage(image, params.imageWidth * params.currentFrameX, params.imageHeight*params.currentFrameY , params.imageWidth, params.imageHeight, this.x, this.y, params.realWidth, params.realHeight);
-
+		};
+		property.animation = function () {
 			if (params.currentFrameX == params.frameX) {
 				params.currentFrameX = 0;
 				if(params.currentFrameY == params.frameY) {
