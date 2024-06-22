@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wall Wizard</title>
+    <link rel="stylesheet" href="styles.css">
+<style>
+ body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.grid {
+    display: grid;
+    gap: 5px;
+    margin-top: 20px;
+}
+
+.cell {
+    width: 50px;
+    height: 50px;
+    background-color: lightgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.square {
+    width: 40px;
+    height: 40px;
+    background-color: blue;
+}
+
+.obstacle {
+    background-color: red;
+}
+.finish {
+    background-color: green;
+}
+</style>
+</head>
+<body>
+    <div id="grid-container" class="grid"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const levels = [
+        [[0,0,0,0,-1]],
+        [[0,0,0,0,0],[1,1,1,1,0],[0,0,0,0,0],[0,1,1,1,1],[0,0,0,0,-1]],
+        [[0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,1,0,0,-1],[0,0,0,0,0,0,0,1,0,0,0,1,0,1,1,0,1,0,0,0],[1,1,0,1,1,1,1,1,0,1,0,1,0,1,1,0,1,0,1,1],[0,1,0,1,0,0,0,1,0,1,0,1,0,1,0,0,1,0,1,1],[0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,0,1,0,0,0],[0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,1,0,1,0],[0,0,0,1,0,1,0,1,0,1,0,1,0,1,0,1,1,0,1,0],[0,1,1,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,0],[0,0,0,0,0,1,0,1,0,1,0,0,0,1,0,1,0,1,0,0],[1,1,1,1,1,1,0,1,0,1,1,1,1,1,0,1,0,1,0,0],[0,1,0,0,0,0,0,1,0,1,1,1,0,0,0,1,0,1,0,0],[0,1,0,1,1,1,1,1,0,1,1,1,0,1,1,1,0,1,0,0],[0,1,0,1,0,0,0,1,0,1,1,0,0,0,0,0,0,1,1,0],[0,0,0,1,0,0,0,1,0,1,1,0,1,1,1,1,1,1,1,0],[0,1,1,1,0,1,0,1,0,1,0,0,1,0,0,0,1,0,1,0],[0,0,0,0,0,1,0,1,0,1,0,1,1,0,1,0,1,0,1,0],[1,1,1,1,1,1,0,1,0,1,0,1,0,0,1,0,0,0,1,0],[0,0,0,0,0,0,0,1,0,1,0,0,0,1,1,0,1,0,1,0],[0,1,1,1,1,1,1,1,0,1,0,1,1,1,1,0,1,1,1,0],[0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0]],
+    ]
+    const gridContainer = document.getElementById('grid-container');
+    const displayedElemntLegend = {obstacle: 1, finish: -1};
+    let cells = [];
+    let grid = [];
+    let currentPosition = { row: 0, col: 0 };
+    let currentLevel = 0;
+    let gridWidth = parseInt(levels[currentLevel][0].length);
+    let gridHeight = parseInt(levels[currentLevel].length);
+
+    const square = document.createElement('div');
+    square.classList.add('square');
+
+    function createGrid(width, height) {
+        gridContainer.innerHTML = '';
+        gridContainer.style.gridTemplateColumns = `repeat(${width}, 50px)`;
+        gridContainer.style.gridTemplateRows = `repeat(${height}, 50px)`;
+
+        console.log(currentLevel);
+        grid = levels[currentLevel];
+
+        cells = [];
+        for (let row = 0; row < height; row++) {
+            for (let col = 0; col < width; col++) {
+                const cell = document.createElement('div');
+                cell.id = `cell-${row}-${col}`;
+                cell.classList.add('cell');
+                if (grid[row][col] === 1) {
+                    cell.classList.add('obstacle');
+                }
+                if (grid[row][col] === -1) {
+                    cell.classList.add('finish');
+                }
+                
+                gridContainer.appendChild(cell);
+                cells.push(cell);
+            }
+        }
+
+        currentPosition = { row: 0, col: 0 };
+        cells[0].appendChild(square);
+    }
+
+    function moveSquare(newPosition) {
+        const { row, col } = newPosition;
+    
+        if (grid[row][col] !== 1) {
+            const oldPositionIndex = currentPosition.row * gridWidth + currentPosition.col;
+            cells[oldPositionIndex].removeChild(square);
+
+            currentPosition = newPosition;
+            const newPositionIndex = currentPosition.row * gridWidth + currentPosition.col;
+            cells[newPositionIndex].appendChild(square);
+        }
+
+        if (grid[row][col] === -1) {
+            alert("You Win!");
+            currentLevel += 1;
+            if (currentLevel > levels.length -1 ) {
+                currentLevel = 0;
+            }
+            gridWidth = parseInt(levels[currentLevel][0].length);
+            gridHeight = parseInt(levels[currentLevel].length);
+            createGrid(gridWidth, gridHeight);
+        }
+    }
+
+    document.addEventListener('keydown', (event) => {
+        const key = event.key;
+        let { row, col } = currentPosition;
+
+        if (key === 'ArrowUp' && row > 0) {
+            row--;
+        } else if (key === 'ArrowDown' && row < gridHeight - 1) {
+            row++;
+        } else if (key === 'ArrowLeft' && col > 0) {
+            col--;
+        } else if (key === 'ArrowRight' && col < gridWidth - 1) {
+            col++;
+        }
+
+        moveSquare({ row, col });
+    });
+
+    createGrid(gridWidth, gridHeight);
+});
+</script>
+</body>
+</html>
