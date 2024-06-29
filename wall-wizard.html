@@ -4,21 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wall Wizard</title>
-    <link rel="stylesheet" href="styles.css">
-<style>
- body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    <style>
+body, html {
+    height: 100%;
     margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #222222;
     font-family: Arial, sans-serif;
-    background-color: black;
 }
 
 .grid {
     display: grid;
     gap: 5px;
-    margin-top: 20px;
 }
 
 .cell {
@@ -45,36 +44,97 @@
 .finish {
     background-color: green;
 }
-</style>
+.key-yellow {
+    width: 40px;
+    height: 40px;
+    background-image: url(imgs/key-yellow.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.lock-yellow {
+    background-image: url(imgs/lock-yellow.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.key-blue {
+    width: 40px;
+    height: 40px;
+    background-image: url(imgs/key-blue.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.lock-blue {
+    background-image: url(imgs/lock-blue.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.key-red {
+    width: 40px;
+    height: 40px;
+    background-image: url(imgs/key-red.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.lock-red {
+    background-image: url(imgs/lock-red.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.thorns {
+    background-image: url(imgs/thorns.png);
+    /* width: 50px;
+    height: 50px; */
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+    </style>
 </head>
 <body>
+    <button style="position: absolute; top: 0; left: 0;" id="restart-level">Restart Level</button>
     <div id="grid-container" class="grid"></div>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
     const levels = [
-        [[0,0,0,0,-1]],
-        [[0,0,0,0,0],[1,1,1,1,0],[0,0,0,0,0],[0,1,1,1,1],[0,0,0,0,-1]],
-        [[0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,1,0,0,-1],[0,0,0,0,0,0,0,1,0,0,0,1,0,1,1,0,1,0,0,0],[1,1,0,1,1,1,1,1,0,1,0,1,0,1,1,0,1,0,1,1],[0,1,0,1,0,0,0,1,0,1,0,1,0,1,0,0,1,0,1,1],[0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,0,1,0,0,0],[0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,1,0,1,0],[0,0,0,1,0,1,0,1,0,1,0,1,0,1,0,1,1,0,1,0],[0,1,1,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,0],[0,0,0,0,0,1,0,1,0,1,0,0,0,1,0,1,0,1,0,0],[1,1,1,1,1,1,0,1,0,1,1,1,1,1,0,1,0,1,0,0],[0,1,0,0,0,0,0,1,0,1,1,1,0,0,0,1,0,1,0,0],[0,1,0,1,1,1,1,1,0,1,1,1,0,1,1,1,0,1,0,0],[0,1,0,1,0,0,0,1,0,1,1,0,0,0,0,0,0,1,1,0],[0,0,0,1,0,0,0,1,0,1,1,0,1,1,1,1,1,1,1,0],[0,1,1,1,0,1,0,1,0,1,0,0,1,0,0,0,1,0,1,0],[0,0,0,0,0,1,0,1,0,1,0,1,1,0,1,0,1,0,1,0],[1,1,1,1,1,1,0,1,0,1,0,1,0,0,1,0,0,0,1,0],[0,0,0,0,0,0,0,1,0,1,0,0,0,1,1,0,1,0,1,0],[0,1,1,1,1,1,1,1,0,1,0,1,1,1,1,0,1,1,1,0],[0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0]],
-    ]
+        {"map":[[1,1,1,1,1,1,1],[1,0,0,0,0,-1,1],[1,1,1,1,1,1,1]],"personPosition":{"row":1,"col":1}},
+        {"map":[[1,1,1,1,1,1,1],[1,0,0,0,0,0,1],[1,1,1,1,1,0,1],[1,0,0,0,0,0,1],[1,0,1,1,1,1,1],[1,0,0,0,0,-1,1],[1,1,1,1,1,1,1]],"personPosition":{"row":1,"col":1}},
+        {"map":[[1,1,1,1,1,1,1,1],[1,0,0,0,0,1,-1,1],[1,1,1,1,0,1,0,1],[1,0,0,0,0,1,0,1],[1,0,1,1,1,1,0,1],[1,0,0,0,0,0,0,1],[1,1,1,1,1,1,1,1]],"personPosition":{"row":1,"col":1}},
+        {"map":[[1,1,1,1,1,1,1,1,1],[1,0,-2,0,0,0,-2,-1,1],[1,0,0,0,-2,0,0,0,1],[1,1,1,1,1,1,1,1,1]],"personPosition":{"row":1,"col":1}},
+        {"map":[[1,1,1,1,1,1,1,1,1],[1,0,1,0,0,0,1,0,1],[1,0,0,0,-2,0,0,0,1],[1,0,1,-2,-1,-2,1,0,1],[1,0,1,1,0,1,1,0,1],[1,0,1,1,0,1,1,0,1],[1,0,1,-2,0,-2,1,0,1],[1,0,0,0,0,0,0,0,1],[1,1,1,1,1,1,1,1,1]],"personPosition":{"row":1,"col":1}},
+        {"map":[[1,1,1,1,1,1,1,1,1],[1,0,0,0,-2,0,0,0,1],[1,0,-2,0,0,0,-2,0,1],[1,0,0,-2,-2,-2,0,0,1],[1,-2,0,-2,0,-2,0,-2,1],[1,0,0,-2,-2,-2,0,0,1],[1,0,-2,0,0,0,-2,0,1],[1,0,0,0,-2,0,0,-1,1],[1,1,1,1,1,1,1,1,1]],"personPosition":{"row":1,"col":1}},
+        {"map":[[1,1,1,1,1,1,1,1],[1,-1,31,0,0,0,-2,1],[1,1,-2,0,-2,0,0,1],[1,0,-2,0,-2,-2,0,1],[1,0,-2,0,-31,-2,0,1],[1,0,0,-2,-2,0,0,1],[1,-2,0,0,0,0,-2,1],[1,1,1,1,1,1,1,1]],"personPosition":{"row":3,"col":1}},
+        {"map":[[1,1,1,1,1,1,1,1],[1,0,0,0,0,0,0,1],[1,0,1,1,1,1,0,1],[1,0,-2,-31,0,31,0,1],[1,0,1,1,1,1,31,1],[1,0,0,0,-31,-2,-1,1],[1,1,1,1,0,31,0,1],[1,1,1,1,1,1,1,1]],"personPosition":{"row":3,"col":4}},
+        {"map":[[1,1,1,1,1,1,1,1],[1,0,0,33,0,1,0,1],[1,-1,1,1,-32,33,0,1],[1,1,1,1,31,1,0,1],[1,0,0,0,0,0,0,1],[1,1,33,1,0,1,32,1],[1,1,-31,1,-33,1,-33,1],[1,1,1,1,1,1,1,1]],"personPosition":{"row":4,"col":1}},
+        {"map":[[1,1,1,1,1,1],[1,0,-31,-32,-33,1],[1,1,0,0,1,1],[1,1,1,32,1,1],[1,1,1,33,1,1],[1,1,1,31,1,1],[1,1,1,-1,1,1],[1,1,1,1,1,1]],"personPosition":{"row":1,"col":1}},
+        
+        // [[0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,1,0,0,-1],[0,0,0,0,0,0,0,1,0,0,0,1,0,1,1,0,1,0,0,0],[1,1,0,1,1,1,1,1,0,1,0,1,0,1,1,0,1,0,1,1],[0,1,0,1,0,0,0,1,0,1,0,1,0,1,0,0,1,0,1,1],[0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,0,1,0,0,0],[0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,1,0,1,0],[0,0,0,1,0,1,0,1,0,1,0,1,0,1,0,1,1,0,1,0],[0,1,1,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,0],[0,0,0,0,0,1,0,1,0,1,0,0,0,1,0,1,0,1,0,0],[1,1,1,1,1,1,0,1,0,1,1,1,1,1,0,1,0,1,0,0],[0,1,0,0,0,0,0,1,0,1,1,1,0,0,0,1,0,1,0,0],[0,1,0,1,1,1,1,1,0,1,1,1,0,1,1,1,0,1,0,0],[0,1,0,1,0,0,0,1,0,1,1,0,0,0,0,0,0,1,1,0],[0,0,0,1,0,0,0,1,0,1,1,0,1,1,1,1,1,1,1,0],[0,1,1,1,0,1,0,1,0,1,0,0,1,0,0,0,1,0,1,0],[0,0,0,0,0,1,0,1,0,1,0,1,1,0,1,0,1,0,1,0],[1,1,1,1,1,1,0,1,0,1,0,1,0,0,1,0,0,0,1,0],[0,0,0,0,0,0,0,1,0,1,0,0,0,1,1,0,1,0,1,0],[0,1,1,1,1,1,1,1,0,1,0,1,1,1,1,0,1,1,1,0],[0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0]],
+    ];
+    const displayedElemntLegend = {obstacle: 1, finish: -1, thorns: -2, "lock-yellow": 31, "lock-blue": 32, "lock-red": 33};
+    const displayedItemElemetnLegend = {"key-yellow": -31, "key-blue": -32, "key-red": -33};
+
+    function getKeyByValue(object, value) {
+        return Object.entries(object).find(([key, val]) => val === value)?.[0];
+    }
+
     const gridContainer = document.getElementById('grid-container');
-    const displayedElemntLegend = {obstacle: 1, finish: -1};
     let cells = [];
-    let grid = [];
     let currentPosition = { row: 0, col: 0 };
     let currentLevel = 0;
-    let gridWidth = parseInt(levels[currentLevel][0].length);
-    let gridHeight = parseInt(levels[currentLevel].length);
+    let grid = deepCopy(levels[currentLevel]).map;
+    let gridWidth = parseInt(levels[currentLevel].map[0].length);
+    let gridHeight = parseInt(levels[currentLevel].map.length);
+    let inventory = [];
 
     const square = document.createElement('div');
+    square.id = 'square';
     square.classList.add('square');
+
+    document.getElementById('restart-level').addEventListener('click', restart);
 
     function createGrid(width, height) {
         gridContainer.innerHTML = '';
         gridContainer.style.gridTemplateColumns = `repeat(${width}, 50px)`;
         gridContainer.style.gridTemplateRows = `repeat(${height}, 50px)`;
-
-        console.log(currentLevel);
-        grid = levels[currentLevel];
 
         cells = [];
         for (let row = 0; row < height; row++) {
@@ -82,11 +142,19 @@
                 const cell = document.createElement('div');
                 cell.id = `cell-${row}-${col}`;
                 cell.classList.add('cell');
-                if (grid[row][col] === 1) {
-                    cell.classList.add('obstacle');
-                }
-                if (grid[row][col] === -1) {
-                    cell.classList.add('finish');
+                if (grid[row][col] !== 0) {
+                    const value = grid[row][col];
+                    
+                    let elementClassName = getKeyByValue(displayedElemntLegend, value);
+                    if (elementClassName) {
+                        cell.classList.add(elementClassName);
+                        
+                    } else {
+                        elementClassName = getKeyByValue(displayedItemElemetnLegend, value);
+                        const item = document.createElement('div');
+                        item.classList.add(elementClassName);
+                        cell.appendChild(item);
+                    }
                 }
                 
                 gridContainer.appendChild(cell);
@@ -94,20 +162,90 @@
             }
         }
 
-        currentPosition = { row: 0, col: 0 };
-        cells[0].appendChild(square);
+        currentPosition = levels[currentLevel].personPosition;
+        const cellIndex = currentPosition.row * grid[0].length + currentPosition.col;
+        cells[cellIndex].appendChild(square);
+    }
+
+    function restart() {
+        inventory = [];
+        let inventoryNode = document.getElementById('square');
+        if (inventoryNode) {
+            while (inventoryNode.firstChild) {
+                inventoryNode.removeChild(inventoryNode.firstChild);
+            }
+        }
+
+        grid = deepCopy(levels[currentLevel]).map;
+        gridWidth = parseInt(levels[currentLevel].map[0].length);
+        gridHeight = parseInt(levels[currentLevel].map.length);
+
+        createGrid(gridWidth, gridHeight);
     }
 
     function moveSquare(newPosition) {
         const { row, col } = newPosition;
-    
-        if (grid[row][col] !== 1) {
-            const oldPositionIndex = currentPosition.row * gridWidth + currentPosition.col;
-            cells[oldPositionIndex].removeChild(square);
 
-            currentPosition = newPosition;
-            const newPositionIndex = currentPosition.row * gridWidth + currentPosition.col;
-            cells[newPositionIndex].appendChild(square);
+        if (grid[row][col] === 1) {
+            // if it's wall, don't move
+            return;
+        }
+        if ([31, 32, 33].includes(grid[row][col])) {
+            const className = getKeyByValue(displayedItemElemetnLegend, -grid[row][col]);
+            const index = inventory.indexOf(className);
+
+            if (index !== -1) {
+                inventory.splice(index, 1);
+                grid[row][col] = 0;
+                const ky = square.querySelector(`.${className}`);
+                square.removeChild(ky);
+                const newPositionIndex = newPosition.row * gridWidth + newPosition.col;
+
+                cells[newPositionIndex].className = 'cell';
+            }
+
+            return;
+        }
+
+        if ( inventory.length !== 0 && [-31, -32, -33].includes(grid[row][col])) {
+            const newPositionIndex = newPosition.row * gridWidth + newPosition.col;
+            const className = getKeyByValue(displayedItemElemetnLegend, grid[row][col]);
+            const elementToRemove = cells[newPositionIndex].querySelector(`.${className}`);
+
+            const removeElement = square.firstChild;
+            square.removeChild(square.firstChild);
+            square.appendChild(elementToRemove);
+
+            cells[newPositionIndex].appendChild(removeElement);
+
+            const currentItem = inventory[0];
+            inventory = [];
+            inventory.push(elementToRemove.className);
+            grid[row][col] = displayedItemElemetnLegend[currentItem];
+            return;
+        }
+
+        // move
+        const oldPositionIndex = currentPosition.row * gridWidth + currentPosition.col;
+        cells[oldPositionIndex].removeChild(square);
+
+        currentPosition = newPosition;
+        const newPositionIndex = currentPosition.row * gridWidth + currentPosition.col;
+        cells[newPositionIndex].appendChild(square);
+
+        if ([-31, -32, -33].includes(grid[row][col])) {
+            const className = getKeyByValue(displayedItemElemetnLegend, grid[row][col]);
+            const elementToRemove = cells[newPositionIndex].querySelector(`.${className}`);
+            cells[newPositionIndex].removeChild(elementToRemove);
+            square.appendChild(elementToRemove);
+            inventory.push(elementToRemove.className);
+            grid[row][col] = 0;
+        }
+
+        if (grid[row][col] === -2) {
+            alert("You're dead, start from the beginning");
+            
+            restart();
         }
 
         if (grid[row][col] === -1) {
@@ -116,30 +254,41 @@
             if (currentLevel > levels.length -1 ) {
                 currentLevel = 0;
             }
-            gridWidth = parseInt(levels[currentLevel][0].length);
-            gridHeight = parseInt(levels[currentLevel].length);
-            createGrid(gridWidth, gridHeight);
+
+            restart();
         }
     }
 
+    const keyMap = {
+        'ArrowUp': { row: -1, col: 0 },
+        'ArrowDown': { row: 1, col: 0 },
+        'ArrowLeft': { row: 0, col: -1 },
+        'ArrowRight': { row: 0, col: 1 },
+        'KeyW': { row: -1, col: 0 },
+        'KeyS': { row: 1, col: 0 },
+        'KeyA': { row: 0, col: -1 },
+        'KeyD': { row: 0, col: 1 },
+    };
+
     document.addEventListener('keydown', (event) => {
-        const key = event.key;
-        let { row, col } = currentPosition;
+        const code = event.code;
+    
+        if (keyMap[code]) {
+            let { row, col } = currentPosition;
+            row += keyMap[code].row;
+            col += keyMap[code].col;
 
-        if (key === 'ArrowUp' && row > 0) {
-            row--;
-        } else if (key === 'ArrowDown' && row < gridHeight - 1) {
-            row++;
-        } else if (key === 'ArrowLeft' && col > 0) {
-            col--;
-        } else if (key === 'ArrowRight' && col < gridWidth - 1) {
-            col++;
+            if (row >= 0 && row < gridHeight && col >= 0 && col < gridWidth) {
+                moveSquare({ row, col });
+            }
         }
-
-        moveSquare({ row, col });
     });
 
-    createGrid(gridWidth, gridHeight);
+    function deepCopy(obj) {
+        return JSON.parse(JSON.stringify(obj));
+    }
+
+    restart();
 });
 </script>
 </body>
