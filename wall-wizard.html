@@ -87,6 +87,26 @@ body, html {
     background-size: contain;
     background-repeat: no-repeat;
 }
+.next-top {
+    background-image: url(imgs/next-top.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.next-right {
+    background-image: url(imgs/next-right.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.next-bottom {
+    background-image: url(imgs/next-bottom.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.next-left {
+    background-image: url(imgs/next-left.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
 
     </style>
 </head>
@@ -106,10 +126,26 @@ document.addEventListener('DOMContentLoaded', () => {
         {"map":[[1,1,1,1,1,1,1,1],[1,0,0,0,0,0,0,1],[1,0,1,1,1,1,0,1],[1,0,-2,-31,0,31,0,1],[1,0,1,1,1,1,31,1],[1,0,0,0,-31,-2,-1,1],[1,1,1,1,0,31,0,1],[1,1,1,1,1,1,1,1]],"personPosition":{"row":3,"col":4}},
         {"map":[[1,1,1,1,1,1,1,1],[1,0,0,33,0,1,0,1],[1,-1,1,1,-32,33,0,1],[1,1,1,1,31,1,0,1],[1,0,0,0,0,0,0,1],[1,1,33,1,0,1,32,1],[1,1,-31,1,-33,1,-33,1],[1,1,1,1,1,1,1,1]],"personPosition":{"row":4,"col":1}},
         {"map":[[1,1,1,1,1,1],[1,0,-31,-32,-33,1],[1,1,0,0,1,1],[1,1,1,32,1,1],[1,1,1,33,1,1],[1,1,1,31,1,1],[1,1,1,-1,1,1],[1,1,1,1,1,1]],"personPosition":{"row":1,"col":1}},
-        
-        // [[0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,1,0,0,-1],[0,0,0,0,0,0,0,1,0,0,0,1,0,1,1,0,1,0,0,0],[1,1,0,1,1,1,1,1,0,1,0,1,0,1,1,0,1,0,1,1],[0,1,0,1,0,0,0,1,0,1,0,1,0,1,0,0,1,0,1,1],[0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,0,1,0,0,0],[0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,1,0,1,0],[0,0,0,1,0,1,0,1,0,1,0,1,0,1,0,1,1,0,1,0],[0,1,1,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,0],[0,0,0,0,0,1,0,1,0,1,0,0,0,1,0,1,0,1,0,0],[1,1,1,1,1,1,0,1,0,1,1,1,1,1,0,1,0,1,0,0],[0,1,0,0,0,0,0,1,0,1,1,1,0,0,0,1,0,1,0,0],[0,1,0,1,1,1,1,1,0,1,1,1,0,1,1,1,0,1,0,0],[0,1,0,1,0,0,0,1,0,1,1,0,0,0,0,0,0,1,1,0],[0,0,0,1,0,0,0,1,0,1,1,0,1,1,1,1,1,1,1,0],[0,1,1,1,0,1,0,1,0,1,0,0,1,0,0,0,1,0,1,0],[0,0,0,0,0,1,0,1,0,1,0,1,1,0,1,0,1,0,1,0],[1,1,1,1,1,1,0,1,0,1,0,1,0,0,1,0,0,0,1,0],[0,0,0,0,0,0,0,1,0,1,0,0,0,1,1,0,1,0,1,0],[0,1,1,1,1,1,1,1,0,1,0,1,1,1,1,0,1,1,1,0],[0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0]],
+        {
+            "map":[[1,1,1,1,1,1,1],[1,-1,31,0,0,0,{"className":"next-right","map":"map1","personPosition":{"row":3,"col":1}}],[1,1,1,1,1,1,1]],
+            "map1": [[1,1,1,1,1,1,1],[1,-33,0,0,33,0,1],[1,1,1,0,1,0,1],[{"className":"next-left","map":"map","personPosition":{"row":1,"col":5}},0,1,0,1,-32,1],[1,0,1,0,32,0,1],[1,0,0,0,1,-31,1],[1,1,1,1,1,1,1]],
+            "personPosition":{"row":1,"col":4}
+        },
+        {
+            "map":[[1,1,1,1,1,1,1,1,1,1,1,1,1],[1,0,0,0,0,0,0,0,0,0,0,0,{"className":"next-right","map":"map12","personPosition":{"row":1,"col":1}}],[1,0,1,0,1,0,1,0,1,0,1,0,1],[1,0,1,0,0,0,1,0,1,0,1,0,1],[1,0,1,1,1,0,1,0,1,1,1,1,1],[1,0,0,0,1,0,1,0,1,0,0,0,{"className":"next-right","map":"map12","personPosition":{"row":5,"col":1}}],[1,0,1,0,1,0,1,1,1,0,1,1,1],[1,0,1,0,0,0,0,0,0,0,0,0,{"className":"next-right","map":"map12","personPosition":{"row":7,"col":1}}],[1,1,1,1,1,0,1,1,1,0,1,1,1],[1,0,0,0,0,0,1,0,0,0,0,0,1],[1,1,1,0,1,1,1,1,1,0,1,1,1],[1,0,0,0,1,0,0,0,0,0,1,0,{"className":"next-right","map":"map12","personPosition":{"row":11,"col":1}}],[1,{"className":"next-bottom","map":"map21","personPosition":{"row":1,"col":1}},1,1,1,1,1,1,1,{"className":"next-bottom","map":"map21","personPosition":{"row":1,"col":9}},1,{"className":"next-bottom","map":"map21","personPosition":{"row":1,"col":11}},1]],
+            "map12": [[1,1,1,1,1,1,1,1,1,1,1,1,1],[{"className":"next-left","map":"map","personPosition":{"row":1,"col":11}},0,1,0,0,0,1,0,0,0,0,0,1],[1,0,1,0,1,0,1,1,1,1,1,0,1],[1,0,0,0,1,0,1,0,0,0,0,0,1],[1,0,1,1,1,1,1,1,1,1,1,0,1],[{"className":"next-left","map":"map","personPosition":{"row":5,"col":11}},0,0,0,1,0,0,0,0,0,1,0,1],[1,1,1,1,1,0,1,0,1,1,1,0,1],[{"className":"next-left","map":"map","personPosition":{"row":7,"col":11}},0,0,0,0,0,1,0,0,0,0,0,1],[1,1,1,1,1,0,1,0,1,1,1,0,1],[1,0,0,0,0,0,1,0,0,0,1,0,1],[1,1,1,0,1,1,1,1,1,0,1,0,1],[{"className":"next-left","map":"map","personPosition":{"row":11,"col":11}},0,1,0,0,0,1,0,1,0,1,0,1],[1,1,1,1,1,1,1,{"className":"next-bottom","map":"map22","personPosition":{"row":1,"col":7}},1,1,1,{"className":"next-bottom","map":"map22","personPosition":{"row":1,"col":11}},1]],
+            "map21": [[1,{"className":"next-top","map":"map","personPosition":{"row":11,"col":1}},1,1,1,1,1,1,1,{"className":"next-top","map":"map","personPosition":{"row":11,"col":9}},1,{"className":"next-top","map":"map","personPosition":{"row":11,"col":11}},1],[1,0,1,0,0,0,0,0,1,0,1,0,{"className":"next-right","map":"map22","personPosition":{"row":1,"col":1}}],[1,0,1,0,1,1,1,0,1,0,1,0,1],[1,0,0,0,1,0,0,0,1,0,0,0,1],[1,1,1,0,1,1,1,0,1,0,1,1,1],[1,0,1,0,1,0,0,0,1,0,0,0,{"className":"next-right","map":"map22","personPosition":{"row":5,"col":1}}],[1,0,1,1,1,0,1,1,1,1,1,0,1],[1,0,0,0,0,0,1,0,1,0,0,0,{"className":"next-right","map":"map22","personPosition":{"row":7,"col":1}}],[1,0,1,1,1,0,1,0,1,0,1,1,1],[1,0,1,0,0,0,0,0,1,0,1,0,1],[1,0,1,1,1,1,1,0,1,1,1,0,1],[1,0,0,1,0,0,0,0,0,0,0,0,{"className":"next-right","map":"map22","personPosition":{"row":11,"col":1}}],[1,1,1,1,1,1,1,1,1,1,1,1,1]],
+            "map22": [[1,1,1,1,1,1,1,{"className":"next-top","map":"map12","personPosition":{"row":11,"col":7}},1,1,1,{"className":"next-top","map":"map12","personPosition":{"row":11,"col":11}},1],[{"className":"next-left","map":"map21","personPosition":{"row":1,"col":11}},0,1,0,0,0,0,0,0,0,0,0,1],[1,0,1,1,1,0,1,1,1,1,1,1,1],[1,0,1,0,0,0,1,0,0,0,0,0,1],[1,1,1,0,1,0,1,1,1,1,1,0,1],[{"className":"next-left","map":"map21","personPosition":{"row":5,"col":11}},0,1,0,1,0,0,0,0,0,0,0,1],[1,1,1,1,1,0,1,1,1,0,1,0,1],[{"className":"next-left","map":"map21","personPosition":{"row":7,"col":11}},0,1,0,0,0,0,0,1,0,0,0,1],[1,0,1,1,1,1,1,0,1,1,1,0,1],[1,0,1,0,0,0,1,0,0,0,0,0,1],[1,0,1,1,1,0,1,0,1,0,1,0,1],[{"className":"next-left","map":"map21","personPosition":{"row":11,"col":11}},0,0,0,0,0,0,0,1,0,0,-1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1]],
+            "personPosition":{"row":1,"col":1}
+        },
     ];
-    const displayedElemntLegend = {obstacle: 1, finish: -1, thorns: -2, "lock-yellow": 31, "lock-blue": 32, "lock-red": 33};
+    const displayedElemntLegend = {
+        obstacle: 1, finish: -1, thorns: -2, "lock-yellow": 31, "lock-blue": 32, "lock-red": 33,
+        "next-top": {"className": "next-top", "map": "map", "personPosition": {"row":1,"col":1}},
+        "next-right": {"className": "next-right", "map": "map", "personPosition": {"row":1,"col":1}},
+        "next-bottom": {"className": "next-bottom", "map": "map", "personPosition": {"row":1,"col":1}},
+        "next-left": {"className": "next-left", "map": "map", "personPosition": {"row":1,"col":1}},
+    };
     const displayedItemElemetnLegend = {"key-yellow": -31, "key-blue": -32, "key-red": -33};
 
     function getKeyByValue(object, value) {
@@ -120,7 +156,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let cells = [];
     let currentPosition = { row: 0, col: 0 };
     let currentLevel = 0;
-    let grid = deepCopy(levels[currentLevel]).map;
+    let currentLevelObject = deepCopy(levels[currentLevel]);
+    let grid = currentLevelObject.map;
     let gridWidth = parseInt(levels[currentLevel].map[0].length);
     let gridHeight = parseInt(levels[currentLevel].map.length);
     let inventory = [];
@@ -144,11 +181,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 cell.classList.add('cell');
                 if (grid[row][col] !== 0) {
                     const value = grid[row][col];
-                    
                     let elementClassName = getKeyByValue(displayedElemntLegend, value);
-                    if (elementClassName) {
+
+                    if (grid[row][col] instanceof Object) {
+                        console.log(grid[row][col].className);
+                        cell.classList.add(grid[row][col].className);
+                    } else if (elementClassName) {
                         cell.classList.add(elementClassName);
-                        
                     } else {
                         elementClassName = getKeyByValue(displayedItemElemetnLegend, value);
                         const item = document.createElement('div');
@@ -162,23 +201,27 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        currentPosition = levels[currentLevel].personPosition;
+        
         const cellIndex = currentPosition.row * grid[0].length + currentPosition.col;
         cells[cellIndex].appendChild(square);
     }
 
-    function restart() {
-        inventory = [];
-        let inventoryNode = document.getElementById('square');
-        if (inventoryNode) {
-            while (inventoryNode.firstChild) {
-                inventoryNode.removeChild(inventoryNode.firstChild);
+    function restart(reloadInventory = true) {
+        if (reloadInventory) {
+            inventory = [];
+            let inventoryNode = document.getElementById('square');
+            if (inventoryNode) {
+                while (inventoryNode.firstChild) {
+                    inventoryNode.removeChild(inventoryNode.firstChild);
+                }
             }
         }
 
-        grid = deepCopy(levels[currentLevel]).map;
-        gridWidth = parseInt(levels[currentLevel].map[0].length);
-        gridHeight = parseInt(levels[currentLevel].map.length);
+        currentLevelObject = deepCopy(levels[currentLevel]);
+        grid = currentLevelObject.map;
+        gridWidth = parseInt(grid[0].length);
+        gridHeight = parseInt(grid.length);
+        currentPosition = levels[currentLevel].personPosition;
 
         createGrid(gridWidth, gridHeight);
     }
@@ -232,6 +275,20 @@ document.addEventListener('DOMContentLoaded', () => {
         currentPosition = newPosition;
         const newPositionIndex = currentPosition.row * gridWidth + currentPosition.col;
         cells[newPositionIndex].appendChild(square);
+
+        if (grid[row][col] instanceof Object) {
+            // console.log(grid[row][col].map);
+            if (["next-top", "next-right", "next-bottom","next-left"].includes(grid[row][col].className)) {
+                currentPosition = grid[row][col].personPosition;
+                grid = currentLevelObject[grid[row][col].map];
+
+                gridWidth = parseInt(grid[0].length);
+                gridHeight = parseInt(grid.length);
+
+                createGrid(gridWidth, gridHeight);
+                return;
+            }
+        }
 
         if ([-31, -32, -33].includes(grid[row][col])) {
             const className = getKeyByValue(displayedItemElemetnLegend, grid[row][col]);
